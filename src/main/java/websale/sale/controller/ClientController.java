@@ -32,7 +32,7 @@ public class ClientController {
     @RequestMapping(path = "/register",method = RequestMethod.POST)
     public String doRegister(Client client){
         clientService.addClient(client);
-        return "index";
+        return "login";
     }
 
     @RequestMapping(path = "/login",method = RequestMethod.GET)

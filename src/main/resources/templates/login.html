@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" media="screen">
+    <style>
+        /*web background*/
+
+        .container{
+            display:table;
+            height:100%;
+        }
+
+        .row{
+            display: table-cell;
+            vertical-align: middle;
+        }
+        /* centered columns styles */
+        .row-centered {
+            text-align:center;
+        }
+        .col-centered {
+            display:inline-block;
+            float:none;
+            text-align:left;
+            margin-right:-4px;
+        }
+    </style>
+</head>
+<body>
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <div class="container">
+        <div class="row row-centered">
+            <div class="well col-md-6 col-centered">
+                <form class="form-horizontal" action="/user/login" method="post">
+                    <div class="control-group">
+                        <label class="control-label" for="phoneNumber">phoneNumber</label>
+                        <div class="controls">
+                            <input type="text" id="phoneNumber" name="phoneNumber" placeholder="PhoneNumber">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputPassword">Password</label>
+                        <div class="controls">
+                            <input type="password" id="inputPassword" name="password" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <label class="checkbox">
+                                <input type="checkbox" name="rememberMe"> Remember me
+                            </label>
+                            <button type="submit" class="btn btn-primary">Sign in</button>
+                            <button type="button" class="btn">Register</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

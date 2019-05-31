@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <style>
+        .cartRow{
+            position: relative;
+            top:50px;
+            left:20%;
+            width: 70%;
+        }
+
+        .bottomRow{
+            position: relative;
+            top:50px;
+            left:20%;
+            width:70%;
+        }
+    </style>
+</head>
+<body>
+<script src="http://code.jquery.com/jquery.js"></script>
+<script src="../static/js/bootstrap.min.js"></script>
+<!-- 导航栏 -->
+<div class="row">
+    <div class="navbar navbar-inverse">
+        <div class="navbar-inner">
+            <ul class="nav">
+                <li class="offset1">
+                    <a class="brand" href="#">
+                        <i class="icon-home icon-white"></i>
+                        Index
+                    </a>
+                </li>
+                <li><a href="#">Link</a></li>
+                <li><a href="#">Link</a></li>
+                <li class="offset3">
+                    <form class="navbar-search pull-left">
+                        <i class="icon-search icon-white"></i>
+                        <input type="text" class="search-query span4" placeholder="Search Item" data-provide="typeahead"
+                               data-source='["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware",
+                                   "Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky",
+                                   "Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi",
+                                   "Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico",
+                                   "New York","North Dakota","North Carolina","Ohio","Oklahoma","Oregon","Pennsylvania",
+                                   "Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont",
+                                   "Virginia","Washington","West Virginia","Wisconsin","Wyoming"]'/>
+                        <!-- TODO 通过函数完成自动补全与提示 -->
+                        <button type="submit" class="btn">Search</button>
+                    </form>
+                </li>
+                <li class="offset6">
+                    <a href="#loginModal" data-toggle="modal">Login</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" id="userDropdown" class="dropdown-toggle" data-toggle="dropdown" data-target="#">
+                        <i class="icon-user icon-white"></i>
+                        {username}
+                        <span class="badge badge-info">3</span>
+                        <!--TODO 根据用户的消息数量显示-->
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="userDropdown">
+                        <li role="presentation">
+                            <a role="menuitem" tabindex="-1" href="#">Profile</a>
+                        </li>
+                        <li role="presentation">
+                            <a role="menuitem" tabindex="-1" href="#">Cart</a>
+                        </li>
+                        <li role="presentation">
+                            <a role="menuitem" tabindex="-1" href="#">
+                                Message
+                                <span class="badge badge-important">3</span>
+                                <!--TODO 根据用户的消息数量显示-->
+                            </a>
+                        </li>
+                        <li role="presentation">
+                            <a role="menuitem" tabindex="-1" href="#">History</a>
+                        </li>
+                        <!-- TODO 根据用户是否是店主来决定是否有这个选项-->
+                        <li role="presentation">
+                            <a role="menuitem" tabindex="-1" href="#">Store</a>
+                        </li>
+                        <li role="presentation" class="divider"></li>
+                        <li role="presentation">
+                            <a role="menuitem" tabindex="-1" href="#">Logout</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div id="loginModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="loginModalHeader" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                <h3 id="loginModalHearder">Login</h3>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row row-centered">
+                        <div class="well col-md-6 col-centered">
+                            <form class="form-horizontal">
+                                <div class="control-group">
+                                    <label class="control-label" for="login_username">Username</label>
+                                    <div class="controls">
+                                        <input type="text" id="login_username" name="username" placeholder="Username">
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="login_inputPassword">Password</label>
+                                    <div class="controls">
+                                        <input type="password" id="login_inputPassword" name="password" placeholder="Password">
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <label class="checkbox">
+                                            <input type="checkbox" name="rememberMe"> Remember me
+                                        </label>
+                                        <button type="submit" class="btn btn-primary">Sign in</button>
+                                        <a href="#registerModal" role="button" class="btn" data-toggle="modal" data-dismiss="modal">Register</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+            </div>
+        </div>
+
+        <div id="registerModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <h3 id="registerModalLabel">Register</h3>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row row-centered">
+                        <div class="well col-md-6 col-centered">
+                            <form class="form-horizontal">
+                                <div class="control-group">
+                                    <label class="control-label" for="username">Username</label>
+                                    <div class="controls">
+                                        <input type="text" id="username" name="username" placeholder="Username">
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="inputPassword">Password</label>
+                                    <div class="controls">
+                                        <input type="password" id="inputPassword" name="password" placeholder="Password">
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="age">Age</label>
+                                    <div class="controls">
+                                        <input type="text" id="age" name="age" placeholder="Age">
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="inputPassword">Email</label>
+                                    <div class="controls">
+                                        <input type="email" id="email" name="email" placeholder="Email">
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="phone">Phone</label>
+                                    <div class="controls">
+                                        <input type="text" id="phone" name="phone" placeholder="Phone">
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="radio inline">
+                                        <div class="controls">
+                                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="man" checked>
+                                            Man
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="control-group">
+                                    <label class="radio inline">
+                                        <div class="controls">
+                                            <input type="radio" name="optionsRadios" id="optionsRadios2" value="woman">
+                                            Woman
+                                        </div>
+                                    </label>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                <button class="btn btn-primary">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 购物车商品列表 -->
+<div class="row cartRow">
+
+    <!-- 标题-->
+    <div class="row">
+        <h2>All Item {num here}</h2>
+    </div>
+
+    <!--表头-->
+    <div class="row">
+        <!--分割线-->
+        <hr class="simple" color="red" />
+
+        <!-- 表格-->
+        <div class="row">
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <!--复选框-->
+                    <div class="span1">
+                        <input type="checkbox" value="{item1}">All
+                    </div>
+                    <!--图片-->
+                    <div class="span1">
+                        <strong>Item Image</strong>
+                </div>
+                    <div class="span2">
+                        <strong>Item Name</strong>
+                    </div>
+                    <div class="span1">
+                        <strong>Item Price</strong>>
+                    </div>
+                    <div class="span2">
+                        <strong>Item Count</strong>
+                    </div>
+                    <div class="span1">
+                        <strong>Total Amount</strong>
+                    </div>
+                    <div class="span1">
+                        <strong>Operation</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 表每列元素-->
+    <div class="row">
+    <!--分割线-->
+        <hr class="simple" color="red" />
+
+        <!-- 表格-->
+        <div class="row">
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <!--复选框-->
+                    <div class="span1">
+                        <input type="checkbox" value="{item1}">
+                    </div>
+                    <!--图片-->
+                    <div class="span1">
+                        <img src="../static/img/thumbnail2.jpg" class="img-polaroid">
+                    </div>
+                    <div class="span2">
+                        <h4><strong>{itemName}</strong></h4>
+                    </div>
+                    <div class="span1">
+                        <p class="lead">￥{price}</p>
+                    </div>
+                    <div class="span2">
+                        <div class="input-prepend input-append offset1">
+                            <button class="btn btn-primary" type="button">
+                                <i class="icon-plus icon-white"></i>
+                            </button>
+                            <input class="span2" type="text" value="1">
+                            <button class="btn" type="button">
+                                <i class="icon-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="span1">
+                        <strong>{total amount}</strong>
+                    </div>
+                    <div class="span1">
+                        <a href="#"><i class="icon-remove"></i>remove</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 表每列元素-->
+    <div class="row">
+        <!--分割线-->
+        <hr class="simple" color="red" />
+
+        <!-- 表格-->
+        <div class="row">
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <!--复选框-->
+                    <div class="span1">
+                        <input type="checkbox" value="{item1}">
+                    </div>
+                    <!--图片-->
+                    <div class="span1">
+                        <img src="../static/img/thumbnail2.jpg" class="img-polaroid">
+                    </div>
+                    <div class="span2">
+                        <h4><strong>{itemName}</strong></h4>
+                    </div>
+                    <div class="span1">
+                        <p class="lead">￥{price}</p>
+                    </div>
+                    <div class="span2">
+                        <div class="input-prepend input-append offset1">
+                            <button class="btn btn-primary" type="button">
+                                <i class="icon-plus icon-white"></i>
+                            </button>
+                            <input class="span2" type="text" value="1">
+                            <button class="btn" type="button">
+                                <i class="icon-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="span1">
+                        <strong>{total amount}</strong>
+                    </div>
+                    <div class="span1">
+                        <a href="#"><i class="icon-remove"></i>remove</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 表每列元素-->
+    <div class="row">
+        <!--分割线-->
+        <hr class="simple" color="red" />
+
+        <!-- 表格-->
+        <div class="row">
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <!--复选框-->
+                    <div class="span1">
+                        <input type="checkbox" value="{item1}">
+                    </div>
+                    <!--图片-->
+                    <div class="span1">
+                        <img src="../static/img/thumbnail2.jpg" class="img-polaroid">
+                    </div>
+                    <div class="span2">
+                        <h4><strong>{itemName}</strong></h4>
+                    </div>
+                    <div class="span1">
+                        <p class="lead">￥{price}</p>
+                    </div>
+                    <div class="span2">
+                        <div class="input-prepend input-append offset1">
+                            <button class="btn btn-primary" type="button">
+                                <i class="icon-plus icon-white"></i>
+                            </button>
+                            <input class="span2" type="text" value="1">
+                            <button class="btn" type="button">
+                                <i class="icon-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="span1">
+                        <strong>{total amount}</strong>
+                    </div>
+                    <div class="span1">
+                        <a href="#"><i class="icon-remove"></i>remove</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 表每列元素-->
+    <div class="row">
+        <!--分割线-->
+        <hr class="simple" color="red" />
+
+        <!-- 表格-->
+        <div class="row">
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <!--复选框-->
+                    <div class="span1">
+                        <input type="checkbox" value="{item1}">
+                    </div>
+                    <!--图片-->
+                    <div class="span1">
+                        <img src="../static/img/thumbnail2.jpg" class="img-polaroid">
+                    </div>
+                    <div class="span2">
+                        <h4><strong>{itemName}</strong></h4>
+                    </div>
+                    <div class="span1">
+                        <p class="lead">￥{price}</p>
+                    </div>
+                    <div class="span2">
+                        <div class="input-prepend input-append offset1">
+                            <button class="btn btn-primary" type="button">
+                                <i class="icon-plus icon-white"></i>
+                            </button>
+                            <input class="span2" type="text" value="1">
+                            <button class="btn" type="button">
+                                <i class="icon-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="span1">
+                        <strong>{total amount}</strong>
+                    </div>
+                    <div class="span1">
+                        <a href="#"><i class="icon-remove"></i>remove</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--结算按钮-->
+<div class="row bottomRow">
+    <hr class="simple" color="red">
+    <button class="btn pull-left" type="reset">Clear</button>
+    <div class="inline pull-right">
+        <strong><i class="icon-shopping-cart"></i>{Total Price}</strong>
+        <a href="#payModal" role="button" class="btn btn-primary" data-toggle="modal">Pay</a>
+    </div>
+</div>
+
+<!--结算界面-->
+<div id="payModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="payModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <h3 id="payModalLabel">Pay Order</h3>
+    </div>
+    <div class="modal-body">
+        <!--TODO 商品list-->
+        <strong>Total: ￥{money}</strong>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+        <button class="btn btn-primary">Confirm</button>
+    </div>
+</div>
+</body>
+</html>

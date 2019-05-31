@@ -11,6 +11,6 @@ public interface ClientDao {
     @Select("select password from client where phonenumber=#{phonenumber}")
     Client selectClient(String phoneNumber);
 
-    @Insert("insert into client values(#{phoneNumber},#{password},#{address})")
+    @Insert("insert into client(phonenumber,password,address) values(#{phoneNumber},#{password},#{address})")
     int insertClient(Client client);
 }

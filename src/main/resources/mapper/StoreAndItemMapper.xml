@@ -4,8 +4,17 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper>
     <update id="updatestoreanditems" parameterType="list">
-        update storeanditem set
-        <foreach collection="list" open="" close="" separator=";" item="item">
+        update storeanditem
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="number =case " suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    when itemid=#{item.itemid} then number-#{item.number}
+                </foreach>
+            </trim>
+        </trim>
+        where id in
+        <foreach collection="list" open="(" close=")" separator="," item="item">
+            #{item.itemid}
         </foreach>
     </update>
 </mapper>

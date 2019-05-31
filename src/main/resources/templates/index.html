@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{/css/bootstrap.min.css}" href="../static/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <style>
+        .indexCarouselContainer {
+            position: relative;
+            margin: 15px 0;
+            padding: 39px 19px 14px;
+            *padding-top: 19px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            width: 800px;
+            height: 600px;
+            left: 30%;
+        }
+
+        #sortNavbar{
+            position: relative;
+            top:100px;
+            left:30px;
+        }
+
+    </style>
+</head>
+<body>
+<script src="http://code.jquery.com/jquery.js"></script>
+<script th:src="@{/js/bootstrap.min.js}" src="../static/js/bootstrap.min.js"></script>
+    <!-- 导航栏 -->
+    <div class="row">
+        <div class="navbar navbar-inverse">
+            <div class="navbar-inner">
+                <ul class="nav">
+                    <li class="offset1">
+                        <a class="brand" href="#">
+                            <i class="icon-home icon-white"></i>
+                            Index
+                        </a>
+                    </li>
+                    <li><a href="#">Link</a></li>
+                    <li><a href="#">Link</a></li>
+                    <li class="offset3">
+                        <form class="navbar-search pull-left">
+                            <i class="icon-search icon-white"></i>
+                            <input type="text" class="search-query span4" placeholder="Search Item" data-provide="typeahead"
+                                   data-source='["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware",
+                                   "Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky",
+                                   "Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi",
+                                   "Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico",
+                                   "New York","North Dakota","North Carolina","Ohio","Oklahoma","Oregon","Pennsylvania",
+                                   "Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont",
+                                   "Virginia","Washington","West Virginia","Wisconsin","Wyoming"]'/>
+                            <!-- TODO 通过函数完成自动补全与提示 -->
+                            <button type="submit" class="btn">Search</button>
+                        </form>
+                    </li>
+                    <li class="offset6">
+                        <a href="#loginModal" data-toggle="modal">Login</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" id="userDropdown" class="dropdown-toggle" data-toggle="dropdown" data-target="#">
+                            <i class="icon-user icon-white"></i>
+                            {username}
+                            <span class="badge badge-info">3</span>
+                            <!--TODO 根据用户的消息数量显示-->
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="userDropdown">
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="#">Profile</a>
+                            </li>
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="#">Cart</a>
+                            </li>
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="#">
+                                    Message
+                                    <span class="badge badge-important">3</span>
+                                    <!--TODO 根据用户的消息数量显示-->
+                                </a>
+                            </li>
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="#">History</a>
+                            </li>
+                            <!-- TODO 根据用户是否是店主来决定是否有这个选项-->
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="#">Store</a>
+                            </li>
+                            <li role="presentation" class="divider"></li>
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="#">Logout</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="loginModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="loginModalHeader" aria-hidden="true">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                    <h3 id="loginModalHearder">Login</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row row-centered">
+                            <div class="well col-md-6 col-centered">
+                                <form class="form-horizontal">
+                                    <div class="control-group">
+                                        <label class="control-label" for="login_username">Username</label>
+                                        <div class="controls">
+                                            <input type="text" id="login_username" name="username" placeholder="Username">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="login_inputPassword">Password</label>
+                                        <div class="controls">
+                                            <input type="password" id="login_inputPassword" name="password" placeholder="Password">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="checkbox">
+                                                <input type="checkbox" name="rememberMe"> Remember me
+                                            </label>
+                                            <button type="submit" class="btn btn-primary">Sign in</button>
+                                            <a href="#registerModal" role="button" class="btn" data-toggle="modal" data-dismiss="modal">Register</a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                </div>
+            </div>
+
+            <div id="registerModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
+                <div class="modal-header">
+                    <h3 id="registerModalLabel">Register</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row row-centered">
+                            <div class="well col-md-6 col-centered">
+                                <form class="form-horizontal">
+                                    <div class="control-group">
+                                        <label class="control-label" for="username">Username</label>
+                                        <div class="controls">
+                                            <input type="text" id="username" name="username" placeholder="Username">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="inputPassword">Password</label>
+                                        <div class="controls">
+                                            <input type="password" id="inputPassword" name="password" placeholder="Password">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="age">Age</label>
+                                        <div class="controls">
+                                            <input type="text" id="age" name="age" placeholder="Age">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="inputPassword">Email</label>
+                                        <div class="controls">
+                                            <input type="email" id="email" name="email" placeholder="Email">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="phone">Phone</label>
+                                        <div class="controls">
+                                            <input type="text" id="phone" name="phone" placeholder="Phone">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="radio inline">
+                                            <div class="controls">
+                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="man" checked>
+                                                Man
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="radio inline">
+                                            <div class="controls">
+                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="woman">
+                                                Woman
+                                            </div>
+                                        </label>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                    <button class="btn btn-primary">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 分类标签 -->
+    <!-- TODO 后续加入面包削 多重分类 -->
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span2" id="sortNavbar">
+                <ul class="nav nav-tabs nav-stacked">
+                    <li>
+                        <!-- TODO 为不同类型加入不同icon -->
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="#"><i class="icon-tag"></i>sort1</a>
+                                <span class="divider">/</span>
+                            </li>
+                            <li>
+                                <a href="#">sort1</a>
+                                <span class="divider">/</span>
+                            </li>
+                            <li>
+                                <a href="#">sort1</a>
+                                <span class="divider">/</span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="#"><i class="icon-tag"></i>sort1</a>
+                                <span class="divider">/</span>
+                            </li>
+                            <li>
+                                <a href="#">sort1</a>
+                                <span class="divider">/</span>
+                            </li>
+                            <li>
+                                <a href="#">sort1</a>
+                                <span class="divider">/</span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="#"><i class="icon-tag"></i>sort1</a>
+                                <span class="divider">/</span>
+                            </li>
+                            <li>
+                                <a href="#">sort1</a>
+                                <span class="divider">/</span>
+                            </li>
+                            <li>
+                                <a href="#">sort1</a>
+                                <span class="divider">/</span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="#"><i class="icon-tag"></i>sort1</a>
+                                <span class="divider">/</span>
+                            </li>
+                            <li>
+                                <a href="#">sort1</a>
+                                <span class="divider">/</span>
+                            </li>
+                            <li>
+                                <a href="#">sort1</a>
+                                <span class="divider">/</span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="#"><i class="icon-tag"></i>sort1</a>
+                                <span class="divider">/</span>
+                            </li>
+                            <li>
+                                <a href="#">sort1</a>
+                                <span class="divider">/</span>
+                            </li>
+                            <li>
+                                <a href="#">sort1</a>
+                                <span class="divider">/</span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="#"><i class="icon-tag"></i>sort1</a>
+                                <span class="divider">/</span>
+                            </li>
+                            <li>
+                                <a href="#">sort1</a>
+                                <span class="divider">/</span>
+                            </li>
+                            <li>
+                                <a href="#">sort1</a>
+                                <span class="divider">/</span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="#"><i class="icon-tag"></i>sort1</a>
+                                <span class="divider">/</span>
+                            </li>
+                            <li>
+                                <a href="#">sort1</a>
+                                <span class="divider">/</span>
+                            </li>
+                            <li>
+                                <a href="#">sort1</a>
+                                <span class="divider">/</span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="#"><i class="icon-tag"></i>sort1</a>
+                                <span class="divider">/</span>
+                            </li>
+                            <li>
+                                <a href="#">sort1</a>
+                                <span class="divider">/</span>
+                            </li>
+                            <li>
+                                <a href="#">sort1</a>
+                                <span class="divider">/</span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="#"><i class="icon-tag"></i>sort1</a>
+                                <span class="divider">/</span>
+                            </li>
+                            <li>
+                                <a href="#">sort1</a>
+                                <span class="divider">/</span>
+                            </li>
+                            <li>
+                                <a href="#">sort1</a>
+                                <span class="divider">/</span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="#"><i class="icon-tag"></i>sort1</a>
+                                <span class="divider">/</span>
+                            </li>
+                            <li>
+                                <a href="#">sort1</a>
+                                <span class="divider">/</span>
+                            </li>
+                            <li>
+                                <a href="#">sort1</a>
+                                <span class="divider">/</span>
+                            </li>
+                        </ul>
+                    </li>
+
+
+
+                </ul>
+            </div>
+    <!-- 轮播推荐 -->
+            <div class="span3">
+                <div class="indexCarouselContainer">
+                    <div id="indexCarousel" class="carousel slide">
+                        <ol class="carousel-indicators">
+                            <li data-target="#indexCarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#indexCarousel" data-slide-to="1"></li>
+                            <li data-target="#indexCarousel" data-slide-to="2"></li>
+                            <li data-target="#indexCarousel" data-slide-to="3"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <img th:src="@{/img/img1.jpg}" alt>
+                                <div class="carousel-caption">
+                                    <h4>First Index Item</h4>
+                                    <p>
+                                        first index item first index item first index item
+                                        first index item first index item first index item
+
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <img src="../static/img/img2.jpg" alt>
+                                <div class="carousel-caption">
+                                    <h4>First Index Item</h4>
+                                    <p>
+                                        first index item first index item first index item
+                                        first index item first index item first index item
+
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <img src="../static/img/img3.jpg" alt>
+                                <div class="carousel-caption">
+                                    <h4>First Index Item</h4>
+                                    <p>
+                                        first index item first index item first index item
+                                        first index item first index item first index item
+
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <img src="../static/img/img4.jpg" alt>
+                                <div class="carousel-caption">
+                                    <h4>First Index Item</h4>
+                                    <p>
+                                        first index item first index item first index item
+                                        first index item first index item first index item
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <a class="left carousel-control" href="#indexCarousel" data-slide="prev">&lsaquo;</a>
+                        <a class="right carousel-control offset3" href="#indexCarousel" data-slide="next">&rsaquo;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TODO 轮播右侧 待加入-->
+
+    <!-- 缩略图thumbnail 显示单个物品 位于轮播carousel底部-->
+    <div class="row">
+        <div class="offset6">
+            <ul class="thumbnails">
+                <li class="span3">
+                    <div class="thumbnail">
+                        <img src="../static/img/thumbnail1.jpeg" alt="">
+                        <h3>Thumbnail Label</h3>
+                        <p>Description Description Description Description</p>
+                        <p>
+                            <a href="#" class="btn btn-primary"><i class="icon-plus"></i>Add</a>
+                            <a href="#" class="btn"><i class="icon icon-star"></i>Star</a>
+                        </p>
+                    </div>
+                </li>
+                <li class="span3">
+                    <div class="thumbnail">
+                        <img src="../static/img/thumbnail2.jpg" alt="">
+                        <h3>Thumbnail Label</h3>
+                        <p>Description Description Description Description</p>
+                        <p>
+                            <a href="#" class="btn btn-primary"><i class="icon-plus"></i>Add</a>
+                            <a href="#" class="btn"><i class="icon icon-star"></i>Star</a>
+                        </p>
+                    </div>
+                </li>
+                <li class="span3">
+                    <div class="thumbnail">
+                        <img src="../static/img/thumbnail3.jpg" alt="">
+                        <h3>Thumbnail Label</h3>
+                        <p>Description Description Description Description</p>
+                        <p>
+                            <a href="#" class="btn btn-primary"><i class="icon-plus"></i>Add</a>
+                            <a href="#" class="btn"><i class="icon icon-star"></i>Star</a>
+                        </p>
+                    </div>
+                </li>
+                <li class="span3">
+                    <div class="thumbnail">
+                        <img src="../static/img/thumbnail4.jpg" alt="">
+                        <h3>Thumbnail Label</h3>
+                        <p>Description Description Description Description</p>
+                        <p>
+                            <a href="#" class="btn btn-primary"><i class="icon-plus"></i>Add</a>
+                            <a href="#" class="btn"><i class="icon icon-star"></i>Star</a>
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <!-- TODO 分页pagination 分页栏 位于缩略图thumbnail底部-->
+    <div class="row">
+        <div class="pagination pagination-centered pagination-large">
+            <ul>
+                <li>
+                    <a href="#">&laquo;</a>
+                </li>
+                <li>
+                    <a href="#">1</a>
+                </li>
+                <li>
+                    <a href="#">2</a>
+                </li>
+                <li>
+                    <a href="#">3</a>
+                </li>
+                <li>
+                    <a href="#">4</a>
+                </li>
+                <li>
+                    <a href="#">5</a>
+                </li>
+                <li>
+                    <a href="#">&raquo;</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>

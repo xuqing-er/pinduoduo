@@ -5,7 +5,7 @@
 <mapper>
     <update id="updatestoreanditems" parameterType="list">
         <foreach collection="list" open="" close="" separator=";" item="item">
-            
+            update m
         </foreach>
     </update>
 </mapper>

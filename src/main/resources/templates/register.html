@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../static/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link th:href="@{/css/bootstrap.min.css}" href="../static/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <style>
         /*web background*/
 
@@ -31,11 +31,11 @@
 </head>
 <body>
 <script src="http://code.jquery.com/jquery.js"></script>
-<script src="../static/js/bootstrap.min.js"></script>
+<script th:src="@{/js/bootstrap.min.js}" src="../static/js/bootstrap.min.js"></script>
 <div class="container">
     <div class="row row-centered">
         <div class="well col-md-6 col-centered">
-            <form class="form-horizontal">
+            <form class="form-horizontal" action="/register" method="post">
                 <div class="control-group">
                     <label class="control-label" for="username">Username</label>
                     <div class="controls">
@@ -43,9 +43,9 @@
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label" for="inputPassword">Password</label>
+                    <label class="control-label" for="password">Password</label>
                     <div class="controls">
-                        <input type="password" id="inputPassword" name="password" placeholder="Password">
+                        <input type="password" id="password" name="password" placeholder="Password">
                     </div>
                 </div>
                 <div class="control-group">
@@ -55,7 +55,7 @@
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label" for="inputPassword">Email</label>
+                    <label class="control-label" for="email">Email</label>
                     <div class="controls">
                         <input type="email" id="email" name="email" placeholder="Email">
                     </div>
@@ -63,23 +63,30 @@
                 <div class="control-group">
                     <label class="control-label" for="phone">Phone</label>
                     <div class="controls">
-                        <input type="text" id="phone" name="phone" placeholder="Phone">
+                        <input type="text" id="phone" name="phoneNumber" placeholder="Phone">
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label">Sex</label>
                     <label class="radio inline">
                         <div class="controls">
-                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="man" checked>
-                        Man
+                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="man" checked>
+                            Man
                         </div>
                     </label>
+                </div>
+                <div class="control-group">
                     <label class="radio inline">
                         <div class="controls">
-                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="woman">
-                        Woman
+                            <input type="radio" name="optionsRadios" id="optionsRadios2" value="woman">
+                            Woman
                         </div>
                     </label>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="address">Address</label>
+                    <div class="controls">
+                        <input type="text" id="address" name="address" placeholder="Address">
+                    </div>
                 </div>
                 <div class="control-group">
                     <div class="controls">

@@ -4,8 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper>
     <update id="updatestoreanditems" parameterType="list">
+        update storeanditem set
         <foreach collection="list" open="" close="" separator=";" item="item">
-            update m
         </foreach>
     </update>
 </mapper>

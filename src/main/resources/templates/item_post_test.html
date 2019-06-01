@@ -29,6 +29,8 @@
             text-align:left;
             margin-right:-4px;
         }
+
+
     </style>
 </head>
 <body>
@@ -37,23 +39,35 @@
 <script th:src="@{/js/fileinput.min.js}" src="../static/js/fileinput.min.js"></script>
 <!--
 <script>
-    $(document).ready(function(){
-        initFileInput("file", "/create/item");
-    });
-
-    function initFileInput(ctrlName, uploadUrl) {
-        var control = $('#' + ctrlName);
-        control.fileinput({
-            uploadUrl: uploadUrl, //上传的地址
-            allowedFileExtensions : ['jpg', 'png','gif'],//接收的文件后缀
-            showUpload: false, //是否显示上传按钮
+    $(document).ready()
+    {
+        $('#file').fileinput({
+            //初始化上传文件框
+            showUpload: true, //显示整体上传的按钮
+            showRemove: true,//显示整体删除的按钮
+            uploadAsync: true,//默认异步上传
+            uploadLabel: "upload",//设置整体上传按钮的汉字
+            removeLabel: "remove",//设置整体删除按钮的汉字
+            uploadClass: "btn btn-primary",//设置上传按钮样式
             showCaption: true,//是否显示标题
-            browseClass: "btn btn-primary", //按钮样式
-            previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+            dropZoneEnabled: false,//是否显示拖拽区域
+            uploadUrl: getPath('/gz/tool/toolAction/uploadImgFile'),//这个是配置上传调取的后台地址，本项目是SSM搭建的
+            maxFileSize: 9999,//文件大小限制
+            maxFileCount: 9999,//允许最大上传数，可以多个，
+            enctype: 'multipart/form-data',
+            allowedFileExtensions: ["jpg", "png", "gif", "docx", "zip", "xlsx", "txt"],/*上传文件格式限制*/
+            msgFilesTooMany: "{n} {m}！",
+            showBrowse: true,
+            browseOnZoneClick: true,
+            slugCallback: function (filename) {
+                return filename.replace('(', '_').replace(']', '_');
+            }
         });
     }
 </script>
 -->
+<label class="control-label">Select FIle</label>
+<input id="file1" type="file" class="file" data-browse-on-zone-click="true">
 <div class="container">
     <div class="row row-centered">
         <div class="well col-md-6 col-centered">
@@ -100,17 +114,11 @@
                         <input type="text" id="descriptor" name="descriptor" placeholder="descriptor">
                     </div>
                 </div>
-                <div class="control-group">
-                    <label class="control-label" for="imagePath">imagePath</label>
-                    <div class="discount">
-                        <input type="text" id="imagePath" name="imagePath" placeholder="imagePath">
-                    </div>
-                </div>
 
-                <div class="control-group">
+                <div class="control-group fileupload">
                     <label class="control-label">File</label>
                     <div class="controls">
-                        <input type="file" id="file" name="file" multiple="multiple">
+                        <input type="file" id="file" name="file" class="file">
                     </div>
                 </div>
                 <div class="control-group">

@@ -109,30 +109,34 @@
                 <div class="modal-body">
                     <div class="container">
                         <div class="row row-centered">
-                            <div class="well col-md-6 col-centered">
-                                <form class="form-horizontal">
-                                    <div class="control-group">
-                                        <label class="control-label" for="login_username">Username</label>
-                                        <div class="controls">
-                                            <input type="text" id="login_username" name="username" placeholder="Username">
-                                        </div>
+                            <div class="container">
+                                <div class="row row-centered">
+                                    <div class="well col-md-6 col-centered">
+                                        <form class="form-horizontal" action="/user/login" method="post">
+                                            <div class="control-group">
+                                                <label class="control-label" for="phoneNumber">phoneNumber</label>
+                                                <div class="controls">
+                                                    <input type="text" id="phoneNumber" name="phoneNumber" placeholder="PhoneNumber">
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="control-label" for="inputPassword">Password</label>
+                                                <div class="controls">
+                                                    <input type="password" id="inputPassword" name="password" placeholder="Password">
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <div class="controls">
+                                                    <label class="checkbox">
+                                                        <input type="checkbox" name="rememberMe"> Remember me
+                                                    </label>
+                                                    <button type="submit" class="btn btn-primary">Sign in</button>
+                                                    <button type="button" class="btn">Register</button>
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
-                                    <div class="control-group">
-                                        <label class="control-label" for="login_inputPassword">Password</label>
-                                        <div class="controls">
-                                            <input type="password" id="login_inputPassword" name="password" placeholder="Password">
-                                        </div>
-                                    </div>
-                                    <div class="control-group">
-                                        <div class="controls">
-                                            <label class="checkbox">
-                                                <input type="checkbox" name="rememberMe"> Remember me
-                                            </label>
-                                            <button type="submit" class="btn btn-primary">Sign in</button>
-                                            <a href="#registerModal" role="button" class="btn" data-toggle="modal" data-dismiss="modal">Register</a>
-                                        </div>
-                                    </div>
-                                </form>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -150,7 +154,7 @@
                     <div class="container">
                         <div class="row row-centered">
                             <div class="well col-md-6 col-centered">
-                                <form class="form-horizontal">
+                                <form class="form-horizontal" action="/register" method="post">
                                     <div class="control-group">
                                         <label class="control-label" for="username">Username</label>
                                         <div class="controls">
@@ -158,9 +162,9 @@
                                         </div>
                                     </div>
                                     <div class="control-group">
-                                        <label class="control-label" for="inputPassword">Password</label>
+                                        <label class="control-label" for="password">Password</label>
                                         <div class="controls">
-                                            <input type="password" id="inputPassword" name="password" placeholder="Password">
+                                            <input type="password" id="password" name="password" placeholder="Password">
                                         </div>
                                     </div>
                                     <div class="control-group">
@@ -170,7 +174,7 @@
                                         </div>
                                     </div>
                                     <div class="control-group">
-                                        <label class="control-label" for="inputPassword">Email</label>
+                                        <label class="control-label" for="email">Email</label>
                                         <div class="controls">
                                             <input type="email" id="email" name="email" placeholder="Email">
                                         </div>
@@ -178,7 +182,7 @@
                                     <div class="control-group">
                                         <label class="control-label" for="phone">Phone</label>
                                         <div class="controls">
-                                            <input type="text" id="phone" name="phone" placeholder="Phone">
+                                            <input type="text" id="phone" name="phoneNumber" placeholder="Phone">
                                         </div>
                                     </div>
                                     <div class="control-group">
@@ -196,6 +200,18 @@
                                                 Woman
                                             </div>
                                         </label>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="address">Address</label>
+                                        <div class="controls">
+                                            <input type="text" id="address" name="address" placeholder="Address">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <button type="submit" class="btn btn-primary">Register</button>
+                                            <button type="button" class="btn">Cancel</button>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
@@ -451,18 +467,23 @@
     <!-- 缩略图thumbnail 显示单个物品 位于轮播carousel底部-->
     <div class="row">
         <div class="offset6">
-            <ul class="thumbnails">
+            <ul class="thumbnails" th:each="item : ${items}">
                 <li class="span3">
                     <div class="thumbnail">
-                        <img src="../static/img/thumbnail1.jpeg" alt="">
-                        <h3>Thumbnail Label</h3>
-                        <p>Description Description Description Description</p>
+                        <img src="../static/img/thumbnail1.jpeg" th:src="@{${item.imagePath}}" alt="">
+                        <h3 th:text="${item.name}">Thumbnail Label</h3>
+                        <p>
+                            <span th:text="${item.price}">{price}</span>
+                            <span th:text="${item.discount}">{discount}</span>
+                        </p>
+                        <p th:text="${item.descriptor}">{desciptor}</p>
                         <p>
                             <a href="#" class="btn btn-primary"><i class="icon-plus"></i>Add</a>
                             <a href="#" class="btn"><i class="icon icon-star"></i>Star</a>
                         </p>
                     </div>
                 </li>
+                <!--
                 <li class="span3">
                     <div class="thumbnail">
                         <img src="../static/img/thumbnail2.jpg" alt="">
@@ -496,6 +517,7 @@
                         </p>
                     </div>
                 </li>
+                -->
             </ul>
         </div>
     </div>

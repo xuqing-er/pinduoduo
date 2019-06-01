@@ -23,6 +23,11 @@ public class ClientController {
     @Autowired
     private CartService cartService;
 
+    @RequestMapping(path = "/index", method = RequestMethod.GET)
+    public String index(){
+
+        return "index";
+    }
 
     @RequestMapping(path = "/register",method = RequestMethod.GET)
     public String register(){
@@ -64,6 +69,7 @@ public class ClientController {
         return "index";
     }
 
+    //当点击商品时，进入单品显示
     @RequestMapping(path = "/item/{id}",method = RequestMethod.GET)
     public String getItem(
             @PathVariable("id") int id,
@@ -72,7 +78,8 @@ public class ClientController {
         return "item";
     }
 
-    @RequestMapping(path = "/cart",method = RequestMethod.POST)
+    //在主页或者商店添加商品到购物车
+    @RequestMapping(path = "/cart/additem",method = RequestMethod.POST)
     public String addItemToCart(
             @RequestParam("id") int id,
             HttpServletRequest request
@@ -85,7 +92,8 @@ public class ClientController {
         cartService.addCartItem(cartItem);
         return "200";
     }
-    
+
+    //在购物车界面增加商品数量
     @RequestMapping(path = "/cart/increase")
     public String increaseItemToCart(
             @RequestParam("id") int id,
@@ -97,6 +105,7 @@ public class ClientController {
         return "200";
     }
 
+    //用户进入购物车
     @RequestMapping(path = "/cart",method = RequestMethod.GET)
     public String getCart(
             Model model,

@@ -7,6 +7,7 @@ import websale.sale.model.Client;
 import websale.sale.model.Item;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class ClientService {
@@ -26,6 +27,10 @@ public class ClientService {
 
     public Item getItem(int itemId){
         return itemDao.selectItem(itemId);
+    }
+
+    public List<Item> getItems(int start){
+        return itemDao.selectItemsByStart(start);
     }
 
 }

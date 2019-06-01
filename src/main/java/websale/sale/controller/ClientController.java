@@ -13,6 +13,7 @@ import websale.sale.service.ClientService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class ClientController {
@@ -23,9 +24,12 @@ public class ClientController {
     @Autowired
     private CartService cartService;
 
-    @RequestMapping(path = "/index", method = RequestMethod.GET)
-    public String index(){
-
+    @RequestMapping(path = "/index/{start}", method = RequestMethod.GET)
+    public String index(
+            @PathVariable("start") int start,
+            Model model){
+        List<Item> items=clientService.getItems(start);
+        model.addAttribute("items",items);
         return "index";
     }
 
@@ -113,7 +117,8 @@ public class ClientController {
     ){
         int clientId=(Integer) request.getSession().getAttribute("id");
         //查询商品
-        List<Item> items=cartService.getItems(clientId);
+        Map<Item,Integer> items=cartService.getItems(clientId);
+        model.addAttribute("items",items);
         return "cart";
     }
 }

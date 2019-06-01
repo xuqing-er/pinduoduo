@@ -56,7 +56,7 @@ public class ManagerController {
         return "store";
     }
 
-    @RequestMapping(path = "manager/logout")
+    @RequestMapping(path = "/manager/logout")
     public String logout(HttpServletRequest request){
         request.getSession().removeAttribute("id");
         return "index";

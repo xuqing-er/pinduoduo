@@ -1,6 +1,7 @@
 package websale.sale.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,6 +17,7 @@ import websale.sale.utils.ImageUtils;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+@Controller
 public class ManagerController {
     @Resource
     ManagerService managerService;
@@ -75,6 +77,11 @@ public class ManagerController {
         item.setImagePath(path);
         managerService.createItem(storeId,item,number);
         return "store";
+    }
+
+    @RequestMapping(path = "/create/item" ,method = RequestMethod.GET)
+    public String getItemPage(){
+        return "item_post_test";
     }
 
     @RequestMapping(path = "/create/store",method = RequestMethod.POST)

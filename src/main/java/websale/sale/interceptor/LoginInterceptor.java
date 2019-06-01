@@ -14,6 +14,6 @@ public class LoginInterceptor implements HandlerInterceptor {
         if (object!=null){
             return true;
         }
-        return false;
+        return true;
     }
 }

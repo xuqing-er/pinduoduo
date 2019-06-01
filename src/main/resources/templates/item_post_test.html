@@ -57,7 +57,7 @@
 <div class="container">
     <div class="row row-centered">
         <div class="well col-md-6 col-centered">
-            <form class="form-horizontal" action="/create/item" method="post">
+            <form class="form-horizontal" action="/create/item" method="post" enctype="multipart/form-data">
                 <div class="control-group">
                     <label class="control-label" for="storeId">storeId</label>
                     <div class="controls">
@@ -74,7 +74,7 @@
                 <div class="control-group">
                     <label class="control-label">File</label>
                     <div class="controls">
-                        <input type="file" id="file" name="file">
+                        <input type="file" id="file" name="file" multiple="multiple">
                     </div>
                 </div>
                 <div class="control-group">

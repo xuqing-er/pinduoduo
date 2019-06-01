@@ -76,7 +76,7 @@ public class ManagerController {
         String path=ImageUtils.saveFile(file,request);
         item.setImagePath(path);
         managerService.createItem(storeId,item,number);
-        return "store";
+        return "index";
     }
 
     @RequestMapping(path = "/create/item" ,method = RequestMethod.GET)

@@ -15,7 +15,7 @@ public interface ItemDao {
     @Select("select * from item where id=#{id}")
     Item selectItem(int id);
 
-    @Select("select top 10 * from item where id>#{start}")
+    @Select("select * from item limit #{start},10")
     List<Item> selectItemsByStart(int start);
 
     List<Item> selectItemsByIds(Set<Integer> list);

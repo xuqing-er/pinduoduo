@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>item_post_test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{/css/bootstrap.min.css}" href="../static/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link th:href="@{/css/fileinput.min.css}" href="../static/css/fileinput.min.css" rel="stylesheet" media="screen">
+
+    <style>
+        /*web background*/
+
+        .container{
+            display:table;
+            height:100%;
+        }
+
+        .row{
+            display: table-cell;
+            vertical-align: middle;
+        }
+        /* centered columns styles */
+        .row-centered {
+            text-align:center;
+        }
+        .col-centered {
+            display:inline-block;
+            float:none;
+            text-align:left;
+            margin-right:-4px;
+        }
+    </style>
+</head>
+<body>
+<script src="http://code.jquery.com/jquery.js"></script>
+<script th:src="@{/js/bootstrap.min.js}" src="../static/js/bootstrap.min.js"></script>
+<script th:src="@{/js/fileinput.min.js}" src="../static/js/fileinput.min.js"></script>
+<!--
+<script>
+    $(document).ready(function(){
+        initFileInput("file", "/create/item");
+    });
+
+    function initFileInput(ctrlName, uploadUrl) {
+        var control = $('#' + ctrlName);
+        control.fileinput({
+            uploadUrl: uploadUrl, //上传的地址
+            allowedFileExtensions : ['jpg', 'png','gif'],//接收的文件后缀
+            showUpload: false, //是否显示上传按钮
+            showCaption: true,//是否显示标题
+            browseClass: "btn btn-primary", //按钮样式
+            previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+        });
+    }
+</script>
+-->
+<div class="container">
+    <div class="row row-centered">
+        <div class="well col-md-6 col-centered">
+            <form class="form-horizontal" action="/create/item" method="post">
+                <div class="control-group">
+                    <label class="control-label" for="storeId">storeId</label>
+                    <div class="controls">
+                        <input type="text" id="storeId" name="storeId" placeholder="storeId">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="number">number</label>
+                    <div class="controls">
+                        <input type="text" id="number" name="number" placeholder="number">
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">File</label>
+                    <div class="controls">
+                        <input type="file" id="file" name="file">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="button" class="btn">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

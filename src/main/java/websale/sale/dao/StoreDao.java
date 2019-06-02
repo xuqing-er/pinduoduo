@@ -1,9 +1,6 @@
 package websale.sale.dao;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 import websale.sale.model.Store;
 
 import java.util.List;
@@ -11,6 +8,7 @@ import java.util.List;
 @Mapper
 public interface StoreDao {
 
+    @SelectKey(keyProperty = "id",resultType = int.class,before = false,statement = "SELECT LAST_INSERT_ID()")
     @Insert("insert into store values (#{name},#{category},#{phoneNumber},#{level)")
     int insertStore(Store store);
 

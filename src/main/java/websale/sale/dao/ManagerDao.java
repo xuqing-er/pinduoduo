@@ -1,15 +1,13 @@
 package websale.sale.dao;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 import websale.sale.model.Manager;
 
 @Mapper
 public interface ManagerDao {
 
     @Insert("insert into manager values()")
+    @SelectKey(keyProperty = "id",resultType = int.class,before = false,statement = "SELECT LAST_INSERT_ID()")
     int insertManager(Manager manager);
 
     @Update("update manager set password=#{password} where phonenumber=#{phonebnumber}")

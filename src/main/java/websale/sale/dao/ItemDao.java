@@ -1,9 +1,6 @@
 package websale.sale.dao;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 import websale.sale.model.Item;
 
 import java.util.List;
@@ -26,6 +23,7 @@ public interface ItemDao {
     @Update("update item set price=#{price} where id=#{id}")
     void updateItemPrice(String id,String price);
 
+    @SelectKey(keyProperty = "id",resultType = int.class,before = false,statement = "SELECT LAST_INSERT_ID()")
     @Insert("insert into item values (#{name},#{category},#{price},#{discount},#{descriptor},#{imagePath})")
     int insertItem(Item item);
 }

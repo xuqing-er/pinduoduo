@@ -3,6 +3,7 @@ package websale.sale.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
 import websale.sale.biz.ClientLoginBiz;
 import websale.sale.model.CartItem;
@@ -12,6 +13,7 @@ import websale.sale.service.CartService;
 import websale.sale.service.ClientService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Map;
 
@@ -45,7 +47,9 @@ public class ClientController {
     }
 
     @RequestMapping(path = "/login",method = RequestMethod.GET)
-    public String login(){
+    public String login(HttpServletRequest request) throws FileNotFoundException {
+        System.out.println(request.getSession().getServletContext().getRealPath("/"));
+        System.out.println(System.getProperty("user.dir"));
         return "login";
     }
 

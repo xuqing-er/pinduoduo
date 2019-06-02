@@ -11,17 +11,19 @@ public class ImageUtils {
         String pathval = request.getSession().getServletContext().getRealPath("/")+"WEB-INF/";
         // 根据配置文件获取服务器图片存放路径
         String newFileName = String.valueOf( System.currentTimeMillis());
-        String saveFilePath = "images/uploadFile";
+        String classPath = System.getProperty("user.dir");
+        String saveFilePath = "img";
         /* 构建文件目录 */
-        File fileDir = new File(pathval + saveFilePath);
+        File fileDir = new File(classPath + "/src/main/resources/static/" + saveFilePath);
         if (!fileDir.exists()) {
             fileDir.mkdirs();
         }
         String filename=filedata.getOriginalFilename();
+        System.out.println(filename);
         String extensionName = filename.substring(filename.lastIndexOf(".") + 1);
         try {
-            String imgPath = saveFilePath + newFileName + "." +extensionName;
-            FileOutputStream out = new FileOutputStream(pathval + imgPath);
+            String imgPath = classPath + "/src/main/resources/static/" + saveFilePath + "/img5.jpg" ;
+            FileOutputStream out = new FileOutputStream(imgPath);
             out.write(filedata.getBytes());
             out.flush();
             out.close();

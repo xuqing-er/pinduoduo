@@ -75,8 +75,8 @@ public class ManagerController {
 
         if (file==null) System.out.println("file error");
         String path=ImageUtils.saveFile(file,request);
-        //item.setImagePath(path);
-        //managerService.createItem(storeId,item,number);
+        item.setImagePath(path);
+        managerService.createItem(storeId,item,number);
         return "index";
     }
 

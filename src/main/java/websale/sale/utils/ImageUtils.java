@@ -15,9 +15,9 @@ public class ImageUtils {
         String saveFilePath = "/src/main/resources/static/img/";
 
         String filename=filedata.getOriginalFilename();
-        System.out.println(filename);
         String extensionName = filename.substring(filename.lastIndexOf(".") + 1);
         String fileFullName=newFileName+"."+extensionName;
+
         try {
             String imgPath = classPath + saveFilePath + fileFullName;
             FileOutputStream out = new FileOutputStream(imgPath);

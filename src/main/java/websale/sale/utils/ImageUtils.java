@@ -8,20 +8,19 @@ import java.io.FileOutputStream;
 
 public class ImageUtils {
     public static String saveFile(MultipartFile filedata, HttpServletRequest request) {
-        String pathval = request.getSession().getServletContext().getRealPath("/")+"WEB-INF/";
         // 根据配置文件获取服务器图片存放路径
         String newFileName = String.valueOf( System.currentTimeMillis());
-        String saveFilePath = "images/uploadFile";
         /* 构建文件目录 */
-        File fileDir = new File(pathval + saveFilePath);
-        if (!fileDir.exists()) {
-            fileDir.mkdirs();
-        }
+        String classPath = System.getProperty("user.dir");
+        String saveFilePath = "/src/main/resources/static/img/";
+
         String filename=filedata.getOriginalFilename();
+        System.out.println(filename);
         String extensionName = filename.substring(filename.lastIndexOf(".") + 1);
+        String fileFullName=newFileName+"."+extensionName;
         try {
-            String imgPath = saveFilePath + newFileName + "." +extensionName;
-            FileOutputStream out = new FileOutputStream(pathval + imgPath);
+            String imgPath = classPath + saveFilePath + fileFullName;
+            FileOutputStream out = new FileOutputStream(imgPath);
             out.write(filedata.getBytes());
             out.flush();
             out.close();

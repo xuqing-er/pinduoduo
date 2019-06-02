@@ -3,8 +3,8 @@ package websale.sale.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import websale.sale.model.Constants;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 
@@ -14,8 +14,9 @@ public class ImageController {
     @RequestMapping(path = "/item/images/{fileName}.{suffix}")
     public void showPicture(@PathVariable("fileName") String fileName,
                             @PathVariable("suffix") String suffix,
+                            HttpServletRequest request,
                             HttpServletResponse response){
-        File imgFile = new File(Constants.ImagePath+fileName + "." + suffix);
+        File imgFile = new File(request.getSession().getServletContext().getRealPath("/")+"WEB-INF/images/uploadFile/"+fileName + "." + suffix);
         responseFile(response, imgFile);
     }
 

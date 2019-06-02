@@ -5,7 +5,7 @@
     <title>item_post_test</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link th:href="@{/css/bootstrap.min.css}" href="../static/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link th:href="@{/css/fileinput.min.css}" href="../static/css/fileinput.min.css" rel="stylesheet" media="screen">
+    <link th:href="@{/css/fileinput.min.css}" href="../static/css/fileinput.min.css" rel="stylesheet">
 
     <style>
         /*web background*/
@@ -35,7 +35,10 @@
 </head>
 <body>
 <script src="http://code.jquery.com/jquery.js"></script>
-<script th:src="@{/js/bootstrap.min.js}" src="../static/js/bootstrap.min.js"></script>
+<script th:src="@{/js/piexif.min.js}" src="../static/js/piexif.min.js"></script>
+<script th:src="@{/js/purify.min.js}" src="../static/js/purify.min.js"></script>
+<script th:src="@{/js/sortable.min.js}" src="../static/js/sortable.min.js"></script>
+<script th:src="@{js/bootstrap.min.js}" src="../static/js/bootstrap.min.js"></script>
 <script th:src="@{/js/fileinput.min.js}" src="../static/js/fileinput.min.js"></script>
 <!--
 <script>
@@ -66,8 +69,7 @@
     }
 </script>
 -->
-<label class="control-label">Select FIle</label>
-<input id="file1" type="file" class="file" data-browse-on-zone-click="true">
+<input id="input-b2" name="input-b2" type="file" class="file" data-show-preview="false">
 <div class="container">
     <div class="row row-centered">
         <div class="well col-md-6 col-centered">
@@ -115,10 +117,10 @@
                     </div>
                 </div>
 
-                <div class="control-group fileupload">
+                <div class="control-group">
                     <label class="control-label">File</label>
                     <div class="controls">
-                        <input type="file" id="file" name="file" class="file">
+                        <input id="input-b2" name="file" type="file" class="file" data-show-preview="false">
                     </div>
                 </div>
                 <div class="control-group">

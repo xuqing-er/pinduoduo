@@ -19,4 +19,5 @@ public class WebConfiguration implements WebMvcConfigurer {
             }
         };
     }
+
 }

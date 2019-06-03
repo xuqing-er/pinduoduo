@@ -7,10 +7,8 @@ import websale.sale.model.CartItem;
 import websale.sale.model.Item;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class CartService {
@@ -24,20 +22,15 @@ public class CartService {
         return cartItemDao.insertCartItem(cartItem);
     }
 
-    public Map<Item,Integer> getItems(int clientId){
+    public List<Item> getItems(int clientId){
         List<CartItem> cartItems=cartItemDao.selectCartItems(clientId);
-        Map<Integer,Integer> idNumberMap=new HashMap<>();
+        List<Integer> Ids=new ArrayList<>();
         for (CartItem c:cartItems
              ) {
-            idNumberMap.put(c.getItemId(),c.getNumber());
+            Ids.add(c.getItemId());
         }
-        List<Item> items=itemDao.selectItemsByIds(idNumberMap.keySet());
-        Map<Item,Integer> itemIntegerMap=new LinkedHashMap<>();
-        for (Item item:items
-             ) {
-            itemIntegerMap.put(item,idNumberMap.get(item.getId()));
-        }
-        return itemIntegerMap;
+        List<Item> items=itemDao.selectItemsByIds(Ids);
+        return items;
     }
 
     public void removeItem(int clientId,int itemId){

@@ -32,7 +32,9 @@ public class ClientController {
     public String index(
             @PathVariable("start") int start,
             Model model){
-        List<Item> items=clientService.getItems(start);
+        List<Item> itemList=clientService.getItems(start,4);
+        model.addAttribute("itemList",itemList);
+        List<Item> items=clientService.getItems(start,6);
         model.addAttribute("items",items);
         return "index";
     }

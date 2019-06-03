@@ -4,7 +4,6 @@ import org.apache.ibatis.annotations.*;
 import websale.sale.model.Item;
 
 import java.util.List;
-import java.util.Set;
 
 @Mapper
 public interface ItemDao {
@@ -12,10 +11,10 @@ public interface ItemDao {
     @Select("select * from item where id=#{id}")
     Item selectItem(int id);
 
-    @Select("select * from item limit #{start},10")
-    List<Item> selectItemsByStart(int start);
+    @Select("select * from item limit #{start},#{num}")
+    List<Item> selectItemsByStart(int start,int num);
 
-    List<Item> selectItemsByIds(Set<Integer> list);
+    List<Item> selectItemsByIds(List<Integer> list);
 
     @Select("select * from item where storeid=#{storeId}")
     List<Item> selectItemsByStoreId(int storeId);

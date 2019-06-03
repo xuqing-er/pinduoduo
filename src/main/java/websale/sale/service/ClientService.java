@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import websale.sale.dao.ClientDao;
 import websale.sale.dao.ItemDao;
 import websale.sale.model.Client;
+import websale.sale.model.Constants;
 import websale.sale.model.Item;
 
 import javax.annotation.Resource;
@@ -30,7 +31,7 @@ public class ClientService {
     }
 
     public List<Item> getItems(int start){
-        return itemDao.selectItemsByStart(start);
+        return itemDao.selectItemsByStart(start*Constants.NUM,Constants.NUM);
     }
 
 }

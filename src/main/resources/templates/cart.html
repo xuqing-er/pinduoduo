@@ -209,7 +209,7 @@
                         <strong>Item Name</strong>
                     </div>
                     <div class="col-md-2">
-                        <strong>Item Price</strong>>
+                        <strong>Item Price</strong>
                     </div>
                     <div class="col-md-2">
                         <strong>Item Count</strong>
@@ -246,31 +246,28 @@
                         <h4><strong th:text="${itemEntry.key.name}">{itemName}</strong></h4>
                     </div>
                     <div class="col-md-2">
-                        <p class="lead" th:text="${itemEntry.key.price}">{price}</p>
+                        <h4><strong th:text="${itemEntry.key.price}">{price}</strong></h4>
                     </div>
                     <div class="col-md-2">
-                        <div>
-                            <div class="input-group">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-primary" type="button">
-                                        <span class="glyphicon glyphicon-plus"></span>
-                                    </button>
-                                </span>
-                                <input type="text" class="form-control" placeholder="Count" aria-label="countLabel" th:value="${itemEntry.value}">
-                                <span class="input-group-btn">
-                                <button class="btn" type="button">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary btn-sm" type="button">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                </button>
+                            </span>
+                            <input type="text" class="form-control input-sm" placeholder="Count" aria-label="countLabel" th:value="${itemEntry.value}">
+                            <span class="input-group-btn">
+                                <button class="btn btn-sm" type="button">
                                     <span class="glyphicon glyphicon-minus"></span>
                                 </button>
                             </span>
-                            </div>
                         </div>
-
-                        <div class="col-md-2">
-                            <strong th:text="${itemEntry.key.price}">{total amount}</strong>
-                        </div>
-                        <div class="col-md-1">
-                            <a href="#"><span class="glyphicon glyphicon-remove"></span> remove</a>
-                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <strong th:text="${itemEntry.key.price}">{amount}</strong>
+                    </div>
+                    <div class="col-md-1">
+                        <a href="#"><span class="glyphicon glyphicon-remove"></span> remove</a>
                     </div>
                 </div>
             </div>
@@ -281,27 +278,50 @@
 
 
 <!--结算按钮-->
-<div class="row bottomRow">
-    <hr class="simple" color="red">
-    <button class="btn pull-left" type="reset">Clear</button>
-    <div class="inline pull-right">
-        <strong><i class="icon-shopping-cart"></i>{Total Price}</strong>
-        <a href="#payModal" role="button" class="btn btn-primary" data-toggle="modal">Pay</a>
+<div class="container-fluid">
+    <div class="row">
+        <hr class="simple" color="red">
+        <button class="btn col-md-offset-2" type="reset">Clear</button>
+        <strong class="col-md-offset-6">{Total Price}</strong>
+        <a data-target="#payModal" role="button" class="btn btn-primary" data-toggle="modal">
+            <span class="glyphicon glyphicon-shopping-cart"></span> Pay
+        </a>
     </div>
-</div>
 
-<!--结算界面-->
-<div id="payModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="payModalLabel" aria-hidden="true">
-    <div class="modal-header">
-        <h3 id="payModalLabel">Pay Order</h3>
-    </div>
-    <div class="modal-body">
-        <!--TODO 商品list-->
-        <strong>Total: ￥{money}</strong>
-    </div>
-    <div class="modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-        <button class="btn btn-primary">Confirm</button>
+</div>
+<!--TODO order 结算界面-->
+<div id="payModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="payModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="payModalHeader">Pay Modal</h4>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row row-centered">
+                        <div class="col-md-6">
+                            <form class="form-horizontal" action="/order" method="post" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <div class="col-sm-10">
+                                        <strong>{Total Amount}</strong>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="controls">
+                                        <button class="btn" data-dismiss="modal">Cancel</button>
+                                        <button type="submit"  class="btn btn-primary">Confirm</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
     </div>
 </div>
 </body>

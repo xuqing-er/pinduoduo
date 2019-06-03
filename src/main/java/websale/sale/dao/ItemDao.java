@@ -16,6 +16,9 @@ public interface ItemDao {
 
     List<Item> selectItemsByIds(List<Integer> list);
 
+    @Select("select * from item where id in (select from clientanditem where clientid=#{clientid})")
+    List<Item> selectItemsByClientId(int clientId);
+
     @Select("select * from item where storeid=#{storeId}")
     List<Item> selectItemsByStoreId(int storeId);
 

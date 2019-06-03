@@ -73,4 +73,18 @@ public class Item {
     public void setInventory(int inventory) {
         this.inventory = inventory;
     }
+
+    @Override
+    public int hashCode() {
+        return id;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Item){
+            return id==((Item)obj).getId();
+        }else {
+            return false;
+        }
+    }
 }

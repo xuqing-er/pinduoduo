@@ -17,6 +17,7 @@ import websale.sale.service.ClientService;
 import javax.servlet.http.HttpServletRequest;
 import java.io.FileNotFoundException;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class ClientController {
@@ -121,8 +122,8 @@ public class ClientController {
     ){
         int clientId=(Integer) request.getSession().getAttribute("id");
         //查询商品
-        List<Item> items=cartService.getItems(clientId);
-        model.addAttribute("items",items);
+        Map<Item,Integer> items=cartService.getItems(clientId);
+        model.addAttribute("itemmap",items);
         return "cart";
     }
 }

@@ -86,6 +86,7 @@ public class ManagerController {
 
     @RequestMapping(path = "/create/store",method = RequestMethod.POST)
     public String createStore(Store store){
+        //managerService
         return "store";
     }
 

@@ -4,8 +4,10 @@ import org.springframework.stereotype.Service;
 import websale.sale.dao.ItemDao;
 import websale.sale.dao.ManagerDao;
 import websale.sale.dao.StoreAndItemDao;
+import websale.sale.dao.StoreDao;
 import websale.sale.model.Item;
 import websale.sale.model.Manager;
+import websale.sale.model.Store;
 import websale.sale.model.StoreAndItem;
 import websale.sale.utils.MD5;
 
@@ -22,9 +24,15 @@ public class ManagerService {
 
     @Resource
     StoreAndItemDao storeAndItemDao;
+    @Resource
+    StoreDao storeDao;
 
     public List<Item> getItems(int storeId){
         return itemDao.selectItemsByStoreId(storeId);
+    }
+
+    public int createStore(Store store){
+        return storeDao.insertStore(store);
     }
 
     public int createItem(int storeId,Item item,int number){

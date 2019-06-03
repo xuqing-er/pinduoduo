@@ -11,15 +11,15 @@ public interface ItemDao {
     @Select("select * from item where id=#{id}")
     Item selectItem(int id);
 
-    @Select("select * from item limit #{start},10")
-    List<Item> selectItemsByStart(int start);
+    @Select("select * from item limit #{start},#{length}")
+    List<Item> selectItemsByStart(int start,int length);
 
     List<Item> selectItemsByIds(List<Integer> list);
 
     @Select("select * from item where id in (select from clientanditem where clientid=#{clientid})")
     List<Item> selectItemsByClientId(int clientId);
 
-    @Select("select * from item where storeid=#{storeId}")
+    @Select("select * from item where itemid in (select itemid from storeanditem where storeid=#{storeId}")
     List<Item> selectItemsByStoreId(int storeId);
 
     @Update("update item set price=#{price} where id=#{id}")

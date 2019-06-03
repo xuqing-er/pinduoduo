@@ -129,12 +129,24 @@ public class ClientController {
     }
 
     @RequestMapping(path = "/buy",method = RequestMethod.POST)
-    public String buy(HttpServletRequest request){
+    public String buy(
+            HttpServletRequest request,
+            Model model
+    ){
         int clientId=(Integer) request.getSession().getAttribute("id");
-        buyService.buy(clientId);
+        int orderId=buyService.buy(clientId);
+        model.addAttribute("orderid",orderId);
         return "/pay";
     }
 
     @RequestMapping(path = "/pay")
-    public int pay()
+    @ResponseBody
+    public int pay(
+            @RequestParam("orderId") int orderId,
+            HttpServletRequest request
+    ){
+        int clientId=(Integer) request.getSession().getAttribute("id");
+        buyService.pay(clientId,orderId);
+        return 1;
+    }
 }

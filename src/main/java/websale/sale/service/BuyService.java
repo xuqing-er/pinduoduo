@@ -36,7 +36,7 @@ public class BuyService {
         orderDao.updateOrderStatus(orderId,1);//已付款
     }
 
-    public void buy(int clientId){
+    public int buy(int clientId){
         Order order=new Order();
         order.setDate(LocalDateTime.now());
         order.setStatus(0);//未付款
@@ -58,5 +58,6 @@ public class BuyService {
             orderAndItems.add(orderAndItem);
         }
         orderAndItemDao.insertOrderAndItems(orderAndItems);//添加订单
+        return orderId;
     }
 }

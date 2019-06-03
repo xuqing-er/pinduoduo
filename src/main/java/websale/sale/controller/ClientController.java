@@ -128,7 +128,7 @@ public class ClientController {
         return "cart";
     }
 
-    @RequestMapping(path = "/buy",method = RequestMethod.POST)
+    @RequestMapping(path = "/cart/buy",method = RequestMethod.POST)
     public String buy(
             HttpServletRequest request,
             Model model
@@ -139,7 +139,7 @@ public class ClientController {
         return "/pay";
     }
 
-    @RequestMapping(path = "/pay")
+    @RequestMapping(path = "/cart/pay")
     @ResponseBody
     public int pay(
             @RequestParam("orderId") int orderId,

@@ -58,6 +58,7 @@ public class BuyService {
             orderAndItems.add(orderAndItem);
         }
         orderAndItemDao.insertOrderAndItems(orderAndItems);//添加订单
+        cartItemDao.deleteCartItems(clientId);
         return orderId;
     }
 }

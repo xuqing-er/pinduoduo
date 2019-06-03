@@ -39,7 +39,7 @@ public class ManagerController {
     ){
         try{
             int manageId= managerLoginBiz.login(phoneNumber,password);
-            request.getSession().setAttribute("id",manageId);
+            request.getSession().setAttribute("mid",manageId);
         }catch (Exception e){
             model.addAttribute("error",e.getMessage());
             return "404";
@@ -60,7 +60,7 @@ public class ManagerController {
 
     @RequestMapping(path = "/manager/logout")
     public String logout(HttpServletRequest request){
-        request.getSession().removeAttribute("id");
+        request.getSession().removeAttribute("mid");
         return "index";
     }
 

@@ -68,14 +68,14 @@ public class ClientController {
             model.addAttribute("error",e.getMessage());
             return "404";
         }
-        return "redirect:/index";
+        return "redirect:/index/0";
     }
 
     @RequestMapping(path = "/logout",method = RequestMethod.GET)
     public String logout(HttpServletRequest request){
         
         request.getSession().removeAttribute("id");
-        return "index";
+        return "redirect:/index/0";
     }
 
     //当点击商品时，进入单品显示

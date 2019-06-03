@@ -79,7 +79,7 @@
                         <div class="modal-body">
                             <div class="container">
                                 <div class="row row-centered">
-                                    <div class="well col-md-6 col-centered">
+                                    <div class="col-md-6">
                                         <form class="form-horizontal" action="/login" method="post" enctype="multipart/form-data">
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="phoneNumber">phone</label>
@@ -101,14 +101,19 @@
                                                     </label>
                                                 </div>
                                             </div>
+                                            <div class="form-group">
+                                                <div class="controls">
+                                                    <button class="btn" data-dismiss="modal" aria-hidden="true" data-toggle="modal" data-target="#registerModal">Register</button>
+                                                    <button type="submit"  class="btn btn-primary">Login</button>
+                                                </div>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button class="btn" data-dismiss="modal" aria-hidden="true" data-toggle="modal" data-target="#registerModal">Register</button>
-                            <a href="/login" class="btn btn-primary">Login</a>
+
                         </div>
                     </div>
                 </div>
@@ -124,7 +129,7 @@
                         <div class="modal-body">
                             <div class="container">
                                 <div class="row row-centered">
-                                    <div class="well col-md-6 col-centered">
+                                    <div class="col-md-6 col-centered">
                                         <form class="form-horizontal" action="/register" method="post" enctype="multipart/form-data">
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="name">name</label>
@@ -157,14 +162,19 @@
                                                     <input id="input-b2" name="file" type="file" class="file form-control" data-show-preview="true">
                                                 </div>
                                             </div>
+                                            <div class="form-group">
+                                                <div class="controls">
+                                                    <button class="btn" data-dismiss="modal">Cancel</button>
+                                                    <button class="btn btn-primary">Register</button>
+                                                </div>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button class="btn" data-dismiss="modal">Cancel</button>
-                            <button class="btn btn-primary">Register</button>
+
                         </div>
                     </div>
                 </div>

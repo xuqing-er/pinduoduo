@@ -8,6 +8,7 @@ public class Item {
     int discount;
     String descriptor;
     String imagePath;
+    int inventory;
 
     public void setCategory(String category) {
         this.category = category;
@@ -63,5 +64,13 @@ public class Item {
 
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
+    }
+
+    public int getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(int inventory) {
+        this.inventory = inventory;
     }
 }

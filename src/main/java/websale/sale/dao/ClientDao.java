@@ -9,7 +9,7 @@ import websale.sale.model.Client;
 @Mapper
 public interface ClientDao {
 
-    @Select("select password from client where phonenumber=#{phonenumber}")
+    @Select("select * from client where phonenumber=#{phonenumber}")
     Client selectClient(String phoneNumber);
 
     @SelectKey(keyProperty = "id",resultType = int.class,before = false,statement = "SELECT LAST_INSERT_ID()")

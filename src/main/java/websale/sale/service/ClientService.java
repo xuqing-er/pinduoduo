@@ -31,8 +31,8 @@ public class ClientService {
         return itemDao.selectItem(itemId);
     }
 
-    public List<Item> getItems(int start,int length){
-        return itemDao.selectItemsByStart(start,length);
+    public List<Item> getItems(int start){
+        return itemDao.selectItemsByStart(start*8);
     }
 
 }

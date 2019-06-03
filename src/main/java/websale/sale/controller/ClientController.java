@@ -32,9 +32,7 @@ public class ClientController {
     public String index(
             @PathVariable("start") int start,
             Model model){
-        List<Item> itemList=clientService.getItems(start,4);
-        model.addAttribute("itemList",itemList);
-        List<Item> items=clientService.getItems(start,6);
+        List<Item> items=clientService.getItems(start);
         model.addAttribute("items",items);
         return "index";
     }
@@ -65,6 +63,7 @@ public class ClientController {
     ){
         try{
             int clientId= clientLoginBiz.login(phoneNumber,password);
+            System.out.println(clientId+"   login");
             request.getSession().setAttribute("id",clientId);
         }catch (Exception e){
             model.addAttribute("error",e.getMessage());

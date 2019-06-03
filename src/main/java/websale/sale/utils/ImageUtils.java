@@ -24,7 +24,7 @@ public class ImageUtils {
             out.write(filedata.getBytes());
             out.flush();
             out.close();
-            return imgPath;
+            return "/img/"+fileFullName;
         } catch (Exception e) {
             e.printStackTrace();
         }

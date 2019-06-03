@@ -44,7 +44,7 @@ public class ManagerController {
             model.addAttribute("error",e.getMessage());
             return "404";
         }
-        return "redirect:/index";
+        return "redirect:/index/0";
     }
 
     @RequestMapping(path = "/manager/register",method = RequestMethod.GET)
@@ -66,18 +66,17 @@ public class ManagerController {
 
     @RequestMapping(path = "/create/item",method = RequestMethod.POST)
     public String createItem(
+            @RequestParam("file") MultipartFile file,
             @RequestParam("storeId") int storeId,
             @RequestParam("number")  int number,
-            @RequestParam("file") MultipartFile file,
             Item item,
             HttpServletRequest request
     ){
 
-        if (file==null) System.out.println("file error");
         String path=ImageUtils.saveFile(file,request);
         item.setImagePath(path);
         managerService.createItem(storeId,item,number);
-        return "index";
+        return "redirect:/index/0";
     }
 
     @RequestMapping(path = "/create/item" ,method = RequestMethod.GET)

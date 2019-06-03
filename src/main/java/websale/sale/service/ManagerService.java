@@ -27,12 +27,14 @@ public class ManagerService {
     }
 
     public int createItem(int storeId,Item item,int number){
+        int clientId=itemDao.insertItem(item);
+        item.setId(clientId);
         StoreAndItem storeAndItem=new StoreAndItem();
-        storeAndItem.setItemId(item.getId());
+        storeAndItem.setItemId(clientId);
         storeAndItem.setStoreId(storeId);
         storeAndItem.setNumber(number);
         storeAndItemDao.insertStoreAndItem(storeAndItem);
-        return itemDao.insertItem(item);
+        return clientId;
     }
 
     public void addItem(int storeId,int itemId,int number){

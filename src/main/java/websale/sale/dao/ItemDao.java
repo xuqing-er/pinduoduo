@@ -24,6 +24,6 @@ public interface ItemDao {
     void updateItemPrice(String id,String price);
 
     @SelectKey(keyProperty = "id",resultType = int.class,before = false,statement = "SELECT LAST_INSERT_ID()")
-    @Insert("insert into item values (#{name},#{category},#{price},#{discount},#{descriptor},#{imagePath})")
+    @Insert("insert into item(name,category,price,discount,descriptor,imagepath) values (#{name},#{category},#{price},#{discount},#{descriptor},#{imagePath})")
     int insertItem(Item item);
 }

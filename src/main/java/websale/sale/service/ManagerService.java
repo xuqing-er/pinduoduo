@@ -7,6 +7,7 @@ import websale.sale.dao.StoreAndItemDao;
 import websale.sale.model.Item;
 import websale.sale.model.Manager;
 import websale.sale.model.StoreAndItem;
+import websale.sale.utils.MD5;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -42,6 +43,8 @@ public class ManagerService {
     }
 
     public int addManager(Manager manager){
+
+        manager.setPassword(MD5.next(manager.getPassword()));
         return managerDao.insertManager(manager);
     }
 

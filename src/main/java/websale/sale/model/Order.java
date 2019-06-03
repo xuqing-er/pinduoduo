@@ -1,12 +1,12 @@
 package websale.sale.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Order {
     int id;
     int status;
     String sum;
-    Date date;
+    LocalDateTime date;
 
     public int getId() {
         return id;
@@ -24,7 +24,11 @@ public class Order {
         return status;
     }
 
-    public Date getDate() {
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
+
+    public LocalDateTime getDate() {
         return date;
     }
 
@@ -32,9 +36,6 @@ public class Order {
         return sum;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
 
     public void setSum(String sum) {
         this.sum = sum;

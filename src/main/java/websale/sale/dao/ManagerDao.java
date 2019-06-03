@@ -6,7 +6,7 @@ import websale.sale.model.Manager;
 @Mapper
 public interface ManagerDao {
 
-    @Insert("insert into manager values()")
+    @Insert("insert into manager(username,phoneNumber,password) values(#{username},#{phoneNumber},#{password})")
     @SelectKey(keyProperty = "id",resultType = int.class,before = false,statement = "SELECT LAST_INSERT_ID()")
     int insertManager(Manager manager);
 

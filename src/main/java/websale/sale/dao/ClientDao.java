@@ -13,6 +13,6 @@ public interface ClientDao {
     Client selectClient(String phoneNumber);
 
     @SelectKey(keyProperty = "id",resultType = int.class,before = false,statement = "SELECT LAST_INSERT_ID()")
-    @Insert("insert into client(phonenumber,password,address) values(#{phoneNumber},#{password},#{address})")
+    @Insert("insert into client(phonenumber,password,username,address) values(#{phoneNumber},#{password},#{userName},#{address})")
     int insertClient(Client client);
 }

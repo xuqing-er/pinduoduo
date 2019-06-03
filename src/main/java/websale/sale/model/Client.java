@@ -5,6 +5,7 @@ public class Client {
     String phoneNumber;
     String password;
     String address;
+    String userName;
 
     public int getId() {
         return id;
@@ -36,5 +37,13 @@ public class Client {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserName() {
+        return userName;
     }
 }

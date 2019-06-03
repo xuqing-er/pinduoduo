@@ -3,14 +3,12 @@ package websale.sale.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import websale.sale.biz.ClientLoginBiz;
 import websale.sale.model.CartItem;
 import websale.sale.model.Client;
 import websale.sale.model.Item;
+import websale.sale.service.BuyService;
 import websale.sale.service.CartService;
 import websale.sale.service.ClientService;
 
@@ -27,6 +25,8 @@ public class ClientController {
     private ClientService clientService;
     @Autowired
     private CartService cartService;
+    @Autowired
+    private BuyService buyService;
 
     @RequestMapping(path = "/index/{start}", method = RequestMethod.GET)
     public String index(
@@ -104,14 +104,15 @@ public class ClientController {
 
     //在购物车界面增加商品数量
     @RequestMapping(path = "/cart/increase")
-    public String increaseItemToCart(
+    @ResponseBody
+    public int increaseItemToCart(
             @RequestParam("id") int id,
             @RequestParam("number") int number,
             HttpServletRequest request
     ){
         int clientId=(Integer) request.getSession().getAttribute("id");
         cartService.updateItem(clientId,id,number);
-        return "200";
+        return clientId;
     }
 
     //用户进入购物车
@@ -126,4 +127,14 @@ public class ClientController {
         model.addAttribute("itemmap",items);
         return "cart";
     }
+
+    @RequestMapping(path = "/buy",method = RequestMethod.POST)
+    public String buy(HttpServletRequest request){
+        int clientId=(Integer) request.getSession().getAttribute("id");
+        buyService.buy(clientId);
+        return "/pay";
+    }
+
+    @RequestMapping(path = "/pay")
+    public int pay()
 }

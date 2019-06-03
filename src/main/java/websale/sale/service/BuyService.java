@@ -8,8 +8,8 @@ import websale.sale.model.Order;
 import websale.sale.model.OrderAndItem;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -33,13 +33,15 @@ public class BuyService {
         List<OrderAndItem> list=orderAndItemDao.selectOederAndItems(orderId);
         storeAndItemDao.updateStoreAndItemNumbers(list);
         cartItemDao.deleteCartItems(clientId);
+        orderDao.updateOrderStatus(orderId,1);//已付款
     }
 
     public void buy(int clientId){
         Order order=new Order();
-        order.setDate(new Date());
+        order.setDate(LocalDateTime.now());
+        order.setStatus(0);//未付款
         int orderId=orderDao.insertOrder(order);
-        ClientAndOrder clientAndOrder=new ClientAndOrder();
+        ClientAndOrder clientAndOrder=new ClientAndOrder();//添加客户订单
         clientAndOrder.setOrderId(orderId);
         clientAndOrder.setClientId(clientId);
         clientAndOrderDao.insertClientAndOrder(clientAndOrder);
@@ -55,6 +57,6 @@ public class BuyService {
             orderAndItem.setNumber(c.getNumber());
             orderAndItems.add(orderAndItem);
         }
-        orderAndItemDao.insertOrderAndItems(orderAndItems);
+        orderAndItemDao.insertOrderAndItems(orderAndItems);//添加订单
     }
 }

@@ -8,9 +8,9 @@ import websale.sale.model.Order;
 @Mapper
 public interface OrderDao {
 
-    @Insert("insert into order values (#{status},#{sum},#{date})")
+    @Insert("insert into orders(status,sum,date) values (#{status},#{sum},#{date})")
     int insertOrder(Order order);
 
-    @Update("update order set status=#{status} where id=#{id}")
+    @Update("update orders set status=#{status} where id=#{id}")
     void updateOrderStatus(int id,int status);
 }

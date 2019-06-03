@@ -4,8 +4,8 @@ import org.springframework.stereotype.Service;
 import websale.sale.dao.ClientDao;
 import websale.sale.dao.ItemDao;
 import websale.sale.model.Client;
-import websale.sale.model.Constants;
 import websale.sale.model.Item;
+import websale.sale.utils.MD5;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -19,6 +19,7 @@ public class ClientService {
     ItemDao itemDao;
 
     public int addClient(Client client){
+        client.setPassword(MD5.next(client.getPassword()));
         return clientDao.insertClient(client);
     }
 
@@ -31,7 +32,7 @@ public class ClientService {
     }
 
     public List<Item> getItems(int start){
-        return itemDao.selectItemsByStart(start*Constants.NUM,Constants.NUM);
+        return itemDao.selectItemsByStart(start*10);
     }
 
 }

@@ -46,10 +46,10 @@
                 </form>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a data-toggle="modal" data-target="#loginModal"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+                        <a th:unless="${session.id}" data-toggle="modal" data-target="#loginModal"><span class="glyphicon glyphicon-log-in"></span> Login</a>
                     </li>
                     <li class="dropdown">
-                        <a href="#" id="userDropdown" class="dropdown-toggle" data-toggle="dropdown">
+                        <a href="#" id="userDropdown" class="dropdown-toggle" data-toggle="dropdown" th:if="${session.id}">
                             <span class="glyphicon glyphicon-user" th:text="${session.username}">{username}</span>
                             <span class="badge">3</span>
                             <!--TODO 根据用户的消息数量显示-->
@@ -60,7 +60,7 @@
                             <li><a href="/cart" tabindex="-1"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
                             <li><a href="#" tabindex="-1"><span class="glyphicon glyphicon-envelope"></span> Message</a></li>
                             <li><a href="#" tabindex="-1"><span class="glyphicon glyphicon-time"></span> History</a></li>
-                            <li><a href="/store" tabindex="-1"><span class="glyphicon glyphicon-home"></span> Store</a></li>
+                            <li><a href="/store"  tabindex="-1"><span class="glyphicon glyphicon-home"></span> Store</a></li>
                             <li><a href="/orders" tabindex="-1"><span class="glyphicon glyphicon-yen"></span> Order</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="#" tabindex="-1"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>

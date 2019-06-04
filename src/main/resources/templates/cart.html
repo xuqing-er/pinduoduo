@@ -209,11 +209,14 @@
                     <div class="col-md-2">
                         <strong>Item Name</strong>
                     </div>
-                    <div class="col-md-2">
-                        <strong>Item Price</strong>
+                    <div class="col-md-1">
+                        <strong>Price</strong>
+                    </div>
+                    <div class="col-md-1">
+                        <strong>Discount</strong>
                     </div>
                     <div class="col-md-2">
-                        <strong>Item Count</strong>
+                        <strong>Count</strong>
                     </div>
                     <div class="col-md-2">
                         <strong>Total Amount</strong>
@@ -234,7 +237,7 @@
         <!-- 表格-->
         <div class="row">
             <div class="container-fluid">
-                <div class="row" th:each="itemEntry : ${itemmap}">
+                <div class="row" th:each="itemEntry : ${itemmap}" th:id="'divId' + ${itemEntry.key.id}">
                     <!--复选框-->
                     <div class="col-md-1">
                         <input type="checkbox" value="{item1}" aria-label="">
@@ -246,8 +249,11 @@
                     <div class="col-md-2">
                         <h4><strong th:text="${itemEntry.key.name}">{itemName}</strong></h4>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-1">
                         <h4><strong th:text="${itemEntry.key.price}">{price}</strong></h4>
+                    </div>
+                    <div class="col-md-1">
+                        <h4><strong th:text="${itemEntry.key.discount}">{price}</strong></h4>
                     </div>
                     <div class="col-md-2">
                         <div class="input-group input-group-sm">
@@ -283,11 +289,29 @@
                         </script>
                     </div>
                     <div class="col-md-2">
-                        <strong th:text="${itemEntry.key.price}">{amount}</strong>
+                        <strong th:text="${itemEntry.key.price} * ${itemEntry.key.discount} * ${itemEntry.value} / 100">{amount}</strong>
                     </div>
                     <div class="col-md-1">
-                        <a href="#"><span class="glyphicon glyphicon-remove"></span> remove</a>
+                        <a href="#" th:id="'removeId'+${itemEntry.key.id}"><span class="glyphicon glyphicon-remove"></span> remove</a>
                     </div>
+                    <!--TODO 移除某一项-->
+                    <script type="text/javascript">
+                        $("#removeId" + [[${itemEntry.key.id}]]).click(function () {
+                            var url = "/cart/remove?id=" + [[${itemEntry.key.id}]];
+                            $.ajax({
+                                url: url,
+                                async: true,
+                                success: function (data, status, xhr) {
+                                    alert("ok: " + data);
+                                    $("#divId" + [[${itemEntry.key.id}]]).hide();
+                                },
+                                error:function (xhr, status, error) {
+                                    alert("errors status:" + status.toString());
+                                    alert(error);
+                                }
+                            })
+                        })
+                    </script>
                 </div>
             </div>
         </div>

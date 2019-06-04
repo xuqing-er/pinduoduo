@@ -91,7 +91,8 @@ public class ClientController {
 
     //在主页或者商店添加商品到购物车
     @RequestMapping(path = "/cart/add",method = RequestMethod.GET)
-    public String addItemToCart(
+    @ResponseBody
+    public CartItem addItemToCart(
             @RequestParam("id") int id,
             HttpServletRequest request
     ){
@@ -101,7 +102,7 @@ public class ClientController {
         cartItem.setItemId(id);
         cartItem.setNumber(1);
         clientService.addItemToCart(cartItem);
-        return "redirect:/index/0";
+        return cartItem;
     }
 
     //在购物车界面增加商品数量

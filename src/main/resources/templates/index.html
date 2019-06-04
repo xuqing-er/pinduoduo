@@ -147,7 +147,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="name">name</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="name" name="username" placeholder="name">
+                                                    <input type="text" class="form-control" id="name" name="userName" placeholder="name">
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -469,7 +469,7 @@
                             </p>
                             <p th:text="${item.descriptor}">{desciptor}</p>
                             <p>
-                                <a href="#" class="btn btn-primary">
+                                <a th:href="'/cart/add?' + ${item.id}" class="btn btn-primary">
                                     <span class="glyphicon glyphicon-plus">Add</span>
                                 </a>
                                 <a href="#" class="btn btn-default">

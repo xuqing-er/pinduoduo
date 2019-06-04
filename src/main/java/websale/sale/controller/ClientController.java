@@ -133,12 +133,14 @@ public class ClientController {
     }
 
     @RequestMapping(path = "/cart/remove")
-    public void removeItemFromCart(
+    @ResponseBody
+    public int removeItemFromCart(
             @RequestParam("id") int itemId,
             HttpServletRequest request
     ){
         int clientId=(Integer)request.getSession().getAttribute("id");
         cartService.removeItem(clientId,itemId);
+        return itemId;
     }
 
     @RequestMapping(path = "/cart/buy",method = RequestMethod.POST)

@@ -252,17 +252,35 @@
                     <div class="col-md-2">
                         <div class="input-group input-group-sm">
                             <span class="input-group-btn">
-                                <button class="btn btn-primary btn-sm" type="button">
+                                <button class="btn btn-primary" id="countAddButton" type="button">
                                     <span class="glyphicon glyphicon-plus"></span>
                                 </button>
                             </span>
-                            <input type="text" class="form-control input-sm" placeholder="Count" aria-label="countLabel" th:value="${itemEntry.value}">
+                            <input type="text" class="form-control" id="countInput" placeholder="Count" aria-label="countLabel" value="1">
                             <span class="input-group-btn">
-                                <button class="btn btn-sm" type="button">
+                                <button class="btn" type="button" id="countSubButton">
                                     <span class="glyphicon glyphicon-minus"></span>
                                 </button>
                             </span>
                         </div>
+
+                        <script type="text/javascript">
+                            $("#countAddButton").click(function () {
+                                var current = $("#countInput");
+                                var newValue = Number(current.val()) + 1;
+                                current.attr("value", newValue);
+                            });
+
+                            <!-- -1按钮-->
+                            $("#countSubButton").click(function () {
+                                var current = $("#countInput");
+                                var newValue = Number(current.val()) - 1;
+                                if(newValue <= 0){
+                                    newValue = 0;
+                                }
+                                current.attr("value", newValue);
+                            })
+                        </script>
                     </div>
                     <div class="col-md-2">
                         <strong th:text="${itemEntry.key.price}">{amount}</strong>
@@ -284,9 +302,9 @@
         <hr class="simple" color="red">
         <button class="btn col-md-offset-2" type="reset">Clear</button>
         <strong class="col-md-offset-6">{Total Price}</strong>
-        <a data-target="#payModal" role="button" class="btn btn-primary" data-toggle="modal">
+        <button type="button" class="btn btn-primary" id="#payButton">
             <span class="glyphicon glyphicon-shopping-cart"></span> Pay
-        </a>
+        </button>
     </div>
 
 </div>
@@ -302,10 +320,10 @@
                 <div class="container">
                     <div class="row row-centered">
                         <div class="col-md-6">
-                            <form class="form-horizontal" action="/order" method="post" enctype="multipart/form-data">
+                            <form class="form-horizontal" action="/orders" method="post" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <div class="col-sm-10">
-                                        <strong>{Total Amount}</strong>
+                                        <div id="payModalContent">{Total Amount}</div>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -325,5 +343,13 @@
         </div>
     </div>
 </div>
+<!-- 动态修改modal内容-->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#payButton").click(function () {
+            $("#payModalContent").load("/orders");
+        })
+    })
+</script>
 </body>
 </html>

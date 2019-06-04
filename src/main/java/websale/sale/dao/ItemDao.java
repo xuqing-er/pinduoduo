@@ -19,13 +19,18 @@ public interface ItemDao {
     @Select("select * from item where id in (select itemid from cartitem where clientid=#{clientid})")
     List<Item> selectItemsByClientId(int clientId);
 
+
     @Select("select * from item where itemid in (select itemid from storeanditem where storeid=#{storeId}")
     List<Item> selectItemsByStoreId(int storeId);
 
     @Update("update item set price=#{price} where id=#{id}")
     void updateItemPrice(String id,String price);
 
+    @Update("update item set number=#{number} where id=#{itemId}")
+    void updateItemInventory(int itemId,int number);
+
     @SelectKey(keyProperty = "id",resultType = int.class,before = false,statement = "SELECT LAST_INSERT_ID()")
-    @Insert("insert into item(name,category,price,discount,descriptor,imagepath) values (#{name},#{category},#{price},#{discount},#{descriptor},#{imagePath})")
+    @Insert("insert into item(name,category,price,discount,descriptor,imagepath,inventory) values " +
+            "(#{name},#{category},#{price},#{discount},#{descriptor},#{imagePath},#{inventory})")
     int insertItem(Item item);
 }

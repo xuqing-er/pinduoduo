@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import websale.sale.biz.ManagerLoginBiz;
 import websale.sale.model.Item;
@@ -16,6 +17,7 @@ import websale.sale.utils.ImageUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 public class ManagerController {
@@ -92,12 +94,22 @@ public class ManagerController {
     }
 
     @RequestMapping(path ="/store")
-    public String addItem(
+    public String getStore(
             @RequestParam("storeId") int storeId,
-            @RequestParam("itemId") int itemId,
+            Model model
+    ){
+        List<Item> items=managerService.getItems(storeId);
+        model.addAttribute("items",items);
+        return "store";
+    }
+
+    @RequestMapping(path = "/store/stock")
+    @ResponseBody
+    public int addItemInventory(
+            @RequestParam("itemid") int itemId,
             @RequestParam("number") int number
     ){
-        managerService.addItem(storeId,itemId,number);
-        return "store";
+        managerService.addItem(itemId,number);
+        return number;
     }
 }

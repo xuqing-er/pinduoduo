@@ -17,6 +17,9 @@ public interface StoreDao {
             "(select id from item where itemname=#{itemName}))")
     List<Store> selectByItem(String itemName);
 
+    @Select("select * from store where id=#{id}")
+    Store selectById(int id);
+
     @Update("update store set name=#{name} where id=#{id}")
     void updateStoreName(@Param("id") String id, @Param("name") String name);
 

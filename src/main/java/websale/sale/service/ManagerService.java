@@ -27,6 +27,7 @@ public class ManagerService {
 
     public int createStore(int managerId,Store store){
         int storeId=storeDao.insertStore(store);
+        System.out.println(storeId);
         ManagerAndStore managerAndStore=new ManagerAndStore();
         managerAndStore.setManagerId(managerId);
         managerAndStore.setStoreId(storeId);

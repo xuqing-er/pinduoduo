@@ -9,7 +9,7 @@ import java.util.List;
 public interface StoreDao {
 
     @SelectKey(keyProperty = "id",resultType = int.class,before = false,statement = "SELECT LAST_INSERT_ID()")
-    @Insert("insert into store values (#{name},#{category},#{phoneNumber},#{level)")
+    @Insert("insert into store (name,category,phonenumber,level) values (#{name},#{category},#{phoneNumber},#{level})")
     int insertStore(Store store);
 
     @Select("select * from store where store.id in " +

@@ -8,9 +8,9 @@ import websale.sale.model.ManagerAndStore;
 @Mapper
 public interface ManagerAndStoreDao {
 
-    @Insert("insert into managerandstore values (#{manageId},#{storeId})")
+    @Insert("insert into managerandstore values (#{managerId},#{storeId})")
     int insertManagerAndStore(ManagerAndStore managerAndStore);
 
-    @Select("select storeId from mangerandstore where mangerId=#{managerId}")
+    @Select("select storeId from mangerandstore where managerId=#{managerId}")
     int selectByMangerId(int mangerId);
 }

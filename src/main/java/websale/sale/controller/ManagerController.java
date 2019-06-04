@@ -56,6 +56,7 @@ public class ManagerController {
 
     @RequestMapping(path = "/manager/register",method = RequestMethod.POST)
     public String doRegister(Manager manager){
+        System.out.println(manager.getUserName());
         managerService.addManager(manager);
         return "redirect:/login";
     }

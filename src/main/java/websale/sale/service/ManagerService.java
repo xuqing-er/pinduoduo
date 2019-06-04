@@ -21,8 +21,8 @@ public class ManagerService {
     @Resource
     ManagerAndStoreDao managerAndStoreDao;
 
-    public List<Item> getItems(int storeId){
-        return itemDao.selectItemsByStoreId(storeId);
+    public List<Item> getItems(int managerId){
+        return itemDao.selectItemsByManagerId(managerId);
     }
 
     public int createStore(int managerId,Store store){

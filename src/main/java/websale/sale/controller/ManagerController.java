@@ -96,7 +96,8 @@ public class ManagerController {
     ){
         int mid=(Integer) request.getSession().getAttribute("mid");
         int storeId=managerService.createStore(mid,store);
-        model.addAttribute("storeid",storeId);
+        store.setId(storeId);
+        model.addAttribute("store",store);
         return "store";
     }
 
@@ -108,10 +109,11 @@ public class ManagerController {
 
     @RequestMapping(path ="/store")
     public String getStore(
-            @RequestParam("storeId") int storeId,
+            HttpServletRequest request,
             Model model
     ){
-        List<Item> items=managerService.getItems(storeId);
+        int managerId=(Integer) request.getSession().getAttribute("mid");
+        List<Item> items=managerService.getItems(managerId);
         model.addAttribute("items",items);
         return "store";
     }

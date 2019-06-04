@@ -11,6 +11,7 @@ public interface ItemDao {
     @Select("select * from item where id=#{id}")
     Item selectItem(int id);
 
+
     @Select("select * from item limit #{start},8")
     List<Item> selectItemsByStart(int start);
 
@@ -20,8 +21,9 @@ public interface ItemDao {
     List<Item> selectItemsByClientId(int clientId);
 
 
-    @Select("select * from item where itemid in (select itemid from storeanditem where storeid=#{storeId}")
-    List<Item> selectItemsByStoreId(int storeId);
+    @Select("select * from item where itemid in " +
+            "(select itemid from storeanditem where storeid=(select storeid from managerandstore where managerId=#{managerId})")
+    List<Item> selectItemsByManagerId(int managerId);
 
     @Update("update item set price=#{price} where id=#{id}")
     void updateItemPrice(@Param("id")String id,@Param("price") String price);

@@ -14,10 +14,10 @@ public interface CartItemDao {
     @Update("update cartitem set number=#{number} where clientId=#{clientId} and itemid=#{itemId}")
     void updateCartItem(int clientId,int itemId,int number);
 
-    @Delete("delete cartitem where clientId=#{clientId} and itemid={itemId}")
+    @Delete("delete from cartitem where clientId=#{clientId} and itemid={itemId}")
     void deleteCartItem(int clientId,int itemId);
 
-    @Delete("delete cartitem where clientid=#{clientId}")
+    @Delete("delete from cartitem where clientid=#{clientId}")
     void deleteCartItems(int clientId);
 
     @Select("select * from cartitem where clientid=#{clientId}")

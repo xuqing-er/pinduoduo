@@ -24,7 +24,7 @@
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-home"></span>Index</a>
+                <a class="navbar-brand" href="/index/0"><span class="glyphicon glyphicon-home"></span>Index</a>
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -50,7 +50,7 @@
                     </li>
                     <li class="dropdown">
                         <a href="#" id="userDropdown" class="dropdown-toggle" data-toggle="dropdown">
-                            <span class="glyphicon glyphicon-user">{username}</span>
+                            <span class="glyphicon glyphicon-user" th:text="${session.username}">{username}</span>
                             <span class="badge">3</span>
                             <!--TODO 根据用户的消息数量显示-->
                             <span class="caret"></span>
@@ -469,6 +469,7 @@
                             </p>
                             <p th:text="${item.descriptor}">{desciptor}</p>
                             <p>
+                                <!--TODO ajax-->
                                 <a th:href="'/cart/add?id=' + ${item.id}" class="btn btn-primary">
                                     <span class="glyphicon glyphicon-plus">Add</span>
                                 </a>

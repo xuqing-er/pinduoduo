@@ -57,7 +57,7 @@ public class ManagerController {
     @RequestMapping(path = "/manager/register",method = RequestMethod.POST)
     public String doRegister(Manager manager){
         managerService.addManager(manager);
-        return "store";
+        return "redirect:/login";
     }
 
     @RequestMapping(path = "/manager/logout")

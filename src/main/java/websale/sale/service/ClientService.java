@@ -1,9 +1,11 @@
 package websale.sale.service;
 
 import org.springframework.stereotype.Service;
+import websale.sale.dao.CartItemDao;
 import websale.sale.dao.ClientDao;
 import websale.sale.dao.ItemDao;
 import websale.sale.dao.OrderDao;
+import websale.sale.model.CartItem;
 import websale.sale.model.Client;
 import websale.sale.model.Item;
 import websale.sale.model.Order;
@@ -20,6 +22,8 @@ public class ClientService {
     OrderDao orderDao;
     @Resource
     ItemDao itemDao;
+    @Resource
+    CartItemDao cartItemDao;
 
     public int addClient(Client client){
         client.setPassword(MD5.next(client.getPassword()));
@@ -39,5 +43,9 @@ public class ClientService {
     }
 
     public List<Order> getOrders(int clientId){ return orderDao.selectByClientId(clientId); }
+
+    public void addItemToCart(CartItem cartItem){
+        cartItemDao.insertCartItem(cartItem);
+    }
 
 }

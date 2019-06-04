@@ -13,7 +13,7 @@ public class ManagerLoginBiz {
     @Autowired
     ManagerService managerService;
 
-    public int login(String phoneNumber,String password) throws Exception{
+    public Manager login(String phoneNumber,String password) throws Exception{
         Manager manager=managerService.getManager(phoneNumber);
 
         if (manager==null){
@@ -23,6 +23,6 @@ public class ManagerLoginBiz {
             throw new LoginRegisterException("密码不正确");
         }
 
-        return manager.getId();
+        return manager;
     }
 }

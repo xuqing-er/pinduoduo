@@ -40,8 +40,9 @@ public class ManagerController {
             HttpServletRequest request
     ){
         try{
-            int manageId= managerLoginBiz.login(phoneNumber,password);
-            request.getSession().setAttribute("mid",manageId);
+            Manager manager= managerLoginBiz.login(phoneNumber,password);
+            request.getSession().setAttribute("mid",manager.getId());
+            request.getSession().setAttribute("username",manager.getUserName());
         }catch (Exception e){
             model.addAttribute("error",e.getMessage());
             return "404";

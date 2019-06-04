@@ -13,7 +13,7 @@ public class ClientLoginBiz {
     @Autowired
     private ClientService clientService;
 
-    public int login(String phoneNumber,String password) throws Exception{
+    public Client login(String phoneNumber,String password) throws Exception{
         Client client =clientService.getClient(phoneNumber);
 
         if (client==null){
@@ -23,6 +23,6 @@ public class ClientLoginBiz {
             throw new LoginRegisterException("密码不正确");
         }
 
-        return client.getId();
+        return client;
     }
 }

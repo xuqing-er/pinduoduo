@@ -62,8 +62,9 @@ public class ClientController {
             HttpServletRequest request
     ){
         try{
-            int clientId= clientLoginBiz.login(phoneNumber,password);
-            request.getSession().setAttribute("id",clientId);
+            Client client= clientLoginBiz.login(phoneNumber,password);
+            request.getSession().setAttribute("id",client.getId());
+            request.getSession().setAttribute("username",client.getUserName());
             //System.out.println(request.getSession().getMaxInactiveInterval());
         }catch (Exception e){
             model.addAttribute("error",e.getMessage());
@@ -89,9 +90,8 @@ public class ClientController {
     }
 
     //在主页或者商店添加商品到购物车
-    @RequestMapping(path = "/cart/add",method = RequestMethod.POST)
-    @ResponseBody
-    public int addItemToCart(
+    @RequestMapping(path = "/cart/add",method = RequestMethod.GET)
+    public String addItemToCart(
             @RequestParam("id") int id,
             HttpServletRequest request
     ){
@@ -100,7 +100,8 @@ public class ClientController {
         cartItem.setClientId(clientId);
         cartItem.setItemId(id);
         cartItem.setNumber(1);
-        return 1;
+        clientService.addItemToCart(cartItem);
+        return "redirect:/index/0";
     }
 
     //在购物车界面增加商品数量

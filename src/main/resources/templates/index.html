@@ -464,8 +464,14 @@
                             <img src="../static/img/thumbnail1.jpeg" th:src="@{${item.imagePath}}" alt="">
                             <h3 th:text="${item.name}">Thumbnail Label</h3>
                             <p>
+                                <strong>Price:</strong>
                                 <span th:text="${item.price}">{price}</span>
+                                <span>￥</span>
+                            </p>
+                            <p>
+                                <strong>Discount:</strong>
                                 <span th:text="${item.discount}">{discount}</span>
+                                <span>%</span>
                             </p>
                             <p th:text="${item.descriptor}">{desciptor}</p>
                             <p>

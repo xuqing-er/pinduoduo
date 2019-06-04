@@ -45,6 +45,8 @@ public class ClientController {
     @RequestMapping(path = "/register",method = RequestMethod.POST)
     public String doRegister(Client client,Model model){
         int clientid=clientService.addClient(client);
+        System.out.println(clientid+"return");
+        System.out.println(client.getId());
         model.addAttribute("clientId",clientid);
         return "login";
     }

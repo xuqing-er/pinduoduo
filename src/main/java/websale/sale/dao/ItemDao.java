@@ -21,8 +21,8 @@ public interface ItemDao {
     List<Item> selectItemsByClientId(int clientId);
 
 
-    @Select("select * from item where itemid in " +
-            "(select itemid from storeanditem where storeid=(select storeid from managerandstore where managerId=#{managerId})")
+    @Select("select * from item where id in " +
+            "(select itemid from storeanditem where storeid =(select storeid from managerandstore where managerId=#{managerId}))")
     List<Item> selectItemsByManagerId(int managerId);
 
     @Update("update item set price=#{price} where id=#{id}")

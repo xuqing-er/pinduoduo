@@ -288,17 +288,36 @@
                     <div>
                         <div class="input-group">
                             <span class="input-group-btn">
-                                <button class="btn btn-primary" type="button">
+                                <button class="btn btn-primary" id="countAddButton" type="button">
                                     <span class="glyphicon glyphicon-plus"></span>
                                 </button>
                             </span>
-                            <input type="text" class="form-control" placeholder="Count" aria-label="countLabel">
+                            <input type="text" class="form-control" id="countInput" placeholder="Count" aria-label="countLabel" value="1">
                             <span class="input-group-btn">
-                                <button class="btn" type="button">
+                                <button class="btn" type="button" id="countSubButton">
                                     <span class="glyphicon glyphicon-minus"></span>
                                 </button>
                             </span>
                         </div>
+
+                        <script type="text/javascript">
+                            <!-- +1按钮-->
+                            $("#countAddButton").click(function () {
+                                var current = $("#countInput");
+                                var newValue = Number(current.val()) + 1;
+                                current.attr("value", newValue);
+                            });
+
+                            <!-- -1按钮-->
+                            $("#countSubButton").click(function () {
+                                var current = $("#countInput");
+                                var newValue = Number(current.val()) - 1;
+                                if(newValue <= 0){
+                                    newValue = 0;
+                                }
+                                current.attr("value", newValue);
+                            })
+                        </script>
                     </div>
                 </div>
 

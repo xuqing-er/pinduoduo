@@ -26,7 +26,8 @@ public class ManagerService {
     }
 
     public int createStore(int managerId,Store store){
-        int storeId=storeDao.insertStore(store);
+        storeDao.insertStore(store);
+        int storeId=storeDao.selectMaxId();
         System.out.println(storeId);
         ManagerAndStore managerAndStore=new ManagerAndStore();
         managerAndStore.setManagerId(managerId);
@@ -37,7 +38,8 @@ public class ManagerService {
 
     public int createItem(int storeId,Item item,int number){
         item.setInventory(number);
-        int itemId=itemDao.insertItem(item);
+        itemDao.insertItem(item);
+        int itemId=itemDao.selectMaxId();
         item.setId(itemId);
         StoreAndItem storeAndItem=new StoreAndItem();
         storeAndItem.setItemId(itemId);
@@ -53,7 +55,8 @@ public class ManagerService {
     public int addManager(Manager manager){
 
         manager.setPassword(MD5.next(manager.getPassword()));
-        return managerDao.insertManager(manager);
+        managerDao.insertManager(manager);
+        return managerDao.selectMaxId();
     }
 
     public Manager getManager(String phoneNumber){

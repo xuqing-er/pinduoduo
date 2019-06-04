@@ -18,4 +18,7 @@ public interface ManagerDao {
 
     @Select("select * from manager where phonenumber=#{phoneNumber}")
     Manager selectManager(String phoneNumber);
+
+    @Select("select max(id) from manager")
+    int selectMaxId();
 }

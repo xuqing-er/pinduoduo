@@ -16,8 +16,4 @@
         <setting name="useGeneratedKeys" value="true"/>
     </settings>
     <!-- Continue going here -->
-    <mappers>
-        <mapper class="web.sale.dao.ClientDao"/>
-        <mapper resource="classpath:mapper/ClientMapper.xml"/>
-    </mappers>
 </configuration>

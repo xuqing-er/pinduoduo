@@ -22,4 +22,7 @@ public interface CartItemDao {
 
     @Select("select * from cartitem where clientid=#{clientId}")
     List<CartItem> selectCartItems(int clientId);
+
+    @Select("select * from cartitem where clientId=#{clientId} and itemid=#{itemId}")
+    CartItem selectCartItem(int clientId,int itemId);
 }

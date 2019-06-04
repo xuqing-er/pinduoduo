@@ -46,8 +46,8 @@ public class ManagerService {
         return clientId;
     }
 
-    public void addItem(int storeId,int itemId,int number){
-        storeAndItemDao.updateStoreAndItemNumber(storeId,itemId,number);
+    public void addItem(int itemId,int number){
+        itemDao.updateItemInventory(itemId,number);
     }
 
     public int addManager(Manager manager){
@@ -59,6 +59,7 @@ public class ManagerService {
     public Manager getManager(String phoneNumber){
         return managerDao.selectManager(phoneNumber);
     }
+
 
     public void updateManagerPassword(String phoneNumber,String password){
         managerDao.updateManagerPassword(phoneNumber,password);

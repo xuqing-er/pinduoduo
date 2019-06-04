@@ -2,7 +2,6 @@ package websale.sale.dao;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Update;
 import websale.sale.model.OrderAndItem;
 import websale.sale.model.StoreAndItem;
 
@@ -16,6 +15,4 @@ public interface StoreAndItemDao {
 
     void updateStoreAndItemNumbers(List<OrderAndItem> list);
 
-    @Update("update storeanditem set number=#{number} where storeid=#{storeId} and itemId=#{itemId}")
-    void updateStoreAndItemNumber(int storeId,int itemId,int number);
 }

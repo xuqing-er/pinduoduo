@@ -20,8 +20,14 @@ public class CartService {
     @Resource
     ItemDao itemDao;
 
-    public int addCartItem(CartItem cartItem){
-        return cartItemDao.insertCartItem(cartItem);
+    public void addCartItem(CartItem cartItem){
+
+        CartItem c=cartItemDao.selectCartItem(cartItem.getClientId(),cartItem.getItemId());
+        if (c!=null){
+            cartItemDao.updateCartItem(c.getClientId(),c.getItemId(),c.getNumber()+1);
+            return;
+        }
+        cartItemDao.insertCartItem(cartItem);
     }
 
     public Map<Item,Integer> getItems(int clientId){

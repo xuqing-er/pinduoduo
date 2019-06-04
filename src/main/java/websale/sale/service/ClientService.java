@@ -3,8 +3,10 @@ package websale.sale.service;
 import org.springframework.stereotype.Service;
 import websale.sale.dao.ClientDao;
 import websale.sale.dao.ItemDao;
+import websale.sale.dao.OrderDao;
 import websale.sale.model.Client;
 import websale.sale.model.Item;
+import websale.sale.model.Order;
 import websale.sale.utils.MD5;
 
 import javax.annotation.Resource;
@@ -14,7 +16,8 @@ import java.util.List;
 public class ClientService {
     @Resource
     ClientDao clientDao;
-
+    @Resource
+    OrderDao orderDao;
     @Resource
     ItemDao itemDao;
 
@@ -34,5 +37,7 @@ public class ClientService {
     public List<Item> getItems(int start){
         return itemDao.selectItemsByStart(start*8);
     }
+
+    public List<Order> getOrders(int clientId){ return orderDao.selectByClientId(clientId); }
 
 }

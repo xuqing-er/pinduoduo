@@ -8,12 +8,12 @@ import websale.sale.biz.ClientLoginBiz;
 import websale.sale.model.CartItem;
 import websale.sale.model.Client;
 import websale.sale.model.Item;
+import websale.sale.model.Order;
 import websale.sale.service.BuyService;
 import websale.sale.service.CartService;
 import websale.sale.service.ClientService;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Map;
 
@@ -50,7 +50,7 @@ public class ClientController {
     }
 
     @RequestMapping(path = "/login",method = RequestMethod.GET)
-    public String login(HttpServletRequest request) throws FileNotFoundException {
+    public String login(){
         return "login";
     }
 
@@ -63,8 +63,8 @@ public class ClientController {
     ){
         try{
             int clientId= clientLoginBiz.login(phoneNumber,password);
-            System.out.println(clientId+"   login");
             request.getSession().setAttribute("id",clientId);
+            //System.out.println(request.getSession().getMaxInactiveInterval());
         }catch (Exception e){
             model.addAttribute("error",e.getMessage());
             return "404";
@@ -89,8 +89,9 @@ public class ClientController {
     }
 
     //在主页或者商店添加商品到购物车
-    @RequestMapping(path = "/cart/additem",method = RequestMethod.POST)
-    public String addItemToCart(
+    @RequestMapping(path = "/cart/add",method = RequestMethod.POST)
+    @ResponseBody
+    public int addItemToCart(
             @RequestParam("id") int id,
             HttpServletRequest request
     ){
@@ -99,8 +100,7 @@ public class ClientController {
         cartItem.setClientId(clientId);
         cartItem.setItemId(id);
         cartItem.setNumber(1);
-        cartService.addCartItem(cartItem);
-        return "200";
+        return 1;
     }
 
     //在购物车界面增加商品数量
@@ -131,7 +131,7 @@ public class ClientController {
 
     @RequestMapping(path = "/cart/remove")
     public void removeItemFromCart(
-            @RequestParam int itemId,
+            @RequestParam("itemid") int itemId,
             HttpServletRequest request
     ){
         int clientId=(Integer)request.getSession().getAttribute("id");
@@ -158,5 +158,16 @@ public class ClientController {
         int clientId=(Integer) request.getSession().getAttribute("id");
         buyService.pay(clientId,orderId);
         return 1;
+    }
+
+    @RequestMapping(path = "/orders",method = RequestMethod.GET)
+    public String getOrders(
+            HttpServletRequest request,
+            Model model
+    ){
+        int clientId=(Integer) request.getSession().getAttribute("id");
+        List<Order> orders=clientService.getOrders(clientId);
+        model.addAttribute("orders",orders);
+        return "orders";
     }
 }

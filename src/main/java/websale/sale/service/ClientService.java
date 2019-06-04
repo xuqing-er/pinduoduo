@@ -26,7 +26,8 @@ public class ClientService {
 
     public int addClient(Client client){
         client.setPassword(MD5.next(client.getPassword()));
-        return clientDao.insertClient(client);
+        clientDao.insertClient(client);
+        return clientDao.selectMaxId();
     }
 
     public Client getClient(String phoneNumber){

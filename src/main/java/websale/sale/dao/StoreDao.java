@@ -12,6 +12,9 @@ public interface StoreDao {
     @Insert("insert into store (name,category,phonenumber,level) values (#{name},#{category},#{phoneNumber},#{level})")
     int insertStore(Store store);
 
+    @Select("select max(id) from store")
+    int selectMaxId();
+
     @Select("select * from store where store.id in " +
             "(select storeid from storeanditem where itemid=" +
             "(select id from item where itemname=#{itemName}))")

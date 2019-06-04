@@ -11,6 +11,8 @@ public interface ItemDao {
     @Select("select * from item where id=#{id}")
     Item selectItem(int id);
 
+    @Select("select max(id) from item")
+    int selectMaxId();
 
     @Select("select * from item limit #{start},8")
     List<Item> selectItemsByStart(int start);

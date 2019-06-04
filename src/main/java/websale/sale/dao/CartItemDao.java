@@ -12,10 +12,10 @@ public interface CartItemDao {
     int insertCartItem(CartItem cartItem);
 
     @Update("update cartitem set number=#{number} where clientId=#{clientId} and itemid=#{itemId}")
-    void updateCartItem(int clientId,int itemId,int number);
+    void updateCartItem(@Param("clientId") int clientId,@Param("itemId") int itemId,@Param("number") int number);
 
     @Delete("delete from cartitem where clientId=#{clientId} and itemid={itemId}")
-    void deleteCartItem(int clientId,int itemId);
+    void deleteCartItem(@Param("clientId") int clientId,@Param("itemId") int itemId);
 
     @Delete("delete from cartitem where clientid=#{clientId}")
     void deleteCartItems(int clientId);
@@ -24,5 +24,5 @@ public interface CartItemDao {
     List<CartItem> selectCartItems(int clientId);
 
     @Select("select * from cartitem where clientId=#{clientId} and itemid=#{itemId}")
-    CartItem selectCartItem(int clientId,int itemId);
+    CartItem selectCartItem(@Param("clientId") int clientId,@Param("itemId") int itemId);
 }

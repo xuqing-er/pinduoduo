@@ -1,9 +1,6 @@
 package websale.sale.dao;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 import websale.sale.model.Order;
 
 import java.util.List;
@@ -15,7 +12,7 @@ public interface OrderDao {
     int insertOrder(Order order);
 
     @Update("update orders set status=#{status} where id=#{id}")
-    void updateOrderStatus(int id,int status);
+    void updateOrderStatus(@Param("id") int id, @Param("status") int status);
 
     @Select("select * from order where id in (select orderid from clientandorder where clientid=#{clientId})")
     List<Order> selectByClientId(int clientId);

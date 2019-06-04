@@ -24,10 +24,10 @@ public interface ItemDao {
     List<Item> selectItemsByStoreId(int storeId);
 
     @Update("update item set price=#{price} where id=#{id}")
-    void updateItemPrice(String id,String price);
+    void updateItemPrice(@Param("id")String id,@Param("price") String price);
 
     @Update("update item set number=#{number} where id=#{itemId}")
-    void updateItemInventory(int itemId,int number);
+    void updateItemInventory(@Param("itemId") int itemId,@Param("number") int number);
 
     @SelectKey(keyProperty = "id",resultType = int.class,before = false,statement = "SELECT LAST_INSERT_ID()")
     @Insert("insert into item(name,category,price,discount,descriptor,imagepath,inventory) values " +

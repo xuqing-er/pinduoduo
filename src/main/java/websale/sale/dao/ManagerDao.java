@@ -11,10 +11,10 @@ public interface ManagerDao {
     int insertManager(Manager manager);
 
     @Update("update manager set password=#{password} where phonenumber=#{phoneNumber}")
-    void updateManagerPassword(String phoneNumber,String password);
+    void updateManagerPassword(@Param("phoneNumber") String phoneNumber,@Param("password") String password);
 
     @Update("update manager set phonenumber=#{newPhoneNumber} where phonenumber=#{phoneNumber}")
-    void updateManagerPhoneNumber(String phoneNumber, String newPhoneNumber);
+    void updateManagerPhoneNumber(@Param("phoneNumber") String phoneNumber, @Param("newPhoneNumber") String newPhoneNumber);
 
     @Select("select * from manager where phonenumber=#{phoneNumber}")
     Manager selectManager(String phoneNumber);

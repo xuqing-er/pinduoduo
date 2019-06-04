@@ -64,6 +64,7 @@ public class ManagerController {
     @RequestMapping(path = "/manager/logout")
     public String logout(HttpServletRequest request){
         request.getSession().removeAttribute("mid");
+        request.getSession().removeAttribute("username");
         return "index";
     }
 

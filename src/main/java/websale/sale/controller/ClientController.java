@@ -77,6 +77,7 @@ public class ClientController {
     public String logout(HttpServletRequest request){
         
         request.getSession().removeAttribute("id");
+        request.getSession().removeAttribute("username");
         return "redirect:/index/0";
     }
 
@@ -101,7 +102,7 @@ public class ClientController {
         cartItem.setClientId(clientId);
         cartItem.setItemId(id);
         cartItem.setNumber(1);
-        clientService.addItemToCart(cartItem);
+        cartService.addCartItem(cartItem);
         return cartItem;
     }
 

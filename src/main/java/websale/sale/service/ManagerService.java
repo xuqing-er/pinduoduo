@@ -1,14 +1,8 @@
 package websale.sale.service;
 
 import org.springframework.stereotype.Service;
-import websale.sale.dao.ItemDao;
-import websale.sale.dao.ManagerDao;
-import websale.sale.dao.StoreAndItemDao;
-import websale.sale.dao.StoreDao;
-import websale.sale.model.Item;
-import websale.sale.model.Manager;
-import websale.sale.model.Store;
-import websale.sale.model.StoreAndItem;
+import websale.sale.dao.*;
+import websale.sale.model.*;
 import websale.sale.utils.MD5;
 
 import javax.annotation.Resource;
@@ -18,21 +12,26 @@ import java.util.List;
 public class ManagerService {
     @Resource
     ManagerDao managerDao;
-
     @Resource
     ItemDao itemDao;
-
     @Resource
     StoreAndItemDao storeAndItemDao;
     @Resource
     StoreDao storeDao;
+    @Resource
+    ManagerAndStoreDao managerAndStoreDao;
 
     public List<Item> getItems(int storeId){
         return itemDao.selectItemsByStoreId(storeId);
     }
 
-    public int createStore(Store store){
-        return storeDao.insertStore(store);
+    public int createStore(int managerId,Store store){
+        int storeId=storeDao.insertStore(store);
+        ManagerAndStore managerAndStore=new ManagerAndStore();
+        managerAndStore.setManagerId(managerId);
+        managerAndStore.setStoreId(storeId);
+        managerAndStoreDao.insertManagerAndStore(managerAndStore);
+        return storeId;
     }
 
     public int createItem(int storeId,Item item,int number){

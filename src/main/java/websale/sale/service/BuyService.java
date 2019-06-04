@@ -16,16 +16,12 @@ import java.util.List;
 public class BuyService {
     @Resource
     OrderAndItemDao orderAndItemDao;
-
     @Resource
     StoreAndItemDao storeAndItemDao;
-
     @Resource
     CartItemDao cartItemDao;
-
     @Resource
     OrderDao orderDao;
-
     @Resource
     ClientAndOrderDao clientAndOrderDao;
 

@@ -87,8 +87,13 @@ public class ManagerController {
     }
 
     @RequestMapping(path = "/create/store",method = RequestMethod.POST)
-    public String createStore(Store store,Model model){
-        int storeId=managerService.createStore(store);
+    public String createStore(
+            Store store,
+            HttpServletRequest request,
+            Model model
+    ){
+        int mid=(Integer) request.getSession().getAttribute("mid");
+        int storeId=managerService.createStore(mid,store);
         model.addAttribute("storeId",storeId);
         return "store";
     }

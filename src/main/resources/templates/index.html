@@ -470,12 +470,29 @@
                             <p th:text="${item.descriptor}">{desciptor}</p>
                             <p>
                                 <!--TODO ajax-->
-                                <a th:href="'/cart/add?id=' + ${item.id}" class="btn btn-primary">
+                                <button th:id="'buttonId' + ${item.id}" class="btn btn-primary">
                                     <span class="glyphicon glyphicon-plus">Add</span>
-                                </a>
-                                <a href="#" class="btn btn-default">
+                                </button>
+                                <button href="#" class="btn btn-default">
                                     <span class="glyphicon glyphicon-star">Star</span>
-                                </a>
+                                </button>
+                                <!--TODO -->
+                                <script type="text/javascript">
+                                    $("#buttonId" + [[${item.id}]]).click(function () {
+                                        var local_url = "/cart/add?id=" + [[${item.id}]];
+                                        $.ajax({
+                                            url: local_url,
+                                            async: true,
+                                            success: function (data, status, xhr) {
+                                                alert(data);
+                                            },
+                                            error:function (xhr, status, error) {
+                                                alert("errors status:" + status.toString());
+                                                alert(error);
+                                            }
+                                        })
+                                    })
+                                </script>
                             </p>
                         </div>
                     </li>

@@ -61,7 +61,7 @@
                             <li><a href="#" tabindex="-1"><span class="glyphicon glyphicon-envelope"></span> Message</a></li>
                             <li><a href="#" tabindex="-1"><span class="glyphicon glyphicon-time"></span> History</a></li>
                             <li><a href="/store" tabindex="-1"><span class="glyphicon glyphicon-home"></span> Store</a></li>
-                            <li><a href="/orders" tabindex="-1"><span class="glyphicon glyphicon-home"></span> Order</a></li>
+                            <li><a href="/orders" tabindex="-1"><span class="glyphicon glyphicon-yen"></span> Order</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="#" tabindex="-1"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                         </ul>
@@ -183,8 +183,8 @@
                                             </div>
 
                                             <script type="text/javascript">
-                                                $("#registerForm").change(function () {
-                                                    $("#registerSelect").attr("action", $(this).val());
+                                                $("#registerSelect").change(function () {
+                                                    $("#registerForm").attr("action", $(this).val());
                                                 });
                                             </script>
                                             <div class="form-group">

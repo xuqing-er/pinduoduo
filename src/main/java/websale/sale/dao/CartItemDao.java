@@ -14,7 +14,7 @@ public interface CartItemDao {
     @Update("update cartitem set number=#{number} where clientId=#{clientId} and itemid=#{itemId}")
     void updateCartItem(@Param("clientId") int clientId,@Param("itemId") int itemId,@Param("number") int number);
 
-    @Delete("delete from cartitem where clientId=#{clientId} and itemid={itemId}")
+    @Delete("delete from cartitem where clientId=#{clientId} and itemid=#{itemId}")
     void deleteCartItem(@Param("clientId") int clientId,@Param("itemId") int itemId);
 
     @Delete("delete from cartitem where clientid=#{clientId}")

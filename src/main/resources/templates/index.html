@@ -49,8 +49,8 @@
                         <a th:unless="${session.id}" data-toggle="modal" data-target="#loginModal"><span class="glyphicon glyphicon-log-in"></span> Login</a>
                     </li>
                     <li class="dropdown">
-                        <a href="#" id="userDropdown" class="dropdown-toggle" data-toggle="dropdown">
-                            <span class="glyphicon glyphicon-user" th:if="${session.id}" th:text="${session.username}">{username}</span>
+                        <a href="#" id="userDropdown" class="dropdown-toggle" data-toggle="dropdown" th:if="${session.id}">
+                            <span class="glyphicon glyphicon-user" th:text="${session.username}">{username}</span>
                             <span class="badge">3</span>
                             <!--TODO 根据用户的消息数量显示-->
                             <span class="caret"></span>

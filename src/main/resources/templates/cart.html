@@ -262,7 +262,7 @@
                                     <span class="glyphicon glyphicon-plus"></span>
                                 </button>
                             </span>
-                            <input type="text" class="form-control" id="countInput" placeholder="Count" aria-label="countLabel" value="1">
+                            <input type="text" class="form-control" id="countInput" placeholder="Count" aria-label="countLabel" th:value="${itemEntry.value}" value="1">
                             <span class="input-group-btn">
                                 <button class="btn" type="button" id="countSubButton">
                                     <span class="glyphicon glyphicon-minus"></span>
@@ -307,7 +307,6 @@
                                 },
                                 error:function (xhr, status, error) {
                                     alert("errors status:" + status.toString());
-                                    alert(error);
                                 }
                             })
                         })

@@ -491,7 +491,7 @@
                                             url: local_url,
                                             async: true,
                                             success: function (data, status, xhr) {
-                                                addItemToCartAnimal();
+                                                addItemToCartAnimal(this, $("#cartIcon"));
                                             },
                                             error:function (xhr, status, error) {
                                                 alert("errors status:" + status.toString());
@@ -500,9 +500,9 @@
                                         })
                                     });
 
-                                    function addItemToCartAnimal(){
-                                        var ele = $(this).append("<span class='glyphicon glyphicon-gift'></span>");
-                                        var endEle = $("#cartIcon");
+                                    function addItemToCartAnimal(beginEle, endEle){
+                                        alert(1);
+                                        var ele = beginEle.append("<span class='glyphicon glyphicon-gift'></span>");
                                         ele.animate({
                                             left: endEle.left,
                                             top: endEle.top,

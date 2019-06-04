@@ -18,8 +18,8 @@ public interface StoreDao {
     List<Store> selectByItem(String itemName);
 
     @Update("update store set name=#{name} where id=#{id}")
-    void updateStoreName(String id, String name);
+    void updateStoreName(@Param("id") String id, @Param("name") String name);
 
     @Update("update store set phonenumber=#{phoneNumber} where id={id}")
-    void updateStorePhoneNumber(String id, String phoneNumber);
+    void updateStorePhoneNumber(@Param("id") String id, @Param("phoneNumber") String phoneNumber);
 }

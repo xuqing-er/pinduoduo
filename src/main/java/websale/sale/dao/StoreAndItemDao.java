@@ -10,7 +10,7 @@ import java.util.List;
 @Mapper
 public interface StoreAndItemDao {
 
-    @Insert("insert into storeanditem values (#{storeId},#{itemId},#{number})")
+    @Insert("insert into storeanditem values (#{storeId},#{itemId})")
     int insertStoreAndItem(StoreAndItem storeAndItem);
 
     void updateStoreAndItemNumbers(List<OrderAndItem> list);

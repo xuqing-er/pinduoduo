@@ -131,7 +131,7 @@ public class ClientController {
         model.addAttribute("itemmap",items);
         return "cart";
     }
-
+    //移除商品
     @RequestMapping(path = "/cart/remove")
     @ResponseBody
     public int removeItemFromCart(

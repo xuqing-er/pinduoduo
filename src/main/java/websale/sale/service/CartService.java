@@ -30,7 +30,7 @@ public class CartService {
         cartItemDao.insertCartItem(cartItem);
     }
 
-    public int getItemNum(int clientId){
+    public Integer getItemNum(int clientId){
         return cartItemDao.selectItemNum(clientId);
     }
 

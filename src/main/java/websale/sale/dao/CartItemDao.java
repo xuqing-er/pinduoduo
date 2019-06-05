@@ -12,7 +12,7 @@ public interface CartItemDao {
     int insertCartItem(CartItem cartItem);
 
     @Select("select sum(number) as itemnum from cartitem where clientid=#{clientId}")
-    int selectItemNum(int clientId);
+    Integer selectItemNum(int clientId);
 
     @Update("update cartitem set number=#{number} where clientId=#{clientId} and itemid=#{itemId}")
     void updateCartItem(@Param("clientId") int clientId,@Param("itemId") int itemId,@Param("number") int number);

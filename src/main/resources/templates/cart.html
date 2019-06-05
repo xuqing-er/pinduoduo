@@ -186,7 +186,7 @@
 
     <!-- 标题-->
     <div class="row">
-        <h2>All Item {num here}</h2>
+        <h2 th:each="_item, _status : ${itemmap}" th:text="'All Item: ' + ${_status.size}">All Item {num here}</h2>
     </div>
 
     <!--表头-->
@@ -324,13 +324,13 @@
         <hr class="simple" color="red">
         <button class="btn col-md-offset-2" type="reset">Clear</button>
         <strong class="col-md-offset-6">{Total Price}</strong>
-        <button type="button" class="btn btn-primary" id="#payButton">
+        <a role="button" href="/cart/buy" class="btn btn-primary" id="#payButton">
             <span class="glyphicon glyphicon-shopping-cart"></span> Pay
-        </button>
+        </a>
     </div>
 
 </div>
-<!--TODO order 结算界面-->
+<!--TODO order 结算界面
 <div id="payModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="payModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -365,13 +365,6 @@
         </div>
     </div>
 </div>
-<!-- 动态修改modal内容-->
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#payButton").click(function () {
-            $("#payModalContent").load("/orders");
-        })
-    })
-</script>
+-->
 </body>
 </html>

@@ -222,15 +222,12 @@
             </div>
             <!--TODO 商品图片-->
             <div class="row">
-                <img src="../static/img/img1.jpg" th:src="'data:image/jpeg;base64,'" class="img-thumbnail" alt="">
+                <img src="../static/img/img1.jpg" th:src="'data:image/jpeg;base64,' + ${photo}" class="img-thumbnail" alt="">
             </div>
             <!--商品标签-->
             <div class="row">
-                <span class="label label-success itemLabelRow">Label1</span>
-                <span class="label label-success itemLabelRow">Label1</span>
-                <span class="label label-success itemLabelRow">Label1</span>
-                <span class="label label-success itemLabelRow">Label1</span>
-                <span class="label label-success itemLabelRow">Label1</span>
+                <span class="label label-success itemLabelRow" th:text="${item.category}">Label1</span>
+
             </div>
         </div>
         <!-- TODO 商品折扣 活动信息-->
@@ -238,7 +235,7 @@
 
             <!-- 商品描述 头部-->
             <div  class="row">
-                <h2>Item Head Desciption</h2>
+                <h2 th:text="${item.name}">Item Head Desciption</h2>
             </div>
 
             <!-- 商品活动 信息-->
@@ -253,45 +250,18 @@
                             </h4>
                         </div>
                         <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                            <div class="panel-body">
+                            <div class="panel-body" th:text="${item.discount} + '%'">
                                 Activity1 Activity1 Activity1 Activity1 ...
                             </div>
                         </div>
                     </div>
-                    <div class="panel panel-warning">
-                        <div class="panel-heading" role="tab" id="headingTwo">
-                            <h4 class="panel-title">
-                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    Activity2
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                            <div class="panel-body">
-                                Activity2 Activity2 Activity2 Activity2...
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel panel-warning">
-                        <div class="panel-heading" role="tab" id="headingThree">
-                            <h4 class="panel-title">
-                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                    Activity3
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                            <div class="panel-body">
-                                Activity3 Activity3 Activity3 Activity3...
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
             </div>
 
             <!-- 商品描述 体-->
             <div  class="row">
-                <p class="bg-success">
+                <p class="bg-success" th:text="${item.descriptor}">
                     Item Description Body Here
                 </p>
             </div>

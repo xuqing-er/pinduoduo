@@ -16,4 +16,7 @@ public interface ClientDao {
 
     @Select("select max(id) from client")
     int selectMaxId();
+
+    @Select("select * from client where id=#{clientId}")
+    Client selectClientById(int clientId);
 }

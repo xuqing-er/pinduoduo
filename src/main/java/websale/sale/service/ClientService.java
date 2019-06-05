@@ -1,13 +1,11 @@
 package websale.sale.service;
 
 import org.springframework.stereotype.Service;
-import websale.sale.dao.CartItemDao;
-import websale.sale.dao.ClientDao;
-import websale.sale.dao.ItemDao;
-import websale.sale.dao.OrderDao;
+import websale.sale.dao.*;
 import websale.sale.model.Client;
 import websale.sale.model.Item;
 import websale.sale.model.Order;
+import websale.sale.model.Store;
 import websale.sale.utils.MD5;
 
 import javax.annotation.Resource;
@@ -23,11 +21,21 @@ public class ClientService {
     ItemDao itemDao;
     @Resource
     CartItemDao cartItemDao;
+    @Resource
+    StoreAndItemDao storeAndItemDao;
 
     public int addClient(Client client){
         client.setPassword(MD5.next(client.getPassword()));
         clientDao.insertClient(client);
         return clientDao.selectMaxId();
+    }
+
+    public Client getClient(int clientId){
+        return clientDao.selectClientById(clientId);
+    }
+
+    public Store getStore(int itemId){
+        return storeAndItemDao.selectStoreByItemId(itemId);
     }
 
     public Client getClient(String phoneNumber){

@@ -5,10 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import websale.sale.biz.ClientLoginBiz;
-import websale.sale.model.CartItem;
-import websale.sale.model.Client;
-import websale.sale.model.Item;
-import websale.sale.model.Order;
+import websale.sale.model.*;
 import websale.sale.service.BuyService;
 import websale.sale.service.CartService;
 import websale.sale.service.ClientService;
@@ -99,7 +96,14 @@ public class ClientController {
     @RequestMapping(path = "/item/{id}",method = RequestMethod.GET)
     public String getItem(
             @PathVariable("id") int id,
-            Model model){
+            Model model,
+            HttpServletRequest request
+    ){
+        int clientId=(Integer) request.getSession().getAttribute("id");
+        Client client=clientService.getClient(clientId);
+        model.addAttribute("client",client);
+        Store store=clientService.getStore(id);
+        model.addAttribute("store",store);
         Item item=clientService.getItem(id);
         String photo=BasePhotoUtil.encode(item);
         model.addAttribute("item",item);

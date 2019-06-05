@@ -230,14 +230,14 @@
             <tr th:each="order, flags: ${orders}" th:id="'trId' + ${order.id}" class="success" th:if="${order.status}">
                 <td th:text="${flags.count}">{1}</td>
                 <td th:text="${order.id}">{id}</td>
-                <td th:if="${order.status}">已支付</td>
+                <td>已支付</td>
                 <td th:text="${order.sum}">{sum}</td>
                 <td th:text="${order.date}">{date}</td>
             </tr>
             <tr th:each="order, flags: ${orders}" th:id="'trId' + ${order.id}" class="warning" th:unless="${order.status}">
                 <td th:text="${flags.count}">{1}</td>
                 <td th:text="${order.id}">{id}</td>
-                <td th:if="${order.status}">已支付</td>
+                <td>未支付</td>
                 <td th:text="${order.sum}">{sum}</td>
                 <td th:text="${order.date}">{date}</td>
             </tr>

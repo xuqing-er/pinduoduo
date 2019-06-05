@@ -474,7 +474,7 @@
                             <!--TODO base64图片
                             <img src="../static/img/thumbnail1.jpeg"  th:src="'data:image/jpg;base64,'+${item.photo}" alt="">
                             -->
-                            <img src="../static/img/thumbnail1.jpeg"  th:src="@{${item.imagePath}" alt="">
+                            <img src="../static/img/thumbnail1.jpeg"  th:src="@{${item.imagePath}}" alt="">
                             <h3 th:text="${item.name}">Thumbnail Label</h3>
                             <p>
                                 <strong>Price:</strong>

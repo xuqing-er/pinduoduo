@@ -197,7 +197,18 @@ public class ClientController {
             Model model
     ){
         int clientId=(Integer) request.getSession().getAttribute("id");
-        List<Order> orders=clientService.getOrders(clientId);
+        List<Order> orders=clientService.getOrders(clientId,0);
+        model.addAttribute("orders",orders);
+        return "orders";
+    }
+
+    @RequestMapping(path = "/history",method = RequestMethod.GET)
+    public String getHistoryOrders(
+            HttpServletRequest request,
+            Model model
+    ){
+        int clientId=(Integer) request.getSession().getAttribute("id");
+        List<Order> orders=clientService.getOrders(clientId,1);
         model.addAttribute("orders",orders);
         return "orders";
     }

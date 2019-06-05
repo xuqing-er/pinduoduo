@@ -15,8 +15,8 @@ public interface OrderDao {
     void updateOrderStatus(@Param("id") int id, @Param("status") int status);
 
 
-    @Select("select * from orders where id in (select orderid from clientandorder where clientid=#{clientId})and status=0")
-    List<Order> selectByClientId(int clientId);
+    @Select("select * from orders where id in (select orderid from clientandorder where clientid=#{clientId})and status=#{status}")
+    List<Order> selectByClientId(@Param("clientId") int clientId,@Param("status") int status);
 
     @Select("select max(id) from orders")
     int selectMaxId();

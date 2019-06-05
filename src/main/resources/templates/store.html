@@ -220,22 +220,27 @@
                 <div class="col-md-5">
                     <div class="row">
                         <h4>
-                            <a href="#"><span class="glyphicon glyphicon-home"></span> Store Name</a>
+                            <span class="glyphicon glyphicon-home"></span><a href="#" th:text="${store.name}"> Store Name</a>
                         </h4>
                     </div>
                     <div class="row">
                         <h4>
-                            <a href="#"><span class="glyphicon glyphicon-user"></span> Store Owner</a>
+                            <span class="glyphicon glyphicon-user"></span><a href="#" th:text="${session.username}"> Store Owner</a>
                         </h4>
                     </div>
                     <div class="row">
                         <h4>
-                            <a href="#"><span class="glyphicon glyphicon-envelope"></span> Email</a>
+                            <span class="glyphicon glyphicon-star"></span><a href="#" th:text="${store.level}"> Level</a>
                         </h4>
                     </div>
                     <div class="row">
                         <h4>
-                            <a href="#"><span class="glyphicon glyphicon-phone"></span> PhoneNumber</a>
+                            <span class="glyphicon glyphicon-tag"></span><a href="#" th:text="${store.category}"> Category</a>
+                        </h4>
+                    </div>
+                    <div class="row">
+                        <h4>
+                            <span class="glyphicon glyphicon-phone"></span> <a href="#" th:text="${store.phoneNumber}">PhoneNumber</a>
                         </h4>
                     </div>
                     <div class="row">

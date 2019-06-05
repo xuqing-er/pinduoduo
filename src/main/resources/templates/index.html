@@ -64,7 +64,7 @@
                                 <!--TODO modal添加商店-->
                                 <a href="/create/store" th:unless="${session.storeid}" tabindex="-1"><span class="glyphicon glyphicon-home"></span> Store</a>
                             </li>
-                            <li><a href="/cart" tabindex="-1"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+                            <li th:unless="${session.mid}"><a href="/cart" tabindex="-1"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
                             <li><a href="/orders" tabindex="-1"><span class="glyphicon glyphicon-yen"></span> Order</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="/logout" tabindex="-1"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>

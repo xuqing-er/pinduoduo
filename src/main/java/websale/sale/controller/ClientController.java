@@ -151,7 +151,7 @@ public class ClientController {
         return itemId;
     }
 
-    @RequestMapping(path = "/cart/buy",method = RequestMethod.GET)
+    @RequestMapping(path = "/cart/buy",method = RequestMethod.POST)
     @ResponseBody
     public int  buy(
             HttpServletRequest request,

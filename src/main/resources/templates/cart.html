@@ -289,17 +289,35 @@
                     <div class="col-md-2">
                         <div class="input-group input-group-sm">
                             <span class="input-group-btn">
-                                <button class="btn btn-primary" id="countAddButton" type="button">
+                                <button class="btn btn-primary" id="countAddButton" th:id="'countAddButtonId'+${itemEntry.key.id}" type="button">
                                     <span class="glyphicon glyphicon-plus"></span>
                                 </button>
                             </span>
-                            <input type="text" class="form-control" id="countInput" placeholder="Count" aria-label="countLabel" th:value="${itemEntry.value}" value="1">
+                            <input type="text" class="form-control" id="countInput" th:id="'countInputId'+${itemEntry.key.id}" placeholder="Count" aria-label="countLabel" th:value="${itemEntry.value}" value="1">
                             <span class="input-group-btn">
-                                <button class="btn" type="button" id="countSubButton">
+                                <button class="btn" type="button" id="countSubButton" th:id="'countSubButtonId'+${itemEntry.key.id}">
                                     <span class="glyphicon glyphicon-minus"></span>
                                 </button>
                             </span>
                         </div>
+
+                        <script type="text/javascript">
+                            $("#countAddButtonId"+[[${itemEntry.key.id}]]).click(function () {
+                                var current = $("#countInputId"+[[${itemEntry.key.id}]]);
+                                var newValue = Number(current.val()) + 1;
+                                current.attr("value", newValue);
+                            });
+
+                            <!-- -1按钮-->
+                            $("#countSubButtonId"+[[${itemEntry.key.id}]]).click(function () {
+                                var current = $("#countInputId"+[[${itemEntry.key.id}]]);
+                                var newValue = Number(current.val()) - 1;
+                                if(newValue <= 0){
+                                    newValue = 0;
+                                }
+                                current.attr("value", newValue);
+                            })
+                        </script>
                     </div>
                     <div class="col-md-2">
                         <strong th:text="${itemEntry.key.price} * ${itemEntry.key.discount} * ${itemEntry.value} / 100" class="itemELe">{amount}</strong>
@@ -391,23 +409,6 @@
         $("#payButton").click(function () {
             window.location.replace("/cart/buy?sum=" + sum);
         })
-    })
-</script>
-<script type="text/javascript">
-    $("#countAddButton").click(function () {
-        var current = $("#countInput");
-        var newValue = Number(current.val()) + 1;
-        current.attr("value", newValue);
-    });
-
-    <!-- -1按钮-->
-    $("#countSubButton").click(function () {
-        var current = $("#countInput");
-        var newValue = Number(current.val()) - 1;
-        if(newValue <= 0){
-            newValue = 0;
-        }
-        current.attr("value", newValue);
     })
 </script>
 </body>

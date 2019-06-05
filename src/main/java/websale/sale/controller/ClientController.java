@@ -210,6 +210,6 @@ public class ClientController {
         int clientId=(Integer) request.getSession().getAttribute("id");
         List<Order> orders=clientService.getOrders(clientId,1);
         model.addAttribute("orders",orders);
-        return "orders";
+        return "history";
     }
 }

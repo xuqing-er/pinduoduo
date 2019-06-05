@@ -216,7 +216,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="storeModalLabel">Login Modal</h4>
+                            <h4 class="modal-title" id="storeModalLabel">Store Modal</h4>
                         </div>
                         <div class="modal-body">
                             <div class="container">
@@ -541,7 +541,7 @@
                 <ul class="thumbnails">
                     <li class="col-lg-3" th:each="item, stats : ${items}">
                         <div class="thumbnail">
-                            <a href="#" th:href="'item/' + ${item.id}">
+                            <a href="#" th:href="'/item/' + ${item.id}">
                                 <img src="../static/img/thumbnail1.jpeg"  th:src="'data:image/jpeg;base64,'+${photos[stats.index]}" alt="">
                             </a>
                             <h3 th:text="${item.name}">Thumbnail Label</h3>

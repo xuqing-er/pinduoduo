@@ -63,8 +63,12 @@ public class ManagerService {
         return managerDao.selectManager(phoneNumber);
     }
 
-    public int getStoreId(int mid){
+    public Integer getStoreId(int mid){
         return managerAndStoreDao.selectByMangerId(mid);
+    }
+
+    public Store getStore(int storeid){
+        return storeDao.selectById(storeid);
     }
 
 

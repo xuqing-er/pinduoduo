@@ -12,5 +12,5 @@ public interface ManagerAndStoreDao {
     int insertManagerAndStore(ManagerAndStore managerAndStore);
 
     @Select("select storeId from managerandstore where managerId=#{managerId}")
-    int selectByMangerId(int mangerId);
+    Integer selectByMangerId(int mangerId);
 }

@@ -15,13 +15,11 @@ public class ManagerLoginBiz {
 
     public Manager login(String phoneNumber,String password) throws Exception{
         Manager manager=managerService.getManager(phoneNumber);
-        System.out.println(MD5.next(password));
-        System.out.println(manager.getPassword());
 
         if (manager==null){
             throw new LoginRegisterException("账户不存在");
         }
-        if (!StringUtils.equals(MD5.next(password),manager.getPassword())){
+        if (!StringUtils.pathEquals(MD5.next(password),manager.getPassword())){
             throw new LoginRegisterException("密码不正确");
         }
 

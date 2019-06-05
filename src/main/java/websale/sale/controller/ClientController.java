@@ -12,6 +12,7 @@ import websale.sale.model.Order;
 import websale.sale.service.BuyService;
 import websale.sale.service.CartService;
 import websale.sale.service.ClientService;
+import websale.sale.utils.BasePhotoUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -31,9 +32,14 @@ public class ClientController {
     @RequestMapping(path = "/index/{start}", method = RequestMethod.GET)
     public String index(
             @PathVariable("start") int start,
-            Model model){
+            Model model,
+            HttpServletRequest request
+    ){
         List<Item> items=clientService.getItems(start);
+        List<String> photos=BasePhotoUtil.encodes(items);
         model.addAttribute("items",items);
+        model.addAttribute("photos",photos);
+        request.getSession().setAttribute("page",start);
         return "index";
     }
 
@@ -128,7 +134,9 @@ public class ClientController {
         int clientId=(Integer) request.getSession().getAttribute("id");
         //查询商品
         Map<Item,Integer> items=cartService.getItems(clientId);
+        List<String> photos=BasePhotoUtil.encodes(items);
         model.addAttribute("itemmap",items);
+        model.addAttribute("photos",photos);
         return "cart";
     }
     //移除商品

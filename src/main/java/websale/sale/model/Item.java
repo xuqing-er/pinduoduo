@@ -71,16 +71,17 @@ public class Item {
         return inventory;
     }
 
-    public byte[] getPhoto() {
-        return photo;
+
+    public void setInventory(int inventory) {
+        this.inventory = inventory;
     }
 
     public void setPhoto(byte[] photo) {
         this.photo = photo;
     }
 
-    public void setInventory(int inventory) {
-        this.inventory = inventory;
+    public byte[] getPhoto() {
+        return photo;
     }
 
     @Override

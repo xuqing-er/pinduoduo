@@ -13,10 +13,11 @@ import websale.sale.model.Item;
 import websale.sale.model.Manager;
 import websale.sale.model.Store;
 import websale.sale.service.ManagerService;
-import websale.sale.utils.ImageUtils;
+import websale.sale.utils.BasePhotoUtil;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -77,8 +78,13 @@ public class ManagerController {
             HttpServletRequest request
     ){
 
-        String path=ImageUtils.saveFile(file,request);
-        item.setImagePath(path);
+        try {
+            item.setPhoto(file.getBytes());
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        //String path=ImageUtils.saveFile(file,request);
+        //item.setImagePath(path);
         managerService.createItem(storeId,item,number);
         return "redirect:/index/0";
     }
@@ -114,6 +120,8 @@ public class ManagerController {
     ){
         int managerId=(Integer) request.getSession().getAttribute("mid");
         List<Item> items=managerService.getItems(managerId);
+        List<String> strings=BasePhotoUtil.encodes(items);
+        model.addAttribute("photos",strings);
         model.addAttribute("items",items);
         return "store";
     }

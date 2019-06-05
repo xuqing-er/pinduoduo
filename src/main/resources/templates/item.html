@@ -273,7 +273,7 @@
                     <address>
                         <label for="addressLabel">Address: </label>
                         <select class="offset1 form-control" id="addressLabel">
-                            <option>address1</option>
+                            <option th:text="${client.address}">address1</option>
                             <option>address2</option>
                             <option>address3</option>
                             <option>address4</option>
@@ -327,7 +327,7 @@
                             <span class="input-group-addon">
                                 ￥
                             </span>
-                            <input type="text" class="form-control" placeholder="Price" aria-label="priceLabel" disabled>
+                            <input type="text" class="form-control" placeholder="Price" aria-label="priceLabel" th:value="${item.price}" disabled>
                             <span class="input-group-addon">
                                 .00
                             </span>
@@ -335,7 +335,7 @@
                     </div>
                 </div>
 
-                <!-- 底部按钮-->
+                <!--TODO 加入购物车 底部按钮-->
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary pull-right"><span class="glyphicon-shopping-cart glyphicon"> Cart</span></button>
                 </div>
@@ -345,36 +345,55 @@
         <div class="col-md-3 col-md-offset-1">
             <!--店家图片名-->
             <div class="row" style="position:relative;left: 20%;">
-                <h2>Store Image Name</h2>
+                <h2 th:text="${store.name}">Store Image Name</h2>
             </div>
 
             <!--店家图片-->
             <div class="row">
-                <img src="../static/img/img2.jpg" class="img-thumbnail" alt="">
+                <img src="../static/img/img2.jpg" th:src="@{/img/img2.jpg}" class="img-thumbnail" alt="">
             </div>
 
             <!-- 店家联系方式-->
             <!--TODO collapse 来显示二维码具体信息 -->
-            <div class="row col-lg-offset-2">
-                <a href="#"><span class="glyphicon glyphicon-user"></span> Store Owner</a>
-            </div>
-            <div class="row col-lg-offset-2">
-                <a href="#"><span class="glyphicon glyphicon-envelope"></span> Email</a>
-            </div>
-            <div class="row col-lg-offset-2">
-                <a href="#"><span class="glyphicon glyphicon-phone"></span> PhoneNumber</a>
-            </div>
-            <div class="row col-lg-offset-2">
-                <a href="#qrcodeCollapse" data-toggle="collapse">
-                    <span class="glyphicon glyphicon-qrcode"></span> Zhifubao
-                </a>
-            </div>
-            <div class="collapse" id="qrcodeCollapse">
-                <div class="well">
-                    <img src="../static/img/qrcode.jpg" class="img-thumbnail" alt="二维码">
+            <div class="col-lg-offset-2">
+                <div class="row">
+                    <h4>
+                        <span class="glyphicon glyphicon-home"></span><a href="#" th:text="${store.name}"> Store Name</a>
+                    </h4>
+                </div>
+                <div class="row">
+                    <h4>
+                        <span class="glyphicon glyphicon-user"></span><a href="#" th:text="${session.username}"> Store Owner</a>
+                    </h4>
+                </div>
+                <div class="row">
+                    <h4>
+                        <span class="glyphicon glyphicon-star"></span><a href="#" th:text="${store.level}"> Level</a>
+                    </h4>
+                </div>
+                <div class="row">
+                    <h4>
+                        <span class="glyphicon glyphicon-tag"></span><a href="#" th:text="${store.category}"> Category</a>
+                    </h4>
+                </div>
+                <div class="row">
+                    <h4>
+                        <span class="glyphicon glyphicon-phone"></span> <a href="#" th:text="${store.phoneNumber}">PhoneNumber</a>
+                    </h4>
+                </div>
+                <div class="row">
+                    <a href="#qrcodeCollapse" data-toggle="collapse">
+                        <span class="glyphicon glyphicon-qrcode"></span> Zhifubao
+                    </a>
+                </div>
+                <div class="collapse" id="qrcodeCollapse">
+                    <div class="well">
+                        <img src="../static/img/qrcode.jpg" th:src="@{/img/qrcode.jpg}" class="img-thumbnail" alt="二维码">
 
+                    </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>

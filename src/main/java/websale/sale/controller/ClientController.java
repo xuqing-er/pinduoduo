@@ -39,7 +39,7 @@ public class ClientController {
         List<String> photos=BasePhotoUtil.encodes(items);
         model.addAttribute("items",items);
         model.addAttribute("photos",photos);
-        request.getSession().setAttribute("page",start);
+        request.getSession().setAttribute("pagenum",start);
         return "index";
     }
 
@@ -69,8 +69,10 @@ public class ClientController {
     ){
         try{
             Client client= clientLoginBiz.login(phoneNumber,password);
+            int itemnum= cartService.getItemNum(client.getId());
             request.getSession().setAttribute("id",client.getId());
             request.getSession().setAttribute("username",client.getUserName());
+            request.getSession().setAttribute("itemnum",itemnum);
             //System.out.println(request.getSession().getMaxInactiveInterval());
         }catch (Exception e){
             model.addAttribute("error",e.getMessage());

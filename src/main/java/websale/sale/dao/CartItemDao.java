@@ -11,6 +11,9 @@ public interface CartItemDao {
     @Insert("insert into cartitem values(#{clientId},#{itemId},#{number})")
     int insertCartItem(CartItem cartItem);
 
+    @Select("select count(*) as itemnum from cartitem where clientid=#{clientId}")
+    int selectItemNum(int clientId);
+
     @Update("update cartitem set number=#{number} where clientId=#{clientId} and itemid=#{itemId}")
     void updateCartItem(@Param("clientId") int clientId,@Param("itemId") int itemId,@Param("number") int number);
 

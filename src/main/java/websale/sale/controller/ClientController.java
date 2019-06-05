@@ -1,5 +1,6 @@
 package websale.sale.controller;
 
+import org.springframework.beans.PropertyEditorRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -69,12 +70,18 @@ public class ClientController {
     ){
         try{
             Client client= clientLoginBiz.login(phoneNumber,password);
-            int itemnum= cartService.getItemNum(client.getId());
+            Integer itemnum= cartService.getItemNum(client.getId());
             request.getSession().setAttribute("id",client.getId());
             request.getSession().setAttribute("username",client.getUserName());
-            request.getSession().setAttribute("itemnum",itemnum);
+            if (itemnum==null){
+                request.setAttribute("itemnum",0);
+            }
+            else {
+                request.getSession().setAttribute("itemnum",itemnum);
+            }
             //System.out.println(request.getSession().getMaxInactiveInterval());
         }catch (Exception e){
+            e.printStackTrace();
             model.addAttribute("error",e.getMessage());
             return "404";
         }
@@ -156,8 +163,7 @@ public class ClientController {
     }
 
     @RequestMapping(path = "/cart/buy",method = RequestMethod.GET)
-    @ResponseBody
-    public int  buy(
+    public String buy(
             HttpServletRequest request,
             @RequestParam("sum") String sum,
             Model model
@@ -165,7 +171,7 @@ public class ClientController {
         int clientId=(Integer) request.getSession().getAttribute("id");
         int orderId=buyService.buy(clientId,sum);
         model.addAttribute("orderid",orderId);
-        return orderId;
+        return "orders";
     }
 
     @RequestMapping(path = "/cart/pay")

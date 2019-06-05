@@ -19,7 +19,7 @@
 
 
 </head>
-<body>
+<body th:with="sum=0">
 <!-- 导航栏 -->
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
@@ -236,7 +236,7 @@
 
         <!-- 表格-->
         <div class="row">
-            <div class="container-fluid">
+            <div class="container-fluid" >
                 <div class="row" th:each="itemEntry : ${itemmap}" th:id="'divId' + ${itemEntry.key.id}" >
                     <!--复选框-->
                     <div class="col-md-1">
@@ -253,7 +253,7 @@
                         <h4><strong th:text="${itemEntry.key.price}">{price}</strong></h4>
                     </div>
                     <div class="col-md-1">
-                        <h4><strong th:text="${itemEntry.key.discount}">{price}</strong></h4>
+                        <h4><strong th:text="${itemEntry.key.discount}">{discount}</strong></h4>
                     </div>
                     <div class="col-md-2">
                         <div class="input-group input-group-sm">
@@ -289,7 +289,7 @@
                         </script>
                     </div>
                     <div class="col-md-2">
-                        <strong th:text="${itemEntry.key.price} * ${itemEntry.key.discount} * ${itemEntry.value} / 100">{amount}</strong>
+                        <strong th:text="${itemEntry.key.price} * ${itemEntry.key.discount} * ${itemEntry.value} / 100" class="itemELe">{amount}</strong>
                     </div>
                     <div class="col-md-1">
                         <a href="#" th:id="'removeId'+${itemEntry.key.id}"><span class="glyphicon glyphicon-remove"></span> remove</a>
@@ -322,13 +322,12 @@
 <div class="container-fluid">
     <div class="row">
         <hr class="simple" color="red">
-        <button class="btn col-md-offset-2" type="reset">Clear</button>
+        <button class="btn col-md-offset-2" type="reset" id="clearButton">Clear</button>
         <strong class="col-md-offset-6">{Total Price}</strong>
-        <a role="button" href="/cart/buy" class="btn btn-primary" id="#payButton">
+        <button type="button" class="btn btn-primary" id="payButton">
             <span class="glyphicon glyphicon-shopping-cart"></span> Pay
-        </a>
+        </button>
     </div>
-
 </div>
 <!--TODO order 结算界面
 <div id="payModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="payModalLabel" aria-hidden="true">
@@ -366,5 +365,17 @@
     </div>
 </div>
 -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        var sum = 0;
+        var itemList = $(".itemELe");
+        for(var i=0; i<itemList.length; i++){
+            sum += itemList[i].innerHTML;
+        }
+        $("#payButton").click(function () {
+            window.location.replace("/cart/buy?sum=" + sum);
+        })
+    })
+</script>
 </body>
 </html>

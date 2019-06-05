@@ -109,9 +109,9 @@ public class ManagerController {
     ){
         int mid=(Integer) request.getSession().getAttribute("mid");
         int storeId=managerService.createStore(mid,store);
-        //store.setId(storeId);
+        store.setId(storeId);
         model.addAttribute("storeid",storeId);
-        return "store";
+        return "redirect:/store";
     }
 
     @RequestMapping(path = "/create/store",method = RequestMethod.GET)
@@ -128,6 +128,8 @@ public class ManagerController {
         int managerId=(Integer) request.getSession().getAttribute("mid");
         List<Item> items=managerService.getItems(managerId);
         List<String> strings=BasePhotoUtil.encodes(items);
+        int storeid=(Integer) request.getSession().getAttribute("storeid");
+        model.addAttribute("store",managerService.getStore(storeid));
         model.addAttribute("photos",strings);
         model.addAttribute("items",items);
         return "store";

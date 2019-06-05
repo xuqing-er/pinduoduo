@@ -209,7 +209,7 @@ public class ClientController {
     ){
         int clientId=(Integer) request.getSession().getAttribute("id");
         List<Order> orders=clientService.getOrders(clientId,1);
-        model.addAttribute("history",orders);
-        return "orders";
+        model.addAttribute("orders",orders);
+        return "history";
     }
 }

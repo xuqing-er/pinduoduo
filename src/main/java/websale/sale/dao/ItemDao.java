@@ -1,7 +1,9 @@
 package websale.sale.dao;
 
 import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.type.JdbcType;
 import websale.sale.model.Item;
+import websale.sale.model.OrderAndItem;
 
 import java.util.List;
 
@@ -9,6 +11,9 @@ import java.util.List;
 public interface ItemDao {
 
     @Select("select * from item where id=#{id}")
+    @Results({
+            @Result(property = "photo",column = "photo",jdbcType = JdbcType.BLOB)
+    })
     Item selectItem(int id);
 
     @Select("select max(id) from item")
@@ -20,6 +25,9 @@ public interface ItemDao {
     List<Item> selectItemsByIds(List<Integer> list);
 
     @Select("select * from item where id in (select itemid from cartitem where clientid=#{clientid})")
+    @Results({
+        @Result(property = "photo",column = "photo",jdbcType = JdbcType.BLOB)
+    })
     List<Item> selectItemsByClientId(int clientId);
 
 
@@ -33,8 +41,10 @@ public interface ItemDao {
     @Update("update item set number=#{number} where id=#{itemId}")
     void updateItemInventory(@Param("itemId") int itemId,@Param("number") int number);
 
-    @SelectKey(keyProperty = "id",resultType = int.class,before = false,statement = "SELECT LAST_INSERT_ID()")
-    @Insert("insert into item(name,category,price,discount,descriptor,imagepath,inventory) values " +
-            "(#{name},#{category},#{price},#{discount},#{descriptor},#{imagePath},#{inventory})")
+    @Insert("insert into item(name,category,price,discount,descriptor,imagepath,inventory,photo}) values " +
+            "(#{name},#{category},#{price},#{discount},#{descriptor},#{imagePath},#{inventory},jdbcType=BLOB})")
     int insertItem(Item item);
+
+    @Update("update item set inventory=inventory-#{number} where id=#{itemid}")
+    void updateItemByOrder(OrderAndItem orderAndItem);
 }

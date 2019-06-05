@@ -9,6 +9,7 @@ public class Item {
     String descriptor;
     String imagePath;
     int inventory;
+    byte[] photo;
 
     public void setCategory(String category) {
         this.category = category;
@@ -68,6 +69,14 @@ public class Item {
 
     public int getInventory() {
         return inventory;
+    }
+
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
     }
 
     public void setInventory(int inventory) {

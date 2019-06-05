@@ -143,15 +143,16 @@ public class ClientController {
         return itemId;
     }
 
-    @RequestMapping(path = "/cart/buy",method = RequestMethod.POST)
-    public String buy(
+    @RequestMapping(path = "/cart/buy",method = RequestMethod.GET)
+    @ResponseBody
+    public int  buy(
             HttpServletRequest request,
             Model model
     ){
         int clientId=(Integer) request.getSession().getAttribute("id");
-        int orderId=buyService.buy(clientId);
+        int orderId=buyService.buy(clientId,"1000");
         model.addAttribute("orderid",orderId);
-        return "/pay";
+        return orderId;
     }
 
     @RequestMapping(path = "/cart/pay")

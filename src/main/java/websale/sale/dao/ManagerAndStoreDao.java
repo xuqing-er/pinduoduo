@@ -11,6 +11,6 @@ public interface ManagerAndStoreDao {
     @Insert("insert into managerandstore(managerid,storeid) values (#{managerId},#{storeId})")
     int insertManagerAndStore(ManagerAndStore managerAndStore);
 
-    @Select("select storeId from mangerandstore where managerId=#{managerId}")
+    @Select("select storeId from managerandstore where managerId=#{managerId}")
     int selectByMangerId(int mangerId);
 }

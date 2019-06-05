@@ -19,7 +19,7 @@ public class ClientLoginBiz {
         if (client==null){
             throw new LoginRegisterException("账户不存在");
         }
-        if (!StringUtils.pathEquals(MD5.next(password),client.getPassword())){
+        if (!StringUtils.pathEquals(MD5.next(password), client.getPassword())){
             throw new LoginRegisterException("密码不正确");
         }
 

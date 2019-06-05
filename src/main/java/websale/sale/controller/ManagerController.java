@@ -43,12 +43,13 @@ public class ManagerController {
         try{
             Manager manager= managerLoginBiz.login(phoneNumber,password);
             int storeid=managerService.getStoreId(manager.getId());
+            System.out.println(storeid);
             request.getSession().setAttribute("storeid",storeid);
             request.getSession().setAttribute("mid",manager.getId());
             request.getSession().setAttribute("username",manager.getUserName());
         }catch (Exception e){
             model.addAttribute("error",e.getMessage());
-            return "404";
+            return "/store";
         }
         return "redirect:/index/0";
     }
@@ -105,8 +106,8 @@ public class ManagerController {
     ){
         int mid=(Integer) request.getSession().getAttribute("mid");
         int storeId=managerService.createStore(mid,store);
-        store.setId(storeId);
-        model.addAttribute("store",store);
+        //store.setId(storeId);
+        model.addAttribute("storeid",storeId);
         return "store";
     }
 

@@ -30,6 +30,10 @@ public class CartService {
         cartItemDao.insertCartItem(cartItem);
     }
 
+    public int getItemNum(int clientId){
+        return cartItemDao.selectItemNum(clientId);
+    }
+
     public Map<Item,Integer> getItems(int clientId){
         List<CartItem> cartItems=cartItemDao.selectCartItems(clientId);
         Map<Integer,Integer> itemIdAndSale=new HashMap<>();

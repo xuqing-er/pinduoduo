@@ -2,6 +2,8 @@ package websale.sale.service;
 
 import org.springframework.stereotype.Service;
 import websale.sale.dao.*;
+import websale.sale.model.CartItem;
+import websale.sale.model.ClientAndOrder;
 import websale.sale.model.Order;
 import websale.sale.model.OrderAndItem;
 
@@ -38,7 +40,7 @@ public class BuyService {
         order.setSum(sum);
         order.setStatus(0);//未付款
         System.out.println("buy");
-        /*orderDao.insertOrder(order);
+        orderDao.insertOrder(order);
         int orderId=orderDao.selectMaxId();
         ClientAndOrder clientAndOrder=new ClientAndOrder();//添加客户订单
         clientAndOrder.setOrderId(orderId);
@@ -59,7 +61,6 @@ public class BuyService {
         }
         //orderAndItemDao.insertOrderAndItems(orderAndItems);//添加订单
         cartItemDao.deleteCartItems(clientId);
-        return orderId;*/
-        return 0;
+        return orderId;
     }
 }

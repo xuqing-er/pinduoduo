@@ -208,7 +208,7 @@ public class ClientController {
             Model model
     ){
         int clientId=(Integer) request.getSession().getAttribute("id");
-        List<Order> orders=clientService.getOrders(clientId,1);
+        List<Order> orders=clientService.getOrders(clientId);
         model.addAttribute("orders",orders);
         return "history";
     }

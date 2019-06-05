@@ -16,7 +16,10 @@ public interface OrderDao {
 
 
     @Select("select * from orders where id in (select orderid from clientandorder where clientid=#{clientId})and status=#{status}")
-    List<Order> selectByClientId(@Param("clientId") int clientId,@Param("status") int status);
+    List<Order> selectByClientIdAndStatus(@Param("clientId") int clientId,@Param("status") int status);
+
+    @Select("select * from orders where id in (select orderid from clientandorder where clientid=#{clientId})")
+    List<Order> selectByClientId(@Param("clientId") int clientId);
 
     @Select("select max(id) from orders")
     int selectMaxId();

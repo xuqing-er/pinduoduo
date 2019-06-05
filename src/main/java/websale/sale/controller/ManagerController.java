@@ -42,9 +42,12 @@ public class ManagerController {
     ){
         try{
             Manager manager= managerLoginBiz.login(phoneNumber,password);
-            int storeid=managerService.getStoreId(manager.getId());
-            System.out.println(storeid);
-            request.getSession().setAttribute("storeid",storeid);
+            Integer storeid=managerService.getStoreId(manager.getId());
+            if (storeid==null){
+                request.setAttribute("storeid",0);
+            }else {
+                request.getSession().setAttribute("storeid",storeid);
+            }
             request.getSession().setAttribute("mid",manager.getId());
             request.getSession().setAttribute("username",manager.getUserName());
         }catch (Exception e){

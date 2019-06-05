@@ -50,6 +50,6 @@ public class ClientService {
         return itemDao.selectItemsByStart(start*8);
     }
 
-    public List<Order> getOrders(int clientId){ return orderDao.selectByClientId(clientId); }
+    public List<Order> getOrders(int clientId,int status){ return orderDao.selectByClientId(clientId,status); }
 
 }

@@ -227,7 +227,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="order, flags: ${orders}">
+                <tr th:each="order, flags: ${orders}" th:id="'trId' + ${order.id}">
                     <td th:text="${flags.count}">{1}</td>
                     <td th:text="${order.id}">{id}</td>
                     <td th:text="${order.status}">{status}</td>
@@ -236,6 +236,16 @@
                     <td>
                         <button type="button" th:id="'buttonId' + ${order.id}" class="btn  btn-primary">Pay</button>
                     </td>
+                    <!-- TODO-->
+                    <script type="text/javascript">
+                        $("#buttonId" + [[${order.id}]]).click(function () {
+                            $.get("/cart/pay?orderId=" + [[${order.id}]], function () {
+                                alert("支付成功！");
+                                $("#trId" + [[${order.id}]]).remove();
+                            })
+                        })
+
+                    </script>
                 </tr>
             </tbody>
         </table>

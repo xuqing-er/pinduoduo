@@ -51,6 +51,6 @@ public interface ItemDao {
             "(#{name},#{category},#{price},#{discount},#{descriptor},#{imagePath},#{inventory},#{photo})")
     int insertItem(Item item);
 
-    @Update("update item set inventory=inventory-#{number} where id=#{itemid}")
+    @Update("update item set inventory=inventory-#{number} where id=#{itemId}")
     void updateItemByOrder(OrderAndItem orderAndItem);
 }

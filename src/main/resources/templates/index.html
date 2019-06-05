@@ -477,7 +477,9 @@
                 <ul class="thumbnails">
                     <li class="col-lg-3" th:each="item, stats : ${items}">
                         <div class="thumbnail">
-                            <img src="../static/img/thumbnail1.jpeg"  th:src="'data:image/jpeg;base64,'+${photos[stats.index]}" alt="">
+                            <a href="#" th:href="'item/' + ${item.id}">
+                                <img src="../static/img/thumbnail1.jpeg"  th:src="'data:image/jpeg;base64,'+${photos[stats.index]}" alt="">
+                            </a>
                             <h3 th:text="${item.name}">Thumbnail Label</h3>
                             <p>
                                 <strong>Price:</strong>

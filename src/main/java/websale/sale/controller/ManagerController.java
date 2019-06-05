@@ -48,9 +48,11 @@ public class ManagerController {
             }else {
                 request.getSession().setAttribute("storeid",storeid);
             }
+            System.out.println(storeid);
             request.getSession().setAttribute("mid",manager.getId());
             request.getSession().setAttribute("username",manager.getUserName());
         }catch (Exception e){
+            e.printStackTrace();
             model.addAttribute("error",e.getMessage());
             return "/store";
         }
@@ -65,7 +67,7 @@ public class ManagerController {
     @RequestMapping(path = "/manager/register",method = RequestMethod.POST)
     public String doRegister(Manager manager){
         managerService.addManager(manager);
-        return "redirect:/login";
+        return "redirect:/index/0";
     }
 
     @RequestMapping(path = "/manager/logout")
@@ -111,6 +113,7 @@ public class ManagerController {
         int storeId=managerService.createStore(mid,store);
         store.setId(storeId);
         model.addAttribute("storeid",storeId);
+        request.getSession().setAttribute("storeid", storeId);
         return "redirect:/store";
     }
 

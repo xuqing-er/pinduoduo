@@ -58,7 +58,7 @@
                         <ul class="dropdown-menu" role="menu" aria-labelledby="userDropdown">
                             <li><a href="/profile" tabindex="-1"><span class="glyphicon glyphicon-file"></span> Profile</a></li>
                             <li><a href="#" tabindex="-1"><span class="glyphicon glyphicon-envelope"></span> Message</a></li>
-                            <li><a href="#" tabindex="-1"><span class="glyphicon glyphicon-time"></span> History</a></li>
+                            <li><a href="/history" tabindex="-1"><span class="glyphicon glyphicon-time"></span> History</a></li>
                             <li th:if="${session.mid}">
                                 <a href="/store" th:if="${session.storeid}" tabindex="-1"><span class="glyphicon glyphicon-home"></span> Store</a>
                                 <!--TODO modal添加商店-->

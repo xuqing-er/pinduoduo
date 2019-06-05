@@ -60,13 +60,13 @@
                             <li><a href="#" tabindex="-1"><span class="glyphicon glyphicon-envelope"></span> Message</a></li>
                             <li><a href="#" tabindex="-1"><span class="glyphicon glyphicon-time"></span> History</a></li>
                             <li><a href="/store"  tabindex="-1"><span class="glyphicon glyphicon-home"></span> Store</a></li>
+                            <li><a href="/cart" tabindex="-1"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
                             <li><a href="/orders" tabindex="-1"><span class="glyphicon glyphicon-yen"></span> Order</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="/logout" tabindex="-1"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                         </ul>
                     </li>
 
-                    <li id="cartIcon"><a href="/cart" tabindex="-1"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
                 </ul>
             </div>
 
@@ -210,7 +210,6 @@
 
     <!-- 分类标签 -->
     <!-- TODO 后续加入面包削 多重分类 -->
-
     <div class="container">
         <div class="row">
             <div class="col-lg-3">
@@ -456,13 +455,26 @@
 
     <!-- TODO 轮播右侧 待加入-->
 
+
+        <hr />
     <!-- 缩略图thumbnail 显示单个物品 位于轮播carousel底部-->
         <div class="row">
             <div class="col-lg-offset-2">
+                <!-- 分割 标题 -->
+                <div class="row col-md-offset-1">
+                    <h2>
+                        <a href="/cart">Items List<span class="glyphicon glyphicon-shopping-cart" id="cartIcon"></span>
+                        </a>
+                    </h2>
+                </div>
+                <hr />
                 <ul class="thumbnails">
                     <li class="col-lg-3" th:each="item : ${items}">
                         <div class="thumbnail">
-                            <img src="../static/img/thumbnail1.jpeg" th:src="@{${item.imagePath}}" alt="">
+                            <!--TODO base64图片
+                            <img src="../static/img/thumbnail1.jpeg"  th:src="'data:image/jpg;base64,'+${item.photo}" alt="">
+                            -->
+                            <img src="../static/img/thumbnail1.jpeg"  th:src="@{${item.imagePath}" alt="">
                             <h3 th:text="${item.name}">Thumbnail Label</h3>
                             <p>
                                 <strong>Price:</strong>
@@ -484,16 +496,21 @@
                                     <span class="glyphicon glyphicon-star">Star</span>
                                 </button>
                                 <!--TODO -->
+
                                 <script type="text/javascript">
-                                    function addItemToCartAnimal(){
+                                    function addItemToCartAnimal(beginEle){
                                         var endEle = $("#cartIcon");
-                                        var ele = $("#buttonId" + [[${item.id}]]).append("<span class='glyphicon glyphicon-gift gift' style='position: absolute'></span>");
-                                        $('.gift').animate({
-                                            left: endEle.offset().left,
-                                            top: endEle.offset().top
-                                        }, "slow", function () {
-                                            $(".gift").hide();
-                                        })
+                                        beginEle.after("<div class='gift' style='position: absolute;top: 200px; left:20px; opacity: 0.3'><h3><span class='glyphicon glyphicon-gift'></span></h3></div>");
+                                        var ele = $('.gift');
+                                        ele.animate({
+                                            left: endEle.offset().left - beginEle.offset().left + 30,
+                                            top: endEle.offset().top - beginEle.offset().top + 260,
+                                            opacity: '1.0'
+                                        }, 1000, function () {
+                                                ele.remove();
+                                        });
+
+
                                     }
                                     $(document).ready(function () {
                                         $("#buttonId" + [[${item.id}]]).click(function () {
@@ -502,7 +519,7 @@
                                                 url: local_url,
                                                 async: true,
                                                 success: function (data, status, xhr) {
-                                                    addItemToCartAnimal();
+                                                    addItemToCartAnimal($("#buttonId" + [[${item.id}]]));
                                                 },
                                                 error:function (xhr, status, error) {
                                                     alert("errors status:" + status.toString());

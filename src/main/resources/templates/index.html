@@ -497,7 +497,7 @@
                                 <!--TODO -->
 
                                 <script type="text/javascript">
-                                    function addItemToCartAnimal(beginEle){
+                                    function addItemToCartAnimal(beginEle, data){
                                         var endEle = $("#cartIcon");
                                         beginEle.after("<div class='gift' style='position: absolute;top: 200px; left:20px; opacity: 0.3'><h3><span class='glyphicon glyphicon-gift'></span></h3></div>");
                                         var ele = $('.gift');
@@ -507,6 +507,8 @@
                                             opacity: '1.0'
                                         }, 1000, function () {
                                                 ele.remove();
+                                                alert(data);
+                                                $("#cartNumBadge").text(data);
                                         });
 
 
@@ -518,7 +520,7 @@
                                                 url: local_url,
                                                 async: true,
                                                 success: function (data, status, xhr) {
-                                                    addItemToCartAnimal($("#buttonId" + [[${item.id}]]));
+                                                    addItemToCartAnimal($("#buttonId" + [[${item.id}]]), data);
 
                                                 },
                                                 error:function (xhr, status, error) {

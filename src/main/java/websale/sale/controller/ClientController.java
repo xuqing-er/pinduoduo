@@ -111,7 +111,9 @@ public class ClientController {
         cartItem.setItemId(id);
         cartItem.setNumber(1);
         cartService.addCartItem(cartItem);
-        return cartService.getItemNum(clientId);
+        int num = cartService.getItemNum(clientId);
+        System.out.println(num);
+        return num;
     }
 
     //在购物车界面增加商品数量

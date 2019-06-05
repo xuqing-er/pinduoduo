@@ -49,7 +49,7 @@ public class ClientController {
     public String doRegister(Client client,Model model){
         int clientid=clientService.addClient(client);
         model.addAttribute("clientId",clientid);
-        return "login";
+        return "redirect:/index/0";
     }
 
     @RequestMapping(path = "/login",method = RequestMethod.GET)

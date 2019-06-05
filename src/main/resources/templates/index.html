@@ -62,7 +62,7 @@
                             <li th:if="${session.mid}">
                                 <a href="/store" th:if="${session.storeid}" tabindex="-1"><span class="glyphicon glyphicon-home"></span> Store</a>
                                 <!--TODO modal添加商店-->
-                                <a href="/create/store" th:unless="${session.storeid}" tabindex="-1"><span class="glyphicon glyphicon-home"></span> Store</a>
+                                <a href="#" th:unless="${session.storeid}" data-toggle="modal" data-target="#createStoreModal" tabindex="-1"><span class="glyphicon glyphicon-home"></span> Store</a>
                             </li>
                             <li th:unless="${session.mid}"><a href="/cart" tabindex="-1"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
                             <li><a href="/orders" tabindex="-1"><span class="glyphicon glyphicon-yen"></span> Order</a></li>
@@ -196,6 +196,70 @@
                                                 <div class="controls">
                                                     <button class="btn" data-dismiss="modal">Cancel</button>
                                                     <button class="btn btn-primary">Register</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- createStoreModal -->
+            <div id="createStoreModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="storeModalHeader" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="storeModalLabel">Login Modal</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container">
+                                <div class="row row-centered">
+                                    <div class="well col-md-6 col-centered">
+                                        <form class="form-horizontal" action="/create/store" method="post" enctype="multipart/form-data">
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label" for="storename">name</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="storename" name="name" placeholder="name">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label" for="category">category</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="category" name="category" placeholder="category">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label" for="storephoneNumber">phone</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="storephoneNumber" name="phoneNumber" placeholder="phoneNumber">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label" for="level">level</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="level" name="level" placeholder="level">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label" for="file">file</label>
+                                                <div class="col-sm-10">
+                                                    <input id="input-b2" name="file" type="file" class="file form-control" data-show-preview="true">
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <div class="controls">
+                                                    <button type="submit" class="btn btn-primary pull-right">Submit</button>
+                                                    <button type="button" class="btn pull-left">Cancel</button>
                                                 </div>
                                             </div>
                                         </form>

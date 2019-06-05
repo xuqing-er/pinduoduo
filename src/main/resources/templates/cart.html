@@ -217,7 +217,7 @@
 
     <!-- 标题-->
     <div class="row">
-        <h2 th:each="_item, _status : ${itemmap}" th:text="'All Item: ' + ${_status.size}">All Item: {num here}</h2>
+        <h2 th:text="${session.itemnum}">All Item: {num here}</h2>
     </div>
 
     <!--表头-->
@@ -300,24 +300,6 @@
                                 </button>
                             </span>
                         </div>
-
-                        <script type="text/javascript">
-                            $("#countAddButton").click(function () {
-                                var current = $("#countInput");
-                                var newValue = Number(current.val()) + 1;
-                                current.attr("value", newValue);
-                            });
-
-                            <!-- -1按钮-->
-                            $("#countSubButton").click(function () {
-                                var current = $("#countInput");
-                                var newValue = Number(current.val()) - 1;
-                                if(newValue <= 0){
-                                    newValue = 0;
-                                }
-                                current.attr("value", newValue);
-                            })
-                        </script>
                     </div>
                     <div class="col-md-2">
                         <strong th:text="${itemEntry.key.price} * ${itemEntry.key.discount} * ${itemEntry.value} / 100" class="itemELe">{amount}</strong>
@@ -409,6 +391,23 @@
         $("#payButton").click(function () {
             window.location.replace("/cart/buy?sum=" + sum);
         })
+    })
+</script>
+<script type="text/javascript">
+    $("#countAddButton").click(function () {
+        var current = $("#countInput");
+        var newValue = Number(current.val()) + 1;
+        current.attr("value", newValue);
+    });
+
+    <!-- -1按钮-->
+    $("#countSubButton").click(function () {
+        var current = $("#countInput");
+        var newValue = Number(current.val()) - 1;
+        if(newValue <= 0){
+            newValue = 0;
+        }
+        current.attr("value", newValue);
     })
 </script>
 </body>

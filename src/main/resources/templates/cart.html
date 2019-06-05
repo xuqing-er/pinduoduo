@@ -370,7 +370,7 @@
         var sum = 0;
         var itemList = $(".itemELe");
         for(var i=0; i<itemList.length; i++){
-            sum += itemList[i].innerHTML;
+            sum += Number(itemList[i].innerHTML);
         }
         $("#payButton").click(function () {
             window.location.replace("/cart/buy?sum=" + sum);

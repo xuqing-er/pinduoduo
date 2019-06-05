@@ -463,16 +463,17 @@
                 <!-- 分割 标题 -->
                 <div class="row col-md-offset-1">
                     <h2>
-                        <a href="/cart">Items List<span class="glyphicon glyphicon-shopping-cart" id="cartIcon"></span>
+                        <a href="/cart">Items List<span class="glyphicon glyphicon-shopping-cart" id="cartIcon">
+                            <span class="badge" th:if="${session.itemnum}" th:text="${session.itemnum}" id="cartNumBadge">0</span>
+                        </span>
                         </a>
                     </h2>
                 </div>
                 <hr />
                 <ul class="thumbnails">
-                    <li class="col-lg-3" th:each="item : ${items}">
+                    <li class="col-lg-3" th:each="item, stats : ${items}">
                         <div class="thumbnail">
-
-                            <img src="../static/img/thumbnail1.jpeg"  th:src="'data:image/jpg;base64,'+${item.photo}" alt="">
+                            <img src="../static/img/thumbnail1.jpeg"  th:src="'data:image/jpeg;base64,'+${photos[stats.index]}" alt="">
                             <h3 th:text="${item.name}">Thumbnail Label</h3>
                             <p>
                                 <strong>Price:</strong>
@@ -518,10 +519,10 @@
                                                 async: true,
                                                 success: function (data, status, xhr) {
                                                     addItemToCartAnimal($("#buttonId" + [[${item.id}]]));
+                                                    alert(data);
                                                 },
                                                 error:function (xhr, status, error) {
                                                     alert("errors status:" + status.toString());
-                                                    alert(error);
                                                 }
                                             })
                                         });
@@ -545,7 +546,7 @@
                 <ul class="pagination pagination-lg">
                     <li>
                         <!--TODO-->
-                        <a href="#" th:href="'/index/0'" aria-label="Previous">
+                        <a href="/index/0" th:href="'/index/' + (${session.pagenum} - 1)" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
@@ -565,7 +566,7 @@
                         <a href="/index/4">5</a>
                     </li>
                     <li>
-                        <a href="#" aria-label="Next">
+                        <a href="/index/0" th:href="'/index/' + (${session.pagenum} + 1)" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>

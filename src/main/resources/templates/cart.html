@@ -237,7 +237,7 @@
         <!-- 表格-->
         <div class="row">
             <div class="container-fluid">
-                <div class="row" th:each="itemEntry : ${itemmap}" th:id="'divId' + ${itemEntry.key.id}">
+                <div class="row" th:each="itemEntry : ${itemmap}" th:id="'divId' + ${itemEntry.key.id}" >
                     <!--复选框-->
                     <div class="col-md-1">
                         <input type="checkbox" value="{item1}" aria-label="">

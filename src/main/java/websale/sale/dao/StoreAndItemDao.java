@@ -10,4 +10,5 @@ public interface StoreAndItemDao {
     @Insert("insert into storeanditem values (#{storeId},#{itemId})")
     int insertStoreAndItem(StoreAndItem storeAndItem);
 
+
 }

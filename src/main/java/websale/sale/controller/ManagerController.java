@@ -42,6 +42,8 @@ public class ManagerController {
     ){
         try{
             Manager manager= managerLoginBiz.login(phoneNumber,password);
+            int storeid=managerService.getStoreId(manager.getId());
+            request.getSession().setAttribute("storeid",storeid);
             request.getSession().setAttribute("mid",manager.getId());
             request.getSession().setAttribute("username",manager.getUserName());
         }catch (Exception e){
@@ -66,18 +68,19 @@ public class ManagerController {
     public String logout(HttpServletRequest request){
         request.getSession().removeAttribute("mid");
         request.getSession().removeAttribute("username");
+        request.getSession().removeAttribute("storeid");
         return "index";
     }
 
     @RequestMapping(path = "/create/item",method = RequestMethod.POST)
     public String createItem(
             @RequestParam("file") MultipartFile file,
-            @RequestParam("storeId") int storeId,
             @RequestParam("number")  int number,
             Item item,
             HttpServletRequest request
     ){
 
+        int storeId=(Integer) request.getSession().getAttribute("storeid");
         try {
             item.setPhoto(file.getBytes());
         }catch (IOException e){

@@ -23,6 +23,7 @@ public interface StoreDao {
     @Select("select * from store where id=#{id}")
     Store selectById(int id);
 
+
     @Update("update store set name=#{name} where id=#{id}")
     void updateStoreName(@Param("id") String id, @Param("name") String name);
 

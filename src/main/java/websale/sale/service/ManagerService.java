@@ -63,6 +63,10 @@ public class ManagerService {
         return managerDao.selectManager(phoneNumber);
     }
 
+    public int getStoreId(int mid){
+        return managerAndStoreDao.selectByMangerId(mid);
+    }
+
 
     public void updateManagerPassword(String phoneNumber,String password){
         managerDao.updateManagerPassword(phoneNumber,password);

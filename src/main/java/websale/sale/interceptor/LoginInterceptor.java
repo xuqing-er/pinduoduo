@@ -16,7 +16,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             return true;
         }
         try{
-            response.sendRedirect("/login");
+            response.sendRedirect("/index/0");
         }catch (Exception e){
             e.printStackTrace();
         }

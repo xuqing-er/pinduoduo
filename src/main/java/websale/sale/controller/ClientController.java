@@ -1,6 +1,5 @@
 package websale.sale.controller;
 
-import org.springframework.beans.PropertyEditorRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -101,7 +100,10 @@ public class ClientController {
     public String getItem(
             @PathVariable("id") int id,
             Model model){
-        model.addAttribute("item",clientService.getItem(id));
+        Item item=clientService.getItem(id);
+        String photo=BasePhotoUtil.encode(item);
+        model.addAttribute("item",item);
+        model.addAttribute("photo",photo);
         return "item";
     }
 

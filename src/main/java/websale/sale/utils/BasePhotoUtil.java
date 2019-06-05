@@ -28,4 +28,11 @@ public class BasePhotoUtil {
         }
         return strings;
     }
+
+    public static String encode(Item item){
+
+        String string=Base64Utils.encodeToString(item.getPhoto());
+        item.setPhoto(null);
+        return string;
+    }
 }

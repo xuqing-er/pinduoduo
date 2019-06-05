@@ -177,7 +177,7 @@ public class ClientController {
         int clientId=(Integer) request.getSession().getAttribute("id");
         int orderId=buyService.buy(clientId,sum);
         model.addAttribute("orderid",orderId);
-        return "redirect: /orders";
+        return "redirect:/orders";
     }
 
     @RequestMapping(path = "/cart/pay")

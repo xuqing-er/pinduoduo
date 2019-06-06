@@ -302,20 +302,48 @@
                         </div>
 
                         <script type="text/javascript">
+                            //+1按钮
                             $("#countAddButtonId"+[[${itemEntry.key.id}]]).click(function () {
                                 var current = $("#countInputId"+[[${itemEntry.key.id}]]);
                                 var newValue = Number(current.val()) + 1;
-                                current.attr("value", newValue);
+                                var url = "/cart/increase?id=" + [[${itemEntry.key.id}]] + "&number=" + newValue;
+                                $.ajax({
+                                    url:url,
+                                    async:true,
+                                    success: function (data, status, xhr) {
+                                        current.attr("value", data);
+                                    },
+                                    error: function (xhr, status, error) {
+                                        alert("errors status:" + status.toString());
+                                    }
+                                });
+
                             });
 
-                            <!-- -1按钮-->
+                            //-1按钮
                             $("#countSubButtonId"+[[${itemEntry.key.id}]]).click(function () {
                                 var current = $("#countInputId"+[[${itemEntry.key.id}]]);
                                 var newValue = Number(current.val()) - 1;
                                 if(newValue <= 0){
                                     newValue = 0;
                                 }
-                                current.attr("value", newValue);
+                                var url = "/cart/increase?id=" + [[${itemEntry.key.id}]] + "&number=" + newValue;
+                                $.ajax({
+                                    url:url,
+                                    async:true,
+                                    success: function (data, status, xhr) {
+                                        current.attr("value", data);
+                                    },
+                                    error: function (xhr, status, error) {
+                                        alert("errors status:" + status.toString());
+                                    }
+                                });
+                            })
+
+                            //手动输入
+                            $("#countInputId"+[[${itemEntry.key.id}]]).change(function () {
+                                var newValue = $(this).val();
+                                alert(newValue);
                             })
                         </script>
                     </div>
@@ -404,6 +432,7 @@
             sum += Number(itemList[i].innerHTML);
         }
 
+        sum = parseFloat(sum.toPrecision(12));
         $("#amountLabel").text('￥' + sum + ' ');
 
         $("#payButton").click(function () {

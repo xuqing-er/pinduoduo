@@ -141,7 +141,7 @@ public class ManagerController {
     @RequestMapping(path = "/store/stock")
     @ResponseBody
     public int addItemInventory(
-            @RequestParam("itemid") int itemId,
+            @RequestParam("itemId") int itemId,
             @RequestParam("number") int number
     ){
         managerService.addItem(itemId,number);

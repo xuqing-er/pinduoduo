@@ -44,7 +44,7 @@ public class ManagerController {
             Manager manager= managerLoginBiz.login(phoneNumber,password);
             Integer storeid=managerService.getStoreId(manager.getId());
             if (storeid==null){
-                request.setAttribute("storeid",0);
+                request.getSession().setAttribute("storeid",0);
             }else {
                 request.getSession().setAttribute("storeid",storeid);
             }
@@ -95,7 +95,7 @@ public class ManagerController {
         //String path=ImageUtils.saveFile(file,request);
         //item.setImagePath(path);
         managerService.createItem(storeId,item,number);
-        return "redirect:/index/0";
+        return "redirect:/store";
     }
 
     @RequestMapping(path = "/create/item" ,method = RequestMethod.GET)

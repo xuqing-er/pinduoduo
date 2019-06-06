@@ -222,4 +222,10 @@ public class ClientController {
         model.addAttribute("orders",orders);
         return "history";
     }
+
+    @RequestMapping(path = "/**")
+    public String defaultErrorHandler(Model model){
+        model.addAttribute("error", "unknown url");
+        return "404";
+    }
 }

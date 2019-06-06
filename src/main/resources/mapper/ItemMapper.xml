@@ -2,13 +2,23 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0 //EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper>
+<mapper namespace="websale.sale.dao.ItemDao">
     <select id="selectItemsByIds" parameterType="list" resultMap="ItemList">
         select * from item where id in
         <foreach collection="list" item="item" open="(" separator="," close=")">
             #{item}
         </foreach>
     </select>
+
+    <update id="updateItem" parameterType="Item">
+        update item
+        <set>
+            <if test="name!=null">name=#{name} ,</if>
+            <if test="price!=null">price=#{price} ,</if>
+            <if test="discount!=0">discount=#{discount} </if>
+        </set>
+        where id=#{id}
+    </update>
 
     <resultMap id="ItemList" type="Item">
         <id property="id" column="id"/>

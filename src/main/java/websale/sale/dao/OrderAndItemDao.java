@@ -13,11 +13,6 @@ public interface OrderAndItemDao {
     /*
     TODO
      */
-    @Insert({"<script> insert into orderanditem (orderid,itemid,number) values" +
-            "        <foreach collection=\"list\" item=\"item\" open=\"\" separator=\",\" close=\"\">" +
-            "            (#{item.orderId},#{item.itemId},#{item.number})" +
-            "        </foreach>" +
-            "</script>"})
     int insertOrderAndItems(List<OrderAndItem> orderAndItem);
 
     @Insert("insert into orderanditem (orderid,itemid,number) values (#{orderId},#{itemId},#{number})")

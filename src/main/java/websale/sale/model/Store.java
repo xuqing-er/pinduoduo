@@ -1,10 +1,19 @@
 package websale.sale.model;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 public class Store {
     int id;
+    @NotNull
     String name;
+    @NotNull
     String category;
+    @Pattern(regexp = "\\d{11}")
     String phoneNumber;
+    @Max(6) @Min(0)
     int level;
 
     public void setId(int id) {

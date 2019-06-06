@@ -1,13 +1,22 @@
 package websale.sale.model;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 public class Item {
     int id;
+    @NotNull
     String name;
+    @NotNull
     String category;
     String price;
+    @Max(100) @Min(0)
     int discount;
+    @NotNull
     String descriptor;
     String imagePath;
+    @Max(10000)@Min(0)
     int inventory;
     byte[] photo;
 

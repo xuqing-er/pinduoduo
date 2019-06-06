@@ -1,11 +1,16 @@
 package websale.sale.model;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Past;
 import java.time.LocalDateTime;
 
 public class Order {
     int id;
+    @Max(1) @Min(0)
     int status;
     String sum;
+    @Past
     LocalDateTime date;
 
     public int getId() {

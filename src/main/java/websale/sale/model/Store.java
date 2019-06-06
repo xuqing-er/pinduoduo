@@ -11,7 +11,7 @@ public class Store {
     String name;
     @NotNull
     String category;
-    @Pattern(regexp = "\\d{11}")
+    @Pattern(regexp = "\\d{11}+")
     String phoneNumber;
     @Max(6) @Min(0)
     int level;

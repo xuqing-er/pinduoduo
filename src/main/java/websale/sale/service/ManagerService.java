@@ -72,6 +72,9 @@ public class ManagerService {
         return storeDao.selectById(storeid);
     }
 
+    public void updateItem(Item item){
+        itemDao.updateItem(item);
+    }
 
     public void updateManagerPassword(String phoneNumber,String password){
         managerDao.updateManagerPassword(phoneNumber,password);

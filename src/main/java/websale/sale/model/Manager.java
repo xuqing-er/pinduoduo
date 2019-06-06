@@ -8,7 +8,7 @@ public class Manager {
     int id;
     @NotNull
     String userName;
-    @Pattern(regexp = "\\d{11}")
+    @Pattern(regexp = "\\d{11}+")
     String phoneNumber;
     @Size(min = 5,max = 20)
     String password;

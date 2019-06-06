@@ -281,10 +281,10 @@
                         <h4><strong th:text="${itemEntry.key.name}">{itemName}</strong></h4>
                     </div>
                     <div class="col-md-1">
-                        <h4><strong th:text="${itemEntry.key.price}">{price}</strong></h4>
+                        <h4><strong th:id="'priceLabelId'+${itemEntry.key.id}" th:text="${itemEntry.key.price}">{price}</strong></h4>
                     </div>
                     <div class="col-md-1">
-                        <h4><strong th:text="${itemEntry.key.discount}">{discount}</strong></h4>
+                        <h4><strong th:id="'discountLabelId'+${itemEntry.key.id}" th:text="${itemEntry.key.discount}">{discount}</strong></h4>
                     </div>
                     <div class="col-md-2">
                         <div class="input-group input-group-sm">
@@ -302,53 +302,77 @@
                         </div>
 
                         <script type="text/javascript">
-                            //+1按钮
-                            $("#countAddButtonId"+[[${itemEntry.key.id}]]).click(function () {
-                                var current = $("#countInputId"+[[${itemEntry.key.id}]]);
-                                var newValue = Number(current.val()) + 1;
-                                var url = "/cart/increase?id=" + [[${itemEntry.key.id}]] + "&number=" + newValue;
-                                $.ajax({
-                                    url:url,
-                                    async:true,
-                                    success: function (data, status, xhr) {
-                                        current.attr("value", data);
-                                    },
-                                    error: function (xhr, status, error) {
-                                        alert("errors status:" + status.toString());
-                                    }
+                            $(document).ready(function () {
+                                //+1按钮
+                                $("#countAddButtonId"+[[${itemEntry.key.id}]]).click(function () {
+                                    var current = $("#countInputId"+[[${itemEntry.key.id}]]);
+                                    var newValue = Number(current.val()) + 1;
+                                    var url = "/cart/increase?id=" + [[${itemEntry.key.id}]] + "&number=" + newValue;
+                                    $.ajax({
+                                        url:url,
+                                        async:true,
+                                        success: function (data, status, xhr) {
+                                            current.attr("value", data);
+                                            updateLabel([[${itemEntry.key.id}]], Number(data));
+                                        },
+                                        error: function (xhr, status, error) {
+                                            alert("errors status:" + status.toString());
+                                        }
+                                    });
+
                                 });
 
+                                //-1按钮
+                                $("#countSubButtonId"+[[${itemEntry.key.id}]]).click(function () {
+                                    var current = $("#countInputId"+[[${itemEntry.key.id}]]);
+                                    var newValue = Number(current.val()) - 1;
+                                    if(newValue <= 0){
+                                        newValue = 0;
+                                    }
+                                    var url = "/cart/increase?id=" + [[${itemEntry.key.id}]] + "&number=" + newValue;
+                                    $.ajax({
+                                        url:url,
+                                        async:true,
+                                        success: function (data, status, xhr) {
+                                            current.attr("value", data);
+                                            updateLabel([[${itemEntry.key.id}]], Number(data));
+                                        },
+                                        error: function (xhr, status, error) {
+                                            alert("errors status:" + status.toString());
+                                        }
+                                    });
+                                });
+
+                                //手动输入
+                                $("#countInputId"+[[${itemEntry.key.id}]]).change(function () {
+                                    var newValue = $(this).val();
+
+                                    //过滤非法数值
+                                    if(isNaN(Number(newValue))){
+                                        alert("非法数值!");
+                                        return;
+                                    }
+                                    var url = "/cart/increase?id=" + [[${itemEntry.key.id}]] + "&number=" + newValue;
+                                    $.ajax({
+                                        url:url,
+                                        async:true,
+                                        success: function (data, status, xhr) {
+                                            $(this).attr("value", data);
+                                            updateLabel([[${itemEntry.key.id}]], Number(data));
+                                        },
+                                        error: function (xhr, status, error) {
+                                            alert("errors status:" + status.toString());
+                                        }
+                                    });
+
+
+                                });
                             });
 
-                            //-1按钮
-                            $("#countSubButtonId"+[[${itemEntry.key.id}]]).click(function () {
-                                var current = $("#countInputId"+[[${itemEntry.key.id}]]);
-                                var newValue = Number(current.val()) - 1;
-                                if(newValue <= 0){
-                                    newValue = 0;
-                                }
-                                var url = "/cart/increase?id=" + [[${itemEntry.key.id}]] + "&number=" + newValue;
-                                $.ajax({
-                                    url:url,
-                                    async:true,
-                                    success: function (data, status, xhr) {
-                                        current.attr("value", data);
-                                    },
-                                    error: function (xhr, status, error) {
-                                        alert("errors status:" + status.toString());
-                                    }
-                                });
-                            })
-
-                            //手动输入
-                            $("#countInputId"+[[${itemEntry.key.id}]]).change(function () {
-                                var newValue = $(this).val();
-                                alert(newValue);
-                            })
                         </script>
                     </div>
                     <div class="col-md-2">
-                        <strong th:text="${itemEntry.key.price} * ${itemEntry.key.discount} * ${itemEntry.value} / 100" class="itemELe">{amount}</strong>
+                        <strong th:id="'totalLabelId' + ${itemEntry.key.id}" th:text="${itemEntry.key.price} * ${itemEntry.key.discount} * ${itemEntry.value} / 100" class="itemELe">{amount}</strong>
                     </div>
                     <div class="col-md-1">
                         <a href="#" th:id="'removeId'+${itemEntry.key.id}"><span class="glyphicon glyphicon-remove"></span> remove</a>
@@ -426,6 +450,19 @@
 -->
 <script type="text/javascript">
     $(document).ready(function () {
+        updateSumLabel();
+        $("#payButton").click(function () {
+            var sum = 0;
+            var itemList = $(".itemELe");
+            for(var i=0; i<itemList.length; i++){
+                sum += Number(itemList[i].innerHTML);
+            }
+
+            sum = parseFloat(sum.toPrecision(12));
+            window.location.replace("/cart/buy?sum=" + sum);
+        });
+    });
+    function updateSumLabel() {
         var sum = 0;
         var itemList = $(".itemELe");
         for(var i=0; i<itemList.length; i++){
@@ -434,11 +471,19 @@
 
         sum = parseFloat(sum.toPrecision(12));
         $("#amountLabel").text('￥' + sum + ' ');
+        //alert("updateSumLabel");
+    }
 
-        $("#payButton").click(function () {
-            window.location.replace("/cart/buy?sum=" + sum);
-        })
-    })
+    function updateLabel(id, num) {
+        //total amount label
+        var price = $("#priceLabelId" + id).text();
+        var discount = $("#discountLabelId" + id).text();
+        $("#totalLabelId" + id).text(price * discount * num / 100);
+
+        //sum label
+        updateSumLabel();
+        //alert("updateLabel");
+    }
 </script>
 </body>
 </html>

@@ -20,5 +20,13 @@
         <setting name="jdbcTypeForNull" value="OTHER"/>
     </settings>
 
+    <typeAliases>
+        <typeAlias type="websale.sale.model.Item" alias="Item"/>
+        <typeAlias type="websale.sale.model.Client" alias="Client"/>
+    </typeAliases>
+    <mappers>
+        <mapper url="file:///Users/duanshibo/Desktop/myjava/pinduoduo/src/main/resources/mapper/ItemMapper.xml "/>
+        <mapper resource="mapper/OrderAndItemMapper.xml"/>
+    </mappers>
     <!-- Continue going here -->
 </configuration>

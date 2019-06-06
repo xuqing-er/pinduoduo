@@ -1,9 +1,12 @@
 package websale.sale.model;
 
+import org.apache.ibatis.type.Alias;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+@Alias("Client")
 public class Client {
     int id;
     @NotNull

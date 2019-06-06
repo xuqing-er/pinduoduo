@@ -247,6 +247,7 @@
                         <p>Store Description Here</p>
                     </div>
                     <div class="row">
+                    <div class="row">
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addItemModal"><span class="glyphicon glyphicon-plus"></span> Add Item</button>
                     </div>
                     <!-- addItemModal-->
@@ -261,7 +262,7 @@
                                     <div class="container">
                                         <div class="row row-centered">
                                             <div class="col-md-6 col-centered">
-                                                <form class="form-horizontal" action="/" method="post" enctype="multipart/form-data">
+                                                <form class="form-horizontal" action="/create/item" method="post" enctype="multipart/form-data">
                                                     <!--数量-->
                                                     <div class="form-group">
                                                         <label class="col-sm-2 control-label" for="number">number</label>
@@ -353,7 +354,7 @@
                         </p>
                         <p>
                             <strong>Count: </strong>
-                            <span th:text="${item.inventory}">{inventory}</span>
+                            <span th:text="${item.inventory}" th:id="'countLabelId' + ${item.id}">{inventory}</span>
                         </p>
                         <p>
                             <strong>Descriptor: </strong>
@@ -363,15 +364,38 @@
                             <button type="button" class="btn btn-primary" th:id="'addNumButtonId' + ${item.id}">
                                 <span class="glyphicon glyphicon-plus"> Add</span>
                             </button>
-                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#updateItemModal" th:id="'editItemButtonId' + ${item.id}">
+                            <button type="button" class="btn btn-default" data-toggle="modal" th:id="'editItemButtonId' + ${item.id}">
                                 <span class="glyphicon glyphicon-pencil"> Edit</span>
                             </button>
                         </p>
-                        <!-- TODO ajax添加item数量 -->
+                        <!--  ajax添加item数量 -->
                         <script type="text/javascript">
                             $(document).ready(function () {
                                 $("#addNumButtonId" + [[${item.id}]]).click(function () {
-                                    alert("TODO");
+                                    var ele = $("#countLabelId" + [[${item.id}]]);
+                                    var num = Number(ele.text());
+                                    num++;
+                                    var url = "/store/stock?itemId=" + [[${item.id}]] + "&number=" + num;
+                                    $.ajax({
+                                        url: url,
+                                        async: true,
+                                        success: function (data, status, xhr) {
+                                            ele.text(data);
+                                        },
+                                        error:function (xhr, status, error) {
+                                            alert("errors status:" + status.toString());
+                                        }
+                                    })
+                                })
+                            })
+                        </script>
+
+                        <!-- 修改item内容 -->
+                        <script type="text/javascript">
+                            $(document).ready(function () {
+                                $("#editItemButtonId" + [[${item.id}]]).click(function () {
+                                    $("#itemid").val([[${item.id}]]);
+                                    $("#updateItemModal").modal();
                                 })
                             })
                         </script>
@@ -392,25 +416,63 @@
                     <div class="modal-body">
                         <div class="container">
                             <div class="row row-centered">
-                                <div class="col-md-6">
-                                    <form class="form-horizontal" id="updateItemForm" action="/cart" method="post" enctype="multipart/form-data">
-                                        <div class="form-group">
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" value="">
-                                                    Remember me
-                                                </label>
+                                <div class="col-md-6 col-centered">
+                                    <form class="form-horizontal" action="#" method="post" enctype="multipart/form-data">
+                                        <div class="form-group" hidden>
+                                            <label class="col-sm-2 control-label" for="itemid">Id</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="itemid" name="itemId" placeholder="itemId" value="0" disabled>
                                             </div>
                                         </div>
-                                        <script type="text/javascript">
-                                            $("#loginSelect").change(function () {
-                                                $("#loginForm").attr("action", $(this).val());
-                                            });
-                                        </script>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" for="itemnumber">number</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="itemnumber" name="number" placeholder="number">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" for="iname">name</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="iname" name="name" placeholder="name">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" for="icategory">category</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="icategory" name="category" placeholder="category">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" for="iprice">price</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="iprice" name="price" placeholder="price">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" for="idiscount">discount</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="idiscount" name="discount" placeholder="discount">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" for="idiscriptor">discriptor</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="idiscriptor" name="discriptor" placeholder="discriptor">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" for="file">file</label>
+                                            <div class="col-sm-10">
+                                                <input id="b2" name="file" type="file" class="file form-control" data-show-preview="true">
+                                            </div>
+                                        </div>
+
+
                                         <div class="form-group">
                                             <div class="controls">
-                                                <button class="btn" data-dismiss="modal" aria-hidden="true" data-toggle="modal" data-target="#registerModal">Register</button>
-                                                <button type="submit"  class="btn btn-primary">Login</button>
+                                                <button type="submit" class="btn btn-primary pull-right">Submit</button>
+                                                <button type="button" class="btn pull-left">Cancel</button>
                                             </div>
                                         </div>
                                     </form>

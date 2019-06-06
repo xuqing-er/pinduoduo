@@ -44,8 +44,8 @@ public interface ItemDao {
     @Update("update item set price=#{price} where id=#{id}")
     void updateItemPrice(@Param("id")String id,@Param("price") String price);
 
-    @Update("update item set number=#{number} where id=#{itemId}")
-    void updateItemInventory(@Param("itemId") int itemId,@Param("number") int number);
+    @Update("update item set inventory=#{inventory} where id=#{itemId}")
+    void updateItemInventory(@Param("itemId") int itemId,@Param("inventory") int inventory);
 
     @Insert("insert into item(name,category,price,discount,descriptor,imagepath,inventory,samllphoto) values " +
             "(#{name},#{category},#{price},#{discount},#{descriptor},#{imagePath},#{inventory},#{photo})")

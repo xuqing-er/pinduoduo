@@ -48,8 +48,9 @@ public class ManagerService {
         return itemId;
     }
 
-    public void addItem(int itemId,int number){
-        itemDao.updateItemInventory(itemId,number);
+    public void addItem(int itemId,int inventory){
+
+        itemDao.updateItemInventory(itemId,inventory);
     }
 
     public int addManager(Manager manager){

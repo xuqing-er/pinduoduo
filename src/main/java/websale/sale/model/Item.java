@@ -1,8 +1,6 @@
 package websale.sale.model;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 
 public class Item {
     int id;
@@ -10,6 +8,7 @@ public class Item {
     String name;
     @NotNull
     String category;
+    @Pattern(regexp = "\\d{1,10}(.\\d{1,2})?")
     String price;
     @Max(100) @Min(0)
     int discount;

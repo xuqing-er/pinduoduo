@@ -51,6 +51,11 @@ public interface ItemDao {
     @Update("update item set inventory=#{inventory} where id=#{itemId}")
     void updateItemInventory(@Param("itemId") int itemId,@Param("inventory") int inventory);
 
+    /*
+    TODO
+     */
+    void updateItem(Item item);
+
     @Insert("insert into item(name,category,price,discount,descriptor,imagepath,inventory,samllphoto) values " +
             "(#{name},#{category},#{price},#{discount},#{descriptor},#{imagePath},#{inventory},#{photo})")
     int insertItem(Item item);

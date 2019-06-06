@@ -73,7 +73,7 @@ public class ManagerController {
     ){
         if (errors.hasErrors()){
             System.out.println("manager error");
-            return "redirect:/index/0";
+            return "redirect:/manager/register";
         }
         managerService.addManager(manager);
         return "redirect:/index/0";
@@ -97,7 +97,7 @@ public class ManagerController {
     ){
         if (errors.hasErrors()){
             System.out.println("item error");
-            return "redirect:/index/0";
+            return "redirect:/create/item";
         }
         int storeId=(Integer) request.getSession().getAttribute("storeid");
         try {
@@ -125,7 +125,7 @@ public class ManagerController {
     ){
         if (errors.hasErrors()){
             System.out.println("store error");
-            return "redirect:/index/0";
+            return "redirect:/create/store";
         }
         int mid=(Integer) request.getSession().getAttribute("mid");
         int storeId=managerService.createStore(mid,store);
@@ -164,5 +164,17 @@ public class ManagerController {
     ){
         managerService.addItem(itemId,number);
         return number;
+    }
+
+    @RequestMapping(path = "/item/update")
+    public String updateItem(
+            @Valid Item item,
+            Errors errors
+    ){
+        if (errors.hasErrors()){
+            System.out.println(" error");
+            return "redirect:/update/item";
+        }
+        return "redirect:/store";
     }
 }

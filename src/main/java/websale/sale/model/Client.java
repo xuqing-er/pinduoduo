@@ -7,7 +7,7 @@ import javax.validation.constraints.Size;
 public class Client {
     int id;
     @NotNull
-    @Pattern(regexp = "\\d{11}")
+    @Pattern(regexp = "\\d{11}+")
     String phoneNumber;
     @Size(min = 5,max = 20)
     String password;

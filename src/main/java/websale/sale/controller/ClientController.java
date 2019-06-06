@@ -223,9 +223,9 @@ public class ClientController {
         return "history";
     }
 
-//    @RequestMapping(path = "/**")
-//    public String defaultErrorHandler(Model model){
-//        model.addAttribute("error", "unknown url");
-//        return "404";
-//    }
+    @RequestMapping(path = "/**")
+    public String defaultErrorHandler(Model model){
+        model.addAttribute("error", "unknown url");
+        return "404";
+    }
 }

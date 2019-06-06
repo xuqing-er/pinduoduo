@@ -249,7 +249,7 @@
                     <div class="row">
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addItemModal"><span class="glyphicon glyphicon-plus"></span> Add Item</button>
                     </div>
-                    <!-- modal-->
+                    <!-- addItemModal-->
                     <div id="addItemModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="addItemModalHeader" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
@@ -261,13 +261,8 @@
                                     <div class="container">
                                         <div class="row row-centered">
                                             <div class="col-md-6 col-centered">
-                                                <form class="form-horizontal" action="/create/item" method="post" enctype="multipart/form-data">
-                                                    <div class="form-group">
-                                                        <label class="col-sm-2 control-label" for="storeId">storeId</label>
-                                                        <div class="col-sm-10">
-                                                            <input type="text" class="form-control" id="storeId" name="storeId" placeholder="storeId">
-                                                        </div>
-                                                    </div>
+                                                <form class="form-horizontal" action="/" method="post" enctype="multipart/form-data">
+                                                    <!--数量-->
                                                     <div class="form-group">
                                                         <label class="col-sm-2 control-label" for="number">number</label>
                                                         <div class="col-sm-10">
@@ -349,23 +344,87 @@
                         <img src="../static/img/thumbnail1.jpeg" th:src="'data:image/jpeg;base64,'+${photos[stats.index]}" alt="">
                         <h3 th:text="${item.name}">Thumbnail Label</h3>
                         <p>
+                            <strong>Price: </strong>
                             <span th:text="${item.price}">{price}</span>
+                        </p>
+                        <p>
+                            <strong>Discount: </strong>
                             <span th:text="${item.discount}">{discount}</span>
                         </p>
-                        <p th:text="${item.descriptor}">{desciptor}</p>
                         <p>
-                            <a href="#" class="btn btn-primary">
-                                <span class="glyphicon glyphicon-plus">Add</span>
-                            </a>
-                            <a href="#" class="btn btn-default">
-                                <span class="glyphicon glyphicon-star">Star</span>
-                            </a>
+                            <strong>Count: </strong>
+                            <span th:text="${item.inventory}">{inventory}</span>
                         </p>
+                        <p>
+                            <strong>Descriptor: </strong>
+                            <span th:text="${item.descriptor}">{descriptor}</span>
+                        </p>
+                        <p>
+                            <button type="button" class="btn btn-primary" th:id="'addNumButtonId' + ${item.id}">
+                                <span class="glyphicon glyphicon-plus"> Add</span>
+                            </button>
+                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#updateItemModal" th:id="'editItemButtonId' + ${item.id}">
+                                <span class="glyphicon glyphicon-pencil"> Edit</span>
+                            </button>
+                        </p>
+                        <!-- TODO ajax添加item数量 -->
+                        <script type="text/javascript">
+                            $(document).ready(function () {
+                                $("#addNumButtonId" + [[${item.id}]]).click(function () {
+                                    alert("TODO");
+                                })
+                            })
+                        </script>
                     </div>
                 </li>
 
             </ul>
         </div>
+
+        <!--TODO 修改整个item内容Modal item.id传入问题 updateItemModal -->
+        <div id="updateItemModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="loginModalHeader" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="updateItemModalHeader">Edit Modal</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="row row-centered">
+                                <div class="col-md-6">
+                                    <form class="form-horizontal" id="updateItemForm" action="/cart" method="post" enctype="multipart/form-data">
+                                        <div class="form-group">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" value="">
+                                                    Remember me
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <script type="text/javascript">
+                                            $("#loginSelect").change(function () {
+                                                $("#loginForm").attr("action", $(this).val());
+                                            });
+                                        </script>
+                                        <div class="form-group">
+                                            <div class="controls">
+                                                <button class="btn" data-dismiss="modal" aria-hidden="true" data-toggle="modal" data-target="#registerModal">Register</button>
+                                                <button type="submit"  class="btn btn-primary">Login</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- TODO 分页pagination 分页栏 位于缩略图thumbnail底部
         <div class="row">
             <nav aria-label="page nav" class="col-lg-offset-4">
@@ -401,6 +460,8 @@
         -->
     </div>
 </div>
+
+
 
 </body>
 </html>

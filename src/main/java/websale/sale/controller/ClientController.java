@@ -3,6 +3,7 @@ package websale.sale.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import websale.sale.biz.ClientLoginBiz;
 import websale.sale.model.*;
@@ -12,6 +13,7 @@ import websale.sale.service.ClientService;
 import websale.sale.utils.BasePhotoUtil;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -46,7 +48,15 @@ public class ClientController {
     }
     
     @RequestMapping(path = "/register",method = RequestMethod.POST)
-    public String doRegister(Client client,Model model){
+    public String doRegister(
+            @Valid Client client,
+            Errors errors,
+            Model model
+    ){
+        if (errors.hasErrors()){
+            System.out.println("error");
+            return "redirect:/index/0";
+        }
         int clientid=clientService.addClient(client);
         model.addAttribute("clientId",clientid);
         return "redirect:/index/0";
@@ -139,7 +149,7 @@ public class ClientController {
     ){
         int clientId=(Integer) request.getSession().getAttribute("id");
         cartService.updateItem(clientId,id,number);
-        return clientId;
+        return number;
     }
 
     //用户进入购物车

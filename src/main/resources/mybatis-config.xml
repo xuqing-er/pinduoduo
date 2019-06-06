@@ -14,6 +14,11 @@
         This setting forces generated keys to be used if set to true,
          as some drivers deny compatibility but still work -->
         <setting name="useGeneratedKeys" value="true"/>
+        <!--本地缓存机制，防止循环引用，缓存一个会话中的所有缓存-->
+        <setting name="localCacheScope" value="SESSION"/>
+        <!--为空值指定JDBC类型 varchar null other-->
+        <setting name="jdbcTypeForNull" value="OTHER"/>
     </settings>
+
     <!-- Continue going here -->
 </configuration>

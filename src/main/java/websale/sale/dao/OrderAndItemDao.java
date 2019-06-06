@@ -10,6 +10,9 @@ import java.util.List;
 @Mapper
 public interface OrderAndItemDao {
 
+    /*
+    TODO
+     */
     @Insert({"<script> insert into orderanditem (orderid,itemid,number) values" +
             "        <foreach collection=\"list\" item=\"item\" open=\"\" separator=\",\" close=\"\">" +
             "            (#{item.orderId},#{item.itemId},#{item.number})" +

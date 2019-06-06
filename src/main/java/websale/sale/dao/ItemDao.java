@@ -25,6 +25,9 @@ public interface ItemDao {
     })
     List<Item> selectItemsByStart(int start);
 
+    /*
+    TODO
+     */
     List<Item> selectItemsByIds(List<Integer> list);
 
     @Select("select * from item where id in (select itemid from cartitem where clientid=#{clientid})")
@@ -43,6 +46,13 @@ public interface ItemDao {
 
     @Update("update item set price=#{price} where id=#{id}")
     void updateItemPrice(@Param("id")String id,@Param("price") String price);
+
+    /*
+    TODO 动态SQL
+    xml文件配置
+     */
+    @Update("update item set ")
+    void updateItem(Item item);
 
     @Update("update item set number=#{number} where id=#{itemId}")
     void updateItemInventory(@Param("itemId") int itemId,@Param("number") int number);

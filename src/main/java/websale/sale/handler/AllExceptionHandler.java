@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @ControllerAdvice
 public class AllExceptionHandler {
-    public static final String ERROR_VIEW = "404";
+    static final String ERROR_VIEW = "404";
 
 
     @ExceptionHandler(value = {Exception.class})

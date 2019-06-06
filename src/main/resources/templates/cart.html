@@ -348,7 +348,7 @@
                                     var newValue = $(this).val();
 
                                     //过滤非法数值
-                                    if(isNaN(newValue)){
+                                    if(isNaN(Number(newValue))){
                                         alert("非法数值!");
                                         return;
                                     }

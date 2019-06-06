@@ -3,6 +3,7 @@ package websale.sale.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +18,7 @@ import websale.sale.utils.BasePhotoUtil;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
 
@@ -65,7 +67,14 @@ public class ManagerController {
     }
 
     @RequestMapping(path = "/manager/register",method = RequestMethod.POST)
-    public String doRegister(Manager manager){
+    public String doRegister(
+            @Valid Manager manager,
+            Errors errors
+    ){
+        if (errors.hasErrors()){
+            System.out.println("manager error");
+            return "redirect:/index/0";
+        }
         managerService.addManager(manager);
         return "redirect:/index/0";
     }
@@ -82,10 +91,14 @@ public class ManagerController {
     public String createItem(
             @RequestParam("file") MultipartFile file,
             @RequestParam("number")  int number,
-            Item item,
+            @Valid Item item,
+            Errors errors,
             HttpServletRequest request
     ){
-
+        if (errors.hasErrors()){
+            System.out.println("item error");
+            return "redirect:/index/0";
+        }
         int storeId=(Integer) request.getSession().getAttribute("storeid");
         try {
             item.setPhoto(file.getBytes());
@@ -105,10 +118,15 @@ public class ManagerController {
 
     @RequestMapping(path = "/create/store",method = RequestMethod.POST)
     public String createStore(
-            Store store,
+            @Valid Store store,
+            Errors errors,
             HttpServletRequest request,
             Model model
     ){
+        if (errors.hasErrors()){
+            System.out.println("store error");
+            return "redirect:/index/0";
+        }
         int mid=(Integer) request.getSession().getAttribute("mid");
         int storeId=managerService.createStore(mid,store);
         store.setId(storeId);

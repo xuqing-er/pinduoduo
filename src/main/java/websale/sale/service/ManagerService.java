@@ -29,10 +29,13 @@ public class ManagerService {
         storeDao.insertStore(store);
         int storeId=storeDao.selectMaxId();
         System.out.println(storeId);
-        ManagerAndStore managerAndStore=new ManagerAndStore();
+
+        ManagerAndStore managerAndStore=new ManagerAndStore();      //这四行感觉可删
         managerAndStore.setManagerId(managerId);
         managerAndStore.setStoreId(storeId);
         managerAndStoreDao.insertManagerAndStore(managerAndStore);
+
+
         return storeId;
     }
 
@@ -41,7 +44,9 @@ public class ManagerService {
         itemDao.insertItem(item);
         int itemId=itemDao.selectMaxId();
         item.setId(itemId);
-        StoreAndItem storeAndItem=new StoreAndItem();
+
+
+        StoreAndItem storeAndItem=new StoreAndItem();           //这四行感觉可删
         storeAndItem.setItemId(itemId);
         storeAndItem.setStoreId(storeId);
         storeAndItemDao.insertStoreAndItem(storeAndItem);

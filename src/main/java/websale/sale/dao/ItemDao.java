@@ -42,7 +42,14 @@ public interface ItemDao {
     @Results({
             @Result(property = "photo",column = "samllphoto",jdbcType = JdbcType.BLOB)
     })
-    List<Item> selectItemsByManagerId(int managerId);
+    List<Item> selectItemsByManagerId1(int managerId);
+
+    @Select("select * from item where storeid in " +                                //&&&&&&&&&&&&&&&&&&
+            "(select storeid from manager where manager.id =#{managerId}))")        //&&&&&&&&&&&&&&&&&&
+    @Results({
+            @Result(property = "photo",column = "samllphoto",jdbcType = JdbcType.BLOB)
+    })
+    List<Item> selectItemsByManagerId(int managerId);      //&&&&&&&&&&&&&&&&&&
 
     @Update("update item set price=#{price} where id=#{id}")
     void updateItemPrice(@Param("id")String id,@Param("price") String price);

@@ -10,7 +10,11 @@ public interface StoreDao {
 
     @SelectKey(keyProperty = "id",resultType = int.class,before = false,statement = "SELECT LAST_INSERT_ID()")
     @Insert("insert into store (name,category,phonenumber,level) values (#{name},#{category},#{phoneNumber},#{level})")
-    int insertStore(Store store);
+    int insertStore1(Store store);
+
+    @SelectKey(keyProperty = "id",resultType = int.class,before = false,statement = "SELECT LAST_INSERT_ID()")
+    @Insert("insert into store (managerid,name,category,phonenumber,level) values (#{managerid},#{name},#{category},#{phoneNumber},#{level})")
+    int insertStore(Store store);               //&&&&&&&&&&
 
     @Select("select max(id) from store")
     int selectMaxId();

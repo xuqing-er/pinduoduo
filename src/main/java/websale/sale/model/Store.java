@@ -10,6 +10,7 @@ import javax.validation.constraints.Pattern;
 @Alias("Store")
 public class Store {
     int id;
+    int managerId;              //&&&&&&&&&&&&&&&&&&
     @NotNull
     String name;
     @NotNull
@@ -26,6 +27,14 @@ public class Store {
     public int getId() {
         return id;
     }
+
+    public void setManagerId(int id) {
+        this.managerId = id;
+    }        //&&&&&&&&&&&&&&&&&&
+
+    public int getManagerId() {
+        return managerId;
+    }                //&&&&&&&&&&&&&&&&&&
 
     public String getPhoneNumber() {
         return phoneNumber;

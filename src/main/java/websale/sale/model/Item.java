@@ -4,6 +4,7 @@ import javax.validation.constraints.*;
 
 public class Item {
     int id;
+    int storeid;                //&&&&&&&&&&&&&&&&&&&
     @NotNull
     String name;
     @NotNull
@@ -42,6 +43,14 @@ public class Item {
     public void setId(int id) {
         this.id = id;
     }
+
+    public int getStoreid() {
+        return storeid;
+    }           //&&&&&&&&&&&&&&&&&&&
+
+    public void setStoreid(int id) {
+        this.storeid = id;
+    }       //&&&&&&&&&&&&&&&&&&&
 
     public void setPrice(String price) {
         this.price = price;

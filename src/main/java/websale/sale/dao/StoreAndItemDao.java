@@ -1,5 +1,6 @@
 package websale.sale.dao;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -14,5 +15,8 @@ public interface StoreAndItemDao {
 
     @Select("select * from store where id in(select storeid from storeanditem where itemid=#{itemId}) ")
     Store selectStoreByItemId(int itemId);
+
+    @Delete("delete from storeanditem where itemid=#{itemid}")
+    void deleteStoreAndItem(int itemid);
 
 }

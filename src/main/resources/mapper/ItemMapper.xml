@@ -10,15 +10,18 @@
         </foreach>
     </select>
 
+    <!--
     <update id="updateItem" parameterType="Item">
         update item
         <set>
             <if test="name!=null">name=#{name} ,</if>
             <if test="price!=null">price=#{price} ,</if>
-            <if test="discount!=0">discount=#{discount} </if>
+            <if test="category!=\"\"null">category=#{category} ,</if>
+            <if test="descriptor!=null">descriptor=#{descriptor} </if>
         </set>
         where id=#{id}
     </update>
+    -->
 
     <resultMap id="ItemList" type="Item">
         <id property="id" column="id"/>

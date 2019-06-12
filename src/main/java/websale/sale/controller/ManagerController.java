@@ -166,15 +166,25 @@ public class ManagerController {
         return number;
     }
 
-    @RequestMapping(path = "/item/update")
+    @RequestMapping(path = "/item/update",method = RequestMethod.POST)
     public String updateItem(
-            @Valid Item item,
-            Errors errors
+            @RequestParam("id") int id,
+            @RequestParam("number") int number
+            //Item item
     ){
-        if (errors.hasErrors()){
-            System.out.println(" error");
-            return "redirect:/update/item";
-        }
+        //item.setInventory(number);
+        System.out.println("id:"+id);
+        //System.out.println(item.getId());
+        //managerService.updateItem(item);
+
+        return "redirect:/store";
+    }
+
+    @RequestMapping(path = "/delete/item")
+    public String removeItem(
+            @RequestParam("itemid") int itemid
+    ){
+        managerService.deleteItem(itemid);
         return "redirect:/store";
     }
 }

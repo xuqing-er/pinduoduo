@@ -53,6 +53,11 @@ public class ManagerService {
         itemDao.updateItemInventory(itemId,inventory);
     }
 
+    public void deleteItem(int itemId){
+        storeAndItemDao.deleteStoreAndItem(itemId);
+        itemDao.deleteItemById(itemId);
+    }
+
     public int addManager(Manager manager){
 
         manager.setPassword(MD5.next(manager.getPassword()));
@@ -71,6 +76,7 @@ public class ManagerService {
     public Store getStore(int storeid){
         return storeDao.selectById(storeid);
     }
+
 
     public void updateItem(Item item){
         itemDao.updateItem(item);

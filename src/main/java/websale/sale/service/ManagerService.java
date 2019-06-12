@@ -20,6 +20,10 @@ public class ManagerService {
     StoreDao storeDao;
     @Resource
     ManagerAndStoreDao managerAndStoreDao;
+    @Resource
+    CartItemDao cartItemDao;
+    @Resource
+    OrderAndItemDao orderAndItemDao;
 
     public List<Item> getItems(int managerId){
         return itemDao.selectItemsByManagerId(managerId);
@@ -55,6 +59,8 @@ public class ManagerService {
 
     public void deleteItem(int itemId){
         storeAndItemDao.deleteStoreAndItem(itemId);
+        cartItemDao.deleteItem(itemId);
+        orderAndItemDao.deleteItem(itemId);
         itemDao.deleteItemById(itemId);
     }
 

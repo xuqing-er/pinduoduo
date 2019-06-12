@@ -16,7 +16,6 @@ public class StoreAndItem {
         this.itemId = itemId;
     }
 
-
     public int getItemId() {
         return itemId;
     }

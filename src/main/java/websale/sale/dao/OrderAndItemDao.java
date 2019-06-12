@@ -1,5 +1,6 @@
 package websale.sale.dao;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -20,4 +21,7 @@ public interface OrderAndItemDao {
 
     @Select("select itemid,number from orderanditem where orderid=#{orderId}")
     List<OrderAndItem> selectOederAndItems(int orderId);
+
+    @Delete("delete from orderanditem where itemid=#{id}")
+    void deleteItem(int id);
 }

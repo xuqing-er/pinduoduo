@@ -28,4 +28,7 @@ public interface CartItemDao {
 
     @Select("select * from cartitem where clientId=#{clientId} and itemid=#{itemId}")
     CartItem selectCartItem(@Param("clientId") int clientId,@Param("itemId") int itemId);
+
+    @Delete("delete from cartitem where itemid=#{id}")
+    void deleteItem(int id);
 }

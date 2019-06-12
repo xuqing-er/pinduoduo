@@ -168,14 +168,13 @@ public class ManagerController {
 
     @RequestMapping(path = "/item/update",method = RequestMethod.POST)
     public String updateItem(
-            @RequestParam("id") int id,
-            @RequestParam("number") int number
-            //Item item
+            @RequestParam("number") int number,
+            Item item
     ){
-        //item.setInventory(number);
-        System.out.println("id:"+id);
+        item.setInventory(number);
+        System.out.println("id:"+item.getId());
         //System.out.println(item.getId());
-        //managerService.updateItem(item);
+        managerService.updateItem(item);
 
         return "redirect:/store";
     }

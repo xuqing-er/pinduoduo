@@ -54,7 +54,7 @@ public interface ItemDao {
     /*
     TODO
      */
-    @Update("update item set price=#{price},inventory=#{inventory},discount=#{discount}")
+    @Update("update item set price=#{price},inventory=#{inventory},discount=#{discount} where id=#{id}")
     void updateItem(Item item);
 
     @Delete("delete from item where id=#{id}")

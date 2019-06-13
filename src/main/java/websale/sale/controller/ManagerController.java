@@ -84,7 +84,7 @@ public class ManagerController {
         request.getSession().removeAttribute("mid");
         request.getSession().removeAttribute("username");
         request.getSession().removeAttribute("storeid");
-        return "index";
+        return "redirect:/index/0";
     }
 
     @RequestMapping(path = "/create/item",method = RequestMethod.POST)
@@ -125,7 +125,7 @@ public class ManagerController {
     ){
         if (errors.hasErrors()){
             System.out.println("store error");
-            return "redirect:/create/store";
+            return "redirect:/store";
         }
         int mid=(Integer) request.getSession().getAttribute("mid");
         int storeId=managerService.createStore(mid,store);
@@ -179,9 +179,9 @@ public class ManagerController {
         return "redirect:/store";
     }
 
-    @RequestMapping(path = "/delete/item")
+    @RequestMapping(path = "/item/delete")
     public String removeItem(
-            @RequestParam("itemid") int itemid
+            @RequestParam("id") int itemid
     ){
         managerService.deleteItem(itemid);
         return "redirect:/store";

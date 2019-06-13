@@ -99,6 +99,7 @@ public class ClientController {
         
         request.getSession().removeAttribute("id");
         request.getSession().removeAttribute("username");
+        request.getSession().removeAttribute("itemnum");
         return "redirect:/index/0";
     }
 
@@ -135,6 +136,7 @@ public class ClientController {
         cartItem.setNumber(1);
         cartService.addCartItem(cartItem);
         int num = cartService.getItemNum(clientId);
+        request.getSession().setAttribute("itemnum",num);
         System.out.println(num);
         return num;
     }
@@ -149,6 +151,8 @@ public class ClientController {
     ){
         int clientId=(Integer) request.getSession().getAttribute("id");
         cartService.updateItem(clientId,id,number);
+        int num = cartService.getItemNum(clientId);
+        request.getSession().setAttribute("itemnum",num);
         return number;
     }
 
@@ -175,6 +179,8 @@ public class ClientController {
     ){
         int clientId=(Integer)request.getSession().getAttribute("id");
         cartService.removeItem(clientId,itemId);
+        int num = cartService.getItemNum(clientId);
+        request.getSession().setAttribute("itemnum",num);
         return itemId;
     }
 
@@ -187,6 +193,7 @@ public class ClientController {
         int clientId=(Integer) request.getSession().getAttribute("id");
         int orderId=buyService.buy(clientId,sum);
         model.addAttribute("orderid",orderId);
+        request.getSession().setAttribute("itemnum",0);
         return "redirect:/orders";
     }
 

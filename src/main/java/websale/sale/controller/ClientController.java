@@ -34,10 +34,12 @@ public class ClientController {
             Model model,
             HttpServletRequest request
     ){
+        List<String> lables=clientService.getAllLable();
         List<Item> items=clientService.getItems(start);
         List<String> photos=BasePhotoUtil.encodes(items);
         model.addAttribute("items",items);
         model.addAttribute("photos",photos);
+        //model.addAttribute("lables",lables);
         request.getSession().setAttribute("pagenum",start);
         return "index";
     }
@@ -101,6 +103,20 @@ public class ClientController {
         request.getSession().removeAttribute("username");
         request.getSession().removeAttribute("itemnum");
         return "redirect:/index/0";
+    }
+
+    public String getLableItems(
+            @RequestParam("lable") String lable,
+            Model model,
+            HttpServletRequest request
+    ){
+        List<Item> items=clientService.getItemsByLable(lable);
+        List<String> photos=BasePhotoUtil.encodes(items);
+        model.addAttribute("items",items);
+        model.addAttribute("photos",photos);
+        request.getSession().setAttribute("pagenum",1);
+
+        return "index";
     }
 
     //当点击商品时，进入单品显示

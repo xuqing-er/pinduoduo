@@ -30,6 +30,14 @@ public class ClientService {
         return clientDao.selectMaxId();
     }
 
+    public List<String> getAllLable(){
+        return itemDao.getAllLable();
+    }
+
+    public List<Item> getItemsByLable(String lable){
+        return itemDao.selectItemsByLable(lable);
+    }
+
     public Client getClient(int clientId){
         return clientDao.selectClientById(clientId);
     }

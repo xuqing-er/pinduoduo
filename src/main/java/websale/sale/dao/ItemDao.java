@@ -66,4 +66,10 @@ public interface ItemDao {
 
     @Update("update item set inventory=inventory-#{number} where id=#{itemId}")
     void updateItemByOrder(OrderAndItem orderAndItem);
+
+    @Select("select category from item")
+    List<String> getAllLable();
+
+    @Select("select * from item where category like \'%#{string}%\'")
+    List<Item> selectItemsByLable(String string);
 }
